@@ -7,51 +7,29 @@
     <title>Teslavedha Edu Tech Solution</title>
 
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #020b2a;
-            color: white;
-            text-align: center;
-            padding: 40px;
-        }
+ body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #020b2a;
+        color: white;
+        text-align: center;
+        padding: 40px;
 
-        .logo {
-            margin-top: 20px;
-            width: 140px;
-        }
+        /* Add animation here */
+        animation: fadein 1.5s ease-in-out;
+    }
 
-        h1 {
-            font-size: 42px;
-            margin-top: 10px;
-        }
+    .logo {
+        margin-top: 20px;
+        width: 140px;
+    }
 
-        h2 {
-            margin-top: -10px;
-            opacity: 0.9;
-            font-size: 22px;
-        }
-
-        p {
-            font-size: 18px;
-            opacity: 0.85;
-            max-width: 700px;
-            margin: 20px auto;
-            line-height: 1.6;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 25px;
-            background: #00c8ff;
-            color: #000;
-            text-decoration: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-    </style>
+    @keyframes fadein {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+      
 </head>
 
 <body>
