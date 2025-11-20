@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Auto Tester</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .ok { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+        .checking { color: orange; }
+    </style>
+</head>
+<body>
+
+<h2>Auto Test – Check All Pages</h2>
+<p>This will test if all your pages open correctly.</p>
+
+<ul id="results"></ul>
+
+<script>
+    const pages = [
+        "course-dashboard.html",
+        "english1.html",
+        "evs.html",
+        "index.html",
+        "ktetcategory1.html",
+        "malayalam.html",
+        "maths.html",
+        "psychology.html",
+        "video-ch1.html"
+    ];
+
+    const resultList = document.getElementById("results");
+
+    pages.forEach(page => {
+        const item = document.createElement("li");
+        item.innerHTML = <span class='checking'>Checking ${page}...</span>;
+        resultList.appendChild(item);
+
+        fetch(page)
+            .then(response => {
+                if (response.ok) {
+                    item.innerHTML = ${page}: <span class='ok'>✔️ Works</span>;
+                } else {
+                    item.innerHTML = ${page}: <span class='fail'>❌ Error ${response.status}</span>;
+                }
+            })
+            .catch(() => {
+                item.innerHTML = ${page}: <span class='fail'>❌ Cannot load (maybe wrong name?)</span>;
+            });
+    });
+</script>
+
+</body>
+</html>
