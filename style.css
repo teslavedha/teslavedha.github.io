@@ -1,0 +1,83 @@
+/* General Page Style */
+body {
+    font-family: Arial, sans-serif;
+    background: #eef3ff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #ccc;
+}
+
+/* Page Title */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    background: #0047b3;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Dashboard Box */
+.dashboard {
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+/* Progress Bar Background */
+.progress-bar {
+    width: 100%;
+    height: 25px;
+    background: #eee;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* Progress Filled Portion */
+.progress {
+    height: 100%;
+    background: #00cc66;
+    border-radius: 15px;
+}
+
+/* Lessons List */
+.lessons li {
+    list-style: none;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+/* Lesson Links */
+.lessons a {
+    background: #007bff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+}
