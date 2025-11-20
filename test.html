@@ -1,54 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Website Auto Tester</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Test – Check All Pages</title>
+
     <style>
-        body { font-family: Arial; padding: 20px; }
-        .ok { color: green; font-weight: bold; }
-        .fail { color: red; font-weight: bold; }
-        .checking { color: orange; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            color: #222;
+        }
+        .ok {
+            color: green;
+            font-weight: bold;
+        }
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+        .checking {
+            color: #444;
+        }
     </style>
 </head>
+
 <body>
+    <h1>Auto Test – Check All Pages</h1>
+    <p>This will test if all your pages open correctly.</p>
 
-<h2>Auto Test – Check All Pages</h2>
-<p>This will test if all your pages open correctly.</p>
+    <!-- THIS IS IMPORTANT -->
+    <ul id="results"></ul>
+    <!-- DON'T REMOVE THIS -->
 
-<ul id="results"></ul>
+    <script>
+        const pages = [
+            "index.html",
+            "course-dashboard.html",
+            "malayalam.html",
+            "english.html",
+            "maths.html",
+            "psychology.html",
+            "evs.html",
+            "video-ch1.html"
+        ];
 
-<script>
-    const pages = [
-        "course-dashboard.html",
-        "english1.html",
-        "evs.html",
-        "index.html",
-        "ktetcategory1.html",
-        "malayalam.html",
-        "maths.html",
-        "psychology.html",
-        "video-ch1.html"
-    ];
+        const resultList = document.getElementById("results");
 
-    const resultList = document.getElementById("results");
+        pages.forEach(page => {
+            const item = document.createElement("li");
+            item.innerHTML = <span class='checking'>Checking ${page}...</span>;
+            resultList.appendChild(item);
 
-    pages.forEach(page => {
-        const item = document.createElement("li");
-        item.innerHTML = <span class='checking'>Checking ${page}...</span>;
-        resultList.appendChild(item);
-
-        fetch(page)
-            .then(response => {
-                if (response.ok) {
-                    item.innerHTML = ${page}: <span class='ok'>✔️ Works</span>;
-                } else {
-                    item.innerHTML = ${page}: <span class='fail'>❌ Error ${response.status}</span>;
-                }
-            })
-            .catch(() => {
-                item.innerHTML = ${page}: <span class='fail'>❌ Cannot load (maybe wrong name?)</span>;
-            });
-    });
-</script>
+            fetch(page)
+                .then(response => {
+                    if (response.ok) {
+                        item.innerHTML = ${page}: <span class='ok'>✔ Works</span>;
+                    } else {
+                        item.innerHTML = ${page}: <span class='fail'>✘ Error ${response.status}</span>;
+                    }
+                })
+                .catch(() => {
+                    item.innerHTML = ${page}: <span class='fail'>✘ Cannot load (maybe wrong file name?)</span>;
+                });
+        });
+    </script>
 
 </body>
 </html>
