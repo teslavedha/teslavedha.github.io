@@ -1,65 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malayalam – KTET</title>
+    <title>Malayalam – KTET Category 1</title>
 
     <style>
         body {
-            background: #040b2a;
-            color: white;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
             margin: 0;
             padding: 20px;
+            animation: fadein 1.5s ease-in-out;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         h1 {
             text-align: center;
-            font-size: 32px;
-            margin-bottom: 20px;
+            color: #333;
         }
 
         .chapter {
-            background: #0d1440;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background: #8c52ff;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
+        .chapter h2 {
+            margin: 0 0 15px 0;
+            color: #222;
+            font-size: 22px;
         }
+
+        .btn-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .button {
+            padding: 10px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #0056b3;
+        }
+
+        /* Special Colors */
+        .notes { background: #6c63ff; }
+        .mcq { background: #ff7b00; }
+        .video { background: #e91e63; }
+        .doubt { background: #4caf50; }
     </style>
 </head>
 
 <body>
 
-    <h1>Malayalam – KTET Category 1</h1>
+    <h1>KTET Category 1 – Malayalam</h1>
 
+    <!-- CHAPTER 1 -->
     <div class="chapter">
-        <h3>Chapter 1 – Basic Language Skills</h3>
-        <a href="#">Read Notes</a>
-        <a href="#">MCQ</a>
+        <h2>Chapter 1 – Basic Language Skills</h2>
+
+        <div class="btn-box">
+            <a href="notes-ch1.html" class="button notes">Read Notes</a>
+            <a href="mcq-ch1.html" class="button mcq">MCQ</a>
+            <a href="video-ch1.html" class="button video">Video Class</a>
+            <a href="doubt.html" class="button doubt">Doubt Clear</a>
+        </div>
     </div>
 
+    <!-- CHAPTER 2 -->
     <div class="chapter">
-        <h3>Chapter 2 – Literature</h3>
-        <a href="#">Read Notes</a>
-        <a href="#">MCQ</a>
+        <h2>Chapter 2 – Grammar Basics</h2>
+
+        <div class="btn-box">
+            <a href="notes-ch2.html" class="button notes">Read Notes</a>
+            <a href="mcq-ch2.html" class="button mcq">MCQ</a>
+            <a href="video-ch2.html" class="button video">Video Class</a>
+            <a href="doubt.html" class="button doubt">Doubt Clear</a>
+        </div>
     </div>
 
-    <div class="chapter">
-        <h3>Chapter 3 – Grammar</h3>
-        <a href="#">Read Notes</a>
-        <a href="#">MCQ</a>
-    </div>
+    <!-- Add more chapters if needed -->
 
 </body>
 </html>
