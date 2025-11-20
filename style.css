@@ -1,24 +1,40 @@
-/* General Page Style */
+/* Smooth Fade-In Animation */
 body {
-    font-family: Arial, sans-serif;
-    background: #eef3ff;
+    animation: fadein 1.5s ease-in-out;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Main Page Styling */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f2f2;
     margin: 0;
-    padding: 0;
+    padding: 40px;
 }
 
+/* Content Box */
 .container {
-    width: 80%;
-    margin: 40px auto;
+    width: 95%;
+    max-width: 800px;
+    margin: auto;
     background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    border-left: 5px solid #1e88e5;
 }
 
-/* Page Title */
+/* Main Heading */
 h1 {
     text-align: center;
-    color: #333;
+    color: #004aad;
+    font-size: 30px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
 /* Table Styling */
@@ -29,55 +45,40 @@ table {
 }
 
 th {
-    background: #0047b3;
+    background: #1e88e5;
     color: white;
-    padding: 12px;
+    padding: 14px;
     text-align: left;
+    font-size: 17px;
 }
 
 td {
     padding: 12px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
 }
 
-/* Dashboard Box */
-.dashboard {
-    width: 80%;
-    margin: 30px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 0 10px #ccc;
+/* Hover Highlight */
+tr:hover {
+    background: #f1f7ff;
 }
 
-/* Progress Bar Background */
-.progress-bar {
-    width: 100%;
-    height: 25px;
-    background: #eee;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
 
-/* Progress Filled Portion */
-.progress {
-    height: 100%;
-    background: #00cc66;
-    border-radius: 15px;
-}
+    .container {
+        padding: 15px;
+    }
 
-/* Lessons List */
-.lessons li {
-    list-style: none;
-    margin: 10px 0;
-    font-size: 18px;
-}
+    h1 {
+        font-size: 24px;
+    }
 
-/* Lesson Links */
-.lessons a {
-    background: #007bff;
-    padding: 5px 10px;
-    border-radius: 6px;
-    color: white;
-    text-decoration: none;
+    th, td {
+        font-size: 14px;
+        padding: 10px;
+    }
 }
