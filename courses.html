@@ -3,120 +3,113 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teslavedha Courses</title>
+    <title>Courses</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         body {
             margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background: #f7f7f7;
+            font-family: 'Poppins', sans-serif;
+            background: #f5faff;
         }
 
-        h2 {
+        .header {
+            background: #0054a6;
+            color: #fff;
+            padding: 22px;
             text-align: center;
-            margin-bottom: 25px;
-            color: #222;
-            font-size: 26px;
+            font-size: 24px;
+            font-weight: 600;
         }
 
-        .courses-container {
+        .course-container {
+            padding: 25px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
-            padding: 10px;
         }
 
         .course-card {
             background: white;
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: 0.25s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             text-decoration: none;
             color: black;
+            transition: transform 0.2s ease;
         }
 
         .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-        }
-
-        .icon-box {
-            width: 45px;
-            height: 45px;
-            border-radius: 8px;
-            background: #4a90e2;
-            margin-bottom: 12px;
+            transform: scale(1.04);
         }
 
         .course-title {
             font-size: 20px;
-            font-weight: bold;
-            color: #111;
+            font-weight: 600;
         }
 
         .tag {
-            margin-top: 8px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        a {
-            text-decoration: none;
+            margin-top: 10px;
+            font-size: 13px;
+            padding: 6px 10px;
+            background: #e8f0ff;
+            color: #0054a6;
+            border-radius: 8px;
+            display: inline-block;
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Available Courses</h2>
+    <div class="header">Available Courses</div>
 
-    <div class="courses-container">
+    <div class="course-container">
 
+        <!-- KTET CATEGORY 1 -->
         <a href="ktet_cat1.html">
             <div class="course-card">
-                <div class="icon-box"></div>
                 <div class="course-title">KTET Category 1</div>
                 <div class="tag">KTET Exam</div>
             </div>
         </a>
 
+        <!-- KTET CATEGORY 2 -->
         <a href="ktet_cat2.html">
             <div class="course-card">
-                <div class="icon-box" style="background:#ff7f50;"></div>
                 <div class="course-title">KTET Category 2</div>
                 <div class="tag">KTET Exam</div>
             </div>
         </a>
 
+        <!-- KTET CATEGORY 3 -->
         <a href="ktet_cat3.html">
             <div class="course-card">
-                <div class="icon-box" style="background:#32cd32;"></div>
                 <div class="course-title">KTET Category 3</div>
                 <div class="tag">KTET Exam</div>
             </div>
         </a>
 
-        <a href="kerala_psc.html">
+        <!-- KERALA PSC -->
+        <a href="psc.html">
             <div class="course-card">
-                <div class="icon-box" style="background:#ff9500;"></div>
-                <div class="course-title">Kerala PSC – 10th Level</div>
+                <div class="course-title">Kerala PSC</div>
                 <div class="tag">PSC Exam</div>
             </div>
         </a>
 
+        <!-- AI COURSE TEACHERS -->
         <a href="ai_teachers.html">
             <div class="course-card">
-                <div class="icon-box" style="background:#8e44ad;"></div>
                 <div class="course-title">AI Course for Teachers</div>
                 <div class="tag">Artificial Intelligence</div>
             </div>
         </a>
 
+        <!-- AI COURSE STUDENTS -->
         <a href="ai_students.html">
             <div class="course-card">
-                <div class="icon-box" style="background:#1abc9c;"></div>
                 <div class="course-title">AI Course for Students</div>
                 <div class="tag">Artificial Intelligence</div>
             </div>
