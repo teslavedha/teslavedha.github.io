@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fce4ec;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #e91e63;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .card:hover {
+            background: #f8bbd0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Admin Dashboard</h1>
+
+    <div class="menu">
+        <div class="card">Add Teacher</div>
+        <div class="card">Remove Teacher</div>
+        <div class="card">Register Student</div>
+        <div class="card">Add Class Video</div>
+        <div class="card">Upload PDF Notes</div>
+        <div class="card">Upload MCQ / PDF</div>
+    </div>
+
+</body>
+</html>
