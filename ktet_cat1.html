@@ -1,107 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KTET Category 1 - Subjects</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 
     <style>
         body {
             margin: 0;
-            font-family: "Poppins", sans-serif;
-            background: #f5f7fa;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #d7e8ff, #f3f8ff);
         }
 
         .header {
-            background: #0d6efd;
-            color: #fff;
-            padding: 22px;
+            background: #1678f2;
+            color: white;
+            padding: 25px;
             text-align: center;
-            font-size: 23px;
-            font-weight: 600;
+            font-size: 26px;
+            font-weight: 700;
         }
 
         .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 15px;
+            padding: 20px;
         }
 
+        /* Glassmorphic Subject Cards */
         .card {
-            background: #ffffff;
-            padding: 18px 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 20px;
+            margin: 15px 0;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            transition: 0.25s;
+            justify-content: space-between;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-        }
-
-        .card-title {
-            font-size: 19px;
+        .sub-name {
+            font-size: 22px;
             font-weight: 600;
-            color: #333;
+            color: #222;
         }
 
         .open-btn {
-            background: #198754;
-            color: #fff;
-            padding: 8px 14px;
+            background: #0f8f4d;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-size: 18px;
             border: none;
-            border-radius: 6px;
             cursor: pointer;
-            font-size: 15px;
         }
 
         .open-btn:hover {
-            background: #157347;
+            background: #0b703c;
         }
     </style>
 </head>
 
 <body>
+
     <div class="header">KTET Category 1 – Subjects</div>
 
     <div class="container">
-        <!-- Malayalam -->
+
         <div class="card">
-            <div class="card-title">Malayalam</div>
-            <button class="open-btn" onclick="window.location='mal_class1.html'">Open</button>
+            <div class="sub-name">Malayalam</div>
+            <button class="open-btn" onclick="location.href='malayalam.html'">Open</button>
         </div>
 
-        <!-- English -->
         <div class="card">
-            <div class="card-title">English</div>
-            <button class="open-btn" onclick="window.location='eng_class1.html'">Open</button>
+            <div class="sub-name">English</div>
+            <button class="open-btn" onclick="location.href='english.html'">Open</button>
         </div>
 
-        <!-- Maths -->
         <div class="card">
-            <div class="card-title">Mathematics</div>
-            <button class="open-btn" onclick="window.location='math_class1.html'">Open</button>
+            <div class="sub-name">Mathematics</div>
+            <button class="open-btn" onclick="location.href='maths.html'">Open</button>
         </div>
 
-        <!-- EVS -->
         <div class="card">
-            <div class="card-title">EVS</div>
-            <button class="open-btn" onclick="window.location='evs_class1.html'">Open</button>
+            <div class="sub-name">EVS</div>
+            <button class="open-btn" onclick="location.href='evs.html'">Open</button>
         </div>
 
-        <!-- Pedagogy -->
         <div class="card">
-            <div class="card-title">Pedagogy</div>
-            <button class="open-btn" onclick="window.location='peda_class1.html'">Open</button>
+            <div class="sub-name">Psychology</div>
+            <button class="open-btn" onclick="location.href='psychology.html'">Open</button>
         </div>
+
     </div>
 
 </body>
