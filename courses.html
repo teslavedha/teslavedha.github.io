@@ -1,59 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Courses</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Courses – Tesla Vedha Institute</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f6f7fb;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 25px;
+    }
+
+    /* COURSE CARD */
+    .course-card {
+        background: white;
+        margin: 12px 0;
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        border-left: 6px solid #1a73e8;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .course-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .course-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #0b2341;
+        margin-bottom: 8px;
+    }
+
+    .course-tag {
+        display: inline-block;
+        background: #ff865e;
+        color: white;
+        padding: 6px 14px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
 </head>
+
 <body>
 
-<header class="header">
-    <h1 class="logo">TESLA VEDHA INSTITUTE</h1>
-    <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="courses.html" class="active">Courses</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+<h1>All Courses</h1>
 
-<section class="courses-section">
-    <h2>Our Courses</h2>
+<!-- KTET Malayalam -->
+<div class="course-card" onclick="location.href='ktet1_malayalam.html'">
+    <div class="course-title">KTET Malayalam</div>
+    <span class="course-tag">KTET Exam</span>
+</div>
 
-    <div class="course-grid">
+<!-- KTET Category 1 -->
+<div class="course-card" onclick="location.href='ktet_cat1.html'">
+    <div class="course-title">KTET Category 1</div>
+    <span class="course-tag">KTET Exam</span>
+</div>
 
-        <a class="course-card" href="ktet_malayalam.html">
-            <h3>KTET Malayalam</h3>
-            <p>Complete Malayalam-oriented KTET training</p>
-        </a>
+<!-- KTET Category 2 -->
+<div class="course-card" onclick="location.href='ktet_cat2.html'">
+    <div class="course-title">KTET Category 2</div>
+    <span class="course-tag">KTET Exam</span>
+</div>
 
-        <a class="course-card" href="ktet_category1.html">
-            <h3>KTET Category 1</h3>
-            <p>Lower Primary Teacher Training</p>
-        </a>
+<!-- KTET Category 3 -->
+<div class="course-card" onclick="location.href='ktet_cat3.html'">
+    <div class="course-title">KTET Category 3</div>
+    <span class="course-tag">KTET Exam</span>
+</div>
 
-        <a class="course-card" href="ktet_category2.html">
-            <h3>KTET Category 2</h3>
-            <p>Upper Primary Teacher Training</p>
-        </a>
+<!-- Kerala PSC 10th Level -->
+<div class="course-card" onclick="location.href='psc_10th.html'">
+    <div class="course-title">Kerala PSC – 10th Level</div>
+    <span class="course-tag">PSC Exam</span>
+</div>
 
-        <a class="course-card" href="ktet_category3.html">
-            <h3>KTET Category 3</h3>
-            <p>High School Teacher Training</p>
-        </a>
+<!-- Kerala PSC Degree -->
+<div class="course-card" onclick="location.href='psc_degree.html'">
+    <div class="course-title">Kerala PSC – Degree Level</div>
+    <span class="course-tag">PSC Exam</span>
+</div>
 
-        <a class="course-card" href="bed_course.html">
-            <h3>B.Ed Course</h3>
-            <p>Teacher Eligibility & Education Programme</p>
-        </a>
-
-        <a class="course-card" href="ttc_course.html">
-            <h3>TTC Course</h3>
-            <p>Primary Teacher Training Certification</p>
-        </a>
-
-    </div>
-</section>
+<!-- AI Course -->
+<div class="course-card" onclick="location.href='ai_teachers.html'">
+    <div class="course-title">AI Course for Teachers</div>
+    <span class="course-tag" style="background:#ffb54a;">Skill Upgrade</span>
+</div>
 
 </body>
 </html>
