@@ -1,76 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tesla Vedha - Courses</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tesla Vedha - Login</title>
     <style>
         body {
-            font-family: Arial;
-            background: #f2f2f2;
-            padding: 20px;
             margin: 0;
-        }
-
-        h2 {
+            font-family: Arial, sans-serif;
             text-align: center;
-            margin-bottom: 30px;
+            background-color: #f3f3f3;
         }
 
-        .course-box {
-            background: white;
+        .logo {
+            margin-top: 30px;
+        }
+
+        .container {
+            margin: 40px auto;
+            width: 300px;
             padding: 20px;
-            margin: 15px 0;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
 
-        .course-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .course-info {
-            margin-bottom: 12px;
-            color: #555;
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
         button {
-            padding: 10px 15px;
+            width: 95%;
+            padding: 10px;
             background: #007bff;
-            color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
 
-<h2>📚 Available Courses</h2>
+    <img src="photo_2025-11-19_13-35-50.jpg" class="logo" width="120">
 
-<div class="course-box">
-    <div class="course-title">KTET FULL COURSE</div>
-    <div class="course-info">Duration: 4 Months | Language: Malayalam</div>
-    <button onclick="alert('KTET course opened')">Open Course</button>
-</div>
+    <h2>Tesla Vedha Institution</h2>
 
-<div class="course-box">
-    <div class="course-title">TTC/B.Ed Teacher Training</div>
-    <div class="course-info">Duration: 6 Months | Malayalam</div>
-    <button onclick="alert('Teacher Training opened')">Open Course</button>
-</div>
+    <div class="container">
+        <h3>Login</h3>
+        
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
 
-<div class="course-box">
-    <div class="course-title">English Communication Basic</div>
-    <div class="course-info">Duration: 2 Months</div>
-    <button onclick="alert('English course opened')">Open Course</button>
-</div>
+        <button onclick="login()">Login</button>
+    </div>
 
-<div class="course-box">
-    <div class="course-title">Online Tuition - Class 1 to 10</div>
-    <div class="course-info">All Subjects | Kerala Syllabus</div>
-    <button onclick="alert('Tuition opened')">Open Course</button>
-</div>
+    <script>
+        function login() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+
+            if (user === "admin" && pass === "1234") {
+                window.location.href = "courses.html"; // CORRECT LINK
+            } else {
+                alert("Invalid username or password");
+            }
+        }
+    </script>
 
 </body>
 </html>
