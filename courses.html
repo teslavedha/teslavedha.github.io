@@ -3,100 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses - TESLA VEDHA</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-        }
-
-        .header {
-            background: #0A5ADB;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-
-        .course-card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            cursor: pointer;
-            border-left: 8px solid #0A5ADB;
-        }
-
-        .course-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-
-        .course-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #002255;
-        }
-
-        .tag {
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 5px;
-            font-size: 13px;
-            color: white;
-            background: #ff7f50;
-            margin-top: 10px;
-        }
-    </style>
+    <title>All Courses</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="header">Available Courses</div>
+<header class="header">
+    <h1 class="logo">TESLA VEDHA INSTITUTE</h1>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="courses.html" class="active">Courses</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
 
-    <div class="container">
+<section class="courses-section">
+    <h2>Our Courses</h2>
 
-        <div class="course-card">
-            <div class="course-title">KTET Category 1</div>
-            <div class="tag">KTET Exam</div>
-        </div>
+    <div class="course-grid">
 
-        <div class="course-card">
-            <div class="course-title">KTET Category 2</div>
-            <div class="tag">KTET Exam</div>
-        </div>
+        <a class="course-card" href="ktet_malayalam.html">
+            <h3>KTET Malayalam</h3>
+            <p>Complete Malayalam-oriented KTET training</p>
+        </a>
 
-        <div class="course-card">
-            <div class="course-title">KTET Category 3</div>
-            <div class="tag">KTET Exam</div>
-        </div>
+        <a class="course-card" href="ktet_category1.html">
+            <h3>KTET Category 1</h3>
+            <p>Lower Primary Teacher Training</p>
+        </a>
 
-        <div class="course-card">
-            <div class="course-title">Kerala PSC – 10th Level</div>
-            <div class="tag">PSC Exam</div>
-        </div>
+        <a class="course-card" href="ktet_category2.html">
+            <h3>KTET Category 2</h3>
+            <p>Upper Primary Teacher Training</p>
+        </a>
 
-        <div class="course-card">
-            <div class="course-title">Kerala PSC – Degree Level</div>
-            <div class="tag">PSC Exam</div>
-        </div>
+        <a class="course-card" href="ktet_category3.html">
+            <h3>KTET Category 3</h3>
+            <p>High School Teacher Training</p>
+        </a>
 
-        <div class="course-card">
-            <div class="course-title">AI Course for Teachers</div>
-            <div class="tag">Skill Upgrade</div>
-        </div>
+        <a class="course-card" href="bed_course.html">
+            <h3>B.Ed Course</h3>
+            <p>Teacher Eligibility & Education Programme</p>
+        </a>
+
+        <a class="course-card" href="ttc_course.html">
+            <h3>TTC Course</h3>
+            <p>Primary Teacher Training Certification</p>
+        </a>
 
     </div>
+</section>
 
 </body>
 </html>
