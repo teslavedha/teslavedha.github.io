@@ -1,93 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KTET Category 1 – Dashboard</title>
-
+    <title>Tesla Vedha Institution</title>
     <style>
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: #ffffff;
-            color: #000;
-        }
-
-        .container {
-            width: 92%;
-            margin: 0 auto;
-            padding-top: 20px;
-        }
-
-        h1 {
             text-align: center;
-            color: #0056d6;
-            margin-bottom: 30px;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
-
-        .lesson-list {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
+        .header {
+            background: white;
+            padding: 20px;
+            border-bottom: 3px solid #0078ff;
         }
-
-        .item {
-            margin: 12px 0;
-            font-size: 18px;
+        .logo {
+            width: 150px;
+            border-radius: 10px;
         }
-
-        .item a {
-            text-decoration: none;
-            color: #0056d6;
+        .title {
+            font-size: 28px;
             font-weight: bold;
+            margin-top: 10px;
         }
-
-        .icon {
-            font-size: 22px;
-            margin-right: 8px;
+        .login-box {
+            margin: 30px auto;
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
         }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #666;
-            font-size: 14px;
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+        button {
+            width: 95%;
+            padding: 10px;
+            background: #0078ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="header">
+        <img src="photo_2025-11-19_13-35-50.jpg" class="logo">
+        <div class="title">TESLA VEDHA INSTITUTION</div>
+    </div>
 
-        <h1>KTET Category 1 – Dashboard</h1>
-
-        <div class="lesson-list">Course Progress</div>
-
-        <div class="item">
-            <span class="icon">📘</span> Malayalam – <a href="malayalam.html">Start</a>
-        </div>
-
-        <div class="item">
-            <span class="icon">📗</span> English – <a href="english.html">Start</a>
-        </div>
-
-        <div class="item">
-            <span class="icon">📙</span> Maths – <a href="maths.html">Start</a>
-        </div>
-
-        <div class="item">
-            <span class="icon">📕</span> Psychology – <a href="psychology.html">Start</a>
-        </div>
-
-        <div class="item">
-            <span class="icon">📒</span> EVS – <a href="evs.html">Start</a>
-        </div>
-
-        <footer>
-            © 2025 Teslavedha Edu Tech Solution
-        </footer>
-
+    <div class="login-box">
+        <h3>Login</h3>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button>Login</button>
     </div>
 
 </body>
