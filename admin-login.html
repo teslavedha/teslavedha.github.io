@@ -1,15 +1,10 @@
 <script>
 function login() {
-    // Get input values
-    let user = document.getElementById("username").value.trim();
-    let pass = document.getElementById("password").value.trim();
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
 
-    // Temporary login details
-    const adminUser = "admin";
-    const adminPass = "tesla123";   // you mentioned this password earlier
-
-    if (user === adminUser && pass === adminPass) {
-        window.location.href = "admin-dashboard.html"; 
+    if (user === "admin" && pass === "12345") {
+        window.location.href = "admin-dashboard.html";
     } else {
         alert("Invalid username or password");
     }
