@@ -1,106 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Courses – Tesla Vedha Institute</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tesla Vedha – Courses</title>
 
-<style>
+  <style>
     body {
-        font-family: Arial, sans-serif;
-        background: #f6f7fb;
-        margin: 0;
-        padding: 20px;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
     }
 
-    h1 {
-        text-align: center;
-        font-size: 30px;
-        font-weight: bold;
-        margin-bottom: 25px;
+    /* HEADER */
+    .header {
+      background: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
-    /* COURSE CARD */
+    .header img {
+      height: 55px;
+    }
+
+    /* PAGE TITLE */
+    .title {
+      text-align: center;
+      margin: 20px 0 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* COURSE GRID */
+    .course-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
     .course-card {
-        background: white;
-        margin: 12px 0;
-        padding: 20px;
-        border-radius: 16px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        border-left: 6px solid #1a73e8;
-        cursor: pointer;
-        transition: 0.2s;
+      background: white;
+      border-radius: 12px;
+      padding: 20px 10px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: 0.25s;
     }
 
     .course-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
 
-    .course-title {
-        font-size: 22px;
-        font-weight: 700;
-        color: #0b2341;
-        margin-bottom: 8px;
+    .course-icon {
+      font-size: 40px;
+      color: #0066ff;
+      margin-bottom: 10px;
     }
 
-    .course-tag {
-        display: inline-block;
-        background: #ff865e;
-        color: white;
-        padding: 6px 14px;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: bold;
+    .course-name {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
     }
-</style>
+  </style>
 </head>
 
 <body>
 
-<h1>All Courses</h1>
+  <!-- Header with Logo -->
+  <div class="header">
+    <img src="logo.png" alt="Tesla Vedha Logo" />
+  </div>
 
-<!-- KTET Malayalam -->
-<div class="course-card" onclick="location.href='ktet1_malayalam.html'">
-    <div class="course-title">KTET Malayalam</div>
-    <span class="course-tag">KTET Exam</span>
-</div>
+  <div class="title">Available Courses</div>
 
-<!-- KTET Category 1 -->
-<div class="course-card" onclick="location.href='ktet_cat1.html'">
-    <div class="course-title">KTET Category 1</div>
-    <span class="course-tag">KTET Exam</span>
-</div>
+  <!-- Course List -->
+  <div class="course-container">
 
-<!-- KTET Category 2 -->
-<div class="course-card" onclick="location.href='ktet_cat2.html'">
-    <div class="course-title">KTET Category 2</div>
-    <span class="course-tag">KTET Exam</span>
-</div>
+    <!-- KTET CATEGORY 1 -->
+    <a href="subjects-cat1.html" class="course-card">
+      <div class="course-icon">📚</div>
+      <div class="course-name">KTET – Category 1</div>
+    </a>
 
-<!-- KTET Category 3 -->
-<div class="course-card" onclick="location.href='ktet_cat3.html'">
-    <div class="course-title">KTET Category 3</div>
-    <span class="course-tag">KTET Exam</span>
-</div>
+    <!-- KTET CATEGORY 2 -->
+    <a href="subjects-cat2.html" class="course-card">
+      <div class="course-icon">📘</div>
+      <div class="course-name">KTET – Category 2</div>
+    </a>
 
-<!-- Kerala PSC 10th Level -->
-<div class="course-card" onclick="location.href='psc_10th.html'">
-    <div class="course-title">Kerala PSC – 10th Level</div>
-    <span class="course-tag">PSC Exam</span>
-</div>
+    <!-- KTET CATEGORY 3 -->
+    <a href="subjects-cat3.html" class="course-card">
+      <div class="course-icon">📗</div>
+      <div class="course-name">KTET – Category 3</div>
+    </a>
 
-<!-- Kerala PSC Degree -->
-<div class="course-card" onclick="location.href='psc_degree.html'">
-    <div class="course-title">Kerala PSC – Degree Level</div>
-    <span class="course-tag">PSC Exam</span>
-</div>
+    <!-- KTET CATEGORY 4 -->
+    <a href="subjects-cat4.html" class="course-card">
+      <div class="course-icon">📙</div>
+      <div class="course-name">KTET – Category 4</div>
+    </a>
 
-<!-- AI Course -->
-<div class="course-card" onclick="location.href='ai_teachers.html'">
-    <div class="course-title">AI Course for Teachers</div>
-    <span class="course-tag" style="background:#ffb54a;">Skill Upgrade</span>
-</div>
+    <!-- Add more courses later -->
+
+  </div>
 
 </body>
 </html>
