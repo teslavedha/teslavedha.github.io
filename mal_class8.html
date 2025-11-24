@@ -1,50 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Video</title>
-
+    <title>Class Videos</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f4f7;
-            margin: 0;
-            padding: 0;
-        }
-
-        .header {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #222;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .container {
-            margin: 20px;
-        }
-
-        iframe {
-            width: 100%;
-            height: 240px;
-            border: none;
-            border-radius: 12px;
-        }
+        body { font-family: Arial; padding: 20px; background:#fff0f6; }
+        .video-box { margin-bottom: 20px; background: #ffccdd; padding: 15px; border-radius: 12px; }
+        iframe { width: 100%; height: 315px; border-radius: 12px; border: none; }
     </style>
 </head>
+
 <body>
 
-    <div class="header">📘 Malayalam – Class Video</div>
+<h2 id="class-title"></h2>
+<div id="video-container">Loading...</div>
 
-    <div class="container">
-        <iframe 
-            src="https://www.youtube.com/embed/VIDEO_ID_HERE"
-            allowfullscreen>
-        </iframe>
-    </div>
+<script>
+    const classNumber = 8;  // CHANGE for each file
+
+    document.getElementById("class-title").innerText = "Class " + classNumber;
+
+    fetch("videos.json")
+        .then(res => res.json())
+        .then(data => {
+            const videos = data["class" + classNumber];
+            const container = document.getElementById("video-container");
+
+            if (!videos || videos.length === 0) {
+                container.innerHTML = "<p>No videos added yet.</p>";
+                return;
+            }
+
+            container.innerHTML = "";
+            videos.forEach(video => {
+                container.innerHTML += 
+                    <div class="video-box">
+                        <h3>${video.title}</h3>
+                        <iframe src="${video.url}" allowfullscreen></iframe>
+                    </div>
+                ;
+            });
+        });
+</script>
 
 </body>
 </html>
