@@ -1,77 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malayalam Video Classes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malayalam – KTET Category 1</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f4f7;
-            margin: 0;
-            padding: 0;
-        }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-        .header {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: #222;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #f3f5fb;
+    }
 
-        .container {
-            margin: 20px;
-        }
+    /* Premium Header */
+    .header {
+        background: linear-gradient(135deg, #0057ff, #003cb3);
+        color: white;
+        text-align: center;
+        padding: 28px 20px;
+        font-size: 26px;
+        font-weight: 600;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
 
-        .class-item {
-            background: white;
-            padding: 18px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            color: #1a237e;
-            text-align: center;
-        }
+    /* Card Container */
+    .container {
+        margin-top: 25px;
+        padding: 0 18px 40px;
+    }
 
-        a {
-            text-decoration: none;
-        }
+    /* Premium Action Cards */
+    .card {
+        background: #ffffffcc;
+        backdrop-filter: blur(9px);
+        padding: 18px;
+        margin-bottom: 18px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 500;
+        color: #003075;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        transition: all 0.25s ease;
+        text-decoration: none;
+    }
 
-        a:hover .class-item {
-            background: #e8eaf6;
-        }
-    </style>
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 22px rgba(0,0,0,0.12);
+    }
+
+    .icon {
+        width: 28px;
+        margin-right: 12px;
+    }
+
+</style>
 </head>
+
 <body>
 
-    <div class="header">📘 Malayalam – Video Classes</div>
+<div class="header">
+    Malayalam – KTET Category 1
+</div>
 
-    <div class="container">
+<div class="container">
 
-        <!-- CURRENT 10 CLASSES -->
-        <a href="mal_class1.html"><div class="class-item">Class 1</div></a>
-        <a href="mal_class2.html"><div class="class-item">Class 2</div></a>
-        <a href="mal_class3.html"><div class="class-item">Class 3</div></a>
-        <a href="mal_class4.html"><div class="class-item">Class 4</div></a>
-        <a href="mal_class5.html"><div class="class-item">Class 5</div></a>
-        <a href="mal_class6.html"><div class="class-item">Class 6</div></a>
-        <a href="mal_class7.html"><div class="class-item">Class 7</div></a>
-        <a href="mal_class8.html"><div class="class-item">Class 8</div></a>
-        <a href="mal_class9.html"><div class="class-item">Class 9</div></a>
-        <a href="mal_class10.html"><div class="class-item">Class 10</div></a>
+    <a href="malayalam-videos.html" class="card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/video.png" class="icon">
+        Video Classes
+    </a>
 
-        <!-- ⚡ FUTURE EXPANSION (Add more later)
-        <a href="mal_class11.html"><div class="class-item">Class 11</div></a>
-        <a href="mal_class12.html"><div class="class-item">Class 12</div></a>
-        ...
-        -->
-    </div>
+    <a href="malayalam-notes.html" class="card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/document.png" class="icon">
+        PDF Notes
+    </a>
+
+    <a href="malayalam-mcq.html" class="card">
+        <img src="https://img.icons8.com/fluency-systems-filled/50/FF0000/question-mark.png" class="icon">
+        MCQ Practice
+    </a>
+
+    <a href="malayalam-comments.html" class="card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/comments.png" class="icon">
+        Comments / Reviews
+    </a>
+
+</div>
 
 </body>
 </html>
