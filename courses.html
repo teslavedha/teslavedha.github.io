@@ -1,90 +1,128 @@
-<a class="course-card" href="ktet_cat1.html">
-        <div class="course-info">
-          <div class="course-icon" aria-hidden="true">
-            <!-- solid book SVG -->
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="3" width="14" height="18" rx="2" fill="#0f66ff"/>
-              <path d="M16 6h4v12h-4z" fill="#0746b6"/>
-              <rect x="4" y="7" width="10" height="2" rx="1" fill="#fff" opacity=".15"/>
-              <rect x="4" y="11" width="10" height="2" rx="1" fill="#fff" opacity=".12"/>
-            </svg>
-          </div>
-          <div>
-            <div class="course-title">KTET Category 1</div>
-            <div style="margin-top:8px;"><span class="tag">KTET Exam</span></div>
-          </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teslavedha Courses</title>
 
-        <div class="card-actions">
-          <span style="color:var(--muted);margin-right:6px;font-weight:600">Details</span>
-          <span class="open-btn" aria-hidden="false">Open</span>
-        </div>
-      </a>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+        }
 
-      <!-- Course 2 -->
-      <a class="course-card" href="ktet_cat2.html">
-        <div class="course-info">
-          <div class="course-icon">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="3" width="14" height="18" rx="2" fill="#1aa7ff"/>
-              <path d="M16 6h4v12h-4z" fill="#0a93d6"/>
-            </svg>
-          </div>
-          <div>
-            <div class="course-title">KTET Category 2</div>
-            <div style="margin-top:8px;"><span class="tag">KTET Exam</span></div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <span style="color:var(--muted);margin-right:6px;font-weight:600">Details</span>
-          <span class="open-btn">Open</span>
-        </div>
-      </a>
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #222;
+            font-size: 26px;
+        }
 
-      <!-- Course 3 -->
-      <a class="course-card" href="ktet_cat3.html">
-        <div class="course-info">
-          <div class="course-icon">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="3" width="14" height="18" rx="2" fill="#6cc070"/>
-              <path d="M16 6h4v12h-4z" fill="#4aa857"/>
-            </svg>
-          </div>
-          <div>
-            <div class="course-title">KTET Category 3</div>
-            <div style="margin-top:8px;"><span class="tag">KTET Exam</span></div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <span style="color:var(--muted);margin-right:6px;font-weight:600">Details</span>
-          <span class="open-btn">Open</span>
-        </div>
-      </a>
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
 
-      <!-- Extra example: PSC / Upskill -->
-      <a class="course-card" href="psc_10th.html">
-        <div class="course-info">
-          <div class="course-icon">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="3" width="14" height="18" rx="2" fill="#ff9b66"/>
-              <path d="M16 6h4v12h-4z" fill="#ff7b3b"/>
-            </svg>
-          </div>
-          <div>
-            <div class="course-title">Kerala PSC – 10th Level</div>
-            <div style="margin-top:8px;"><span class="tag">PSC Exam</span></div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <span style="color:var(--muted);margin-right:6px;font-weight:600">Details</span>
-          <span class="open-btn">Open</span>
-        </div>
-      </a>
+        .course-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: 0.25s;
+            text-decoration: none;
+            color: black;
+        }
 
-      <!-- Add more course cards here -->
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
 
-    </section>
-  </main>
+        .icon-box {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            background: #4a90e2;
+            margin-bottom: 12px;
+        }
+
+        .course-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        .tag {
+            margin-top: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Available Courses</h2>
+
+    <div class="courses-container">
+
+        <a href="ktet_cat1.html">
+            <div class="course-card">
+                <div class="icon-box"></div>
+                <div class="course-title">KTET Category 1</div>
+                <div class="tag">KTET Exam</div>
+            </div>
+        </a>
+
+        <a href="ktet_cat2.html">
+            <div class="course-card">
+                <div class="icon-box" style="background:#ff7f50;"></div>
+                <div class="course-title">KTET Category 2</div>
+                <div class="tag">KTET Exam</div>
+            </div>
+        </a>
+
+        <a href="ktet_cat3.html">
+            <div class="course-card">
+                <div class="icon-box" style="background:#32cd32;"></div>
+                <div class="course-title">KTET Category 3</div>
+                <div class="tag">KTET Exam</div>
+            </div>
+        </a>
+
+        <a href="kerala_psc.html">
+            <div class="course-card">
+                <div class="icon-box" style="background:#ff9500;"></div>
+                <div class="course-title">Kerala PSC – 10th Level</div>
+                <div class="tag">PSC Exam</div>
+            </div>
+        </a>
+
+        <a href="ai_teachers.html">
+            <div class="course-card">
+                <div class="icon-box" style="background:#8e44ad;"></div>
+                <div class="course-title">AI Course for Teachers</div>
+                <div class="tag">Artificial Intelligence</div>
+            </div>
+        </a>
+
+        <a href="ai_students.html">
+            <div class="course-card">
+                <div class="icon-box" style="background:#1abc9c;"></div>
+                <div class="course-title">AI Course for Students</div>
+                <div class="tag">Artificial Intelligence</div>
+            </div>
+        </a>
+
+    </div>
 
 </body>
 </html>
