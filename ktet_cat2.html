@@ -1,133 +1,263 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KTET Category 2 – Subjects</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>KTET Category 2 — Subjects</title>
+<meta name="description" content="KTET Category 2 subjects — Video Classes, PDF Notes, MCQ Practice, Comments. Premium responsive design." />
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: #0e0e0f;
-        margin: 0;
-        padding: 0;
-        color: white;
-    }
+  :root{
+    --bg-1: #05060a;
+    --panel: linear-gradient(180deg,#0b1320 0%, #071228 100%);
+    --muted: #9aa6b2;
+    --accent: #60a5fa;
+    --accent2: #7dd3fc;
+    --card-bg: rgba(255,255,255,0.02);
+    --glass: rgba(255,255,255,0.03);
+    --radius: 18px;
+    --shadow: 0 18px 40px rgba(2,8,23,0.7);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
 
-    .header {
-        background: linear-gradient(135deg, #111827, #1f2937);
-        padding: 28px;
-        text-align: center;
-        color: white;
-        font-size: 27px;
-        font-weight: 700;
-        border-bottom: 1px solid #2d3748;
-    }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background: radial-gradient(circle at 10% 10%, rgba(96,165,250,0.06), transparent 10%),
+                radial-gradient(circle at 90% 90%, rgba(125,211,252,0.02), transparent 12%),
+                var(--bg-1);
+    color:#e8f0fb;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:28px 16px;
+    display:flex;
+    justify-content:center;
+  }
 
-    .container {
-        max-width: 1100px;
-        margin: 40px auto;
-        padding: 20px;
-    }
+  .container{
+    width:100%;
+    max-width:1100px;
+  }
 
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 35px;
-    }
+  header{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    margin-bottom:20px;
+  }
 
-    .card {
-        background: #111827;
-        padding: 30px 25px;
-        text-align: center;
-        border-radius: 22px;
-        transition: 0.3s ease-in-out;
-        border: 1px solid #1f2937;
-        cursor: pointer;
-        box-shadow: 0 0 0 rgba(0,0,0,0);
-    }
+  .logo{
+    width:64px;height:64px;border-radius:14px;
+    background:linear-gradient(135deg,var(--accent), var(--accent2));
+    display:grid;place-items:center;font-weight:700;color:#032027;font-size:20px;
+    box-shadow:0 8px 30px rgba(8,20,40,0.6);
+  }
+  .brand-title{line-height:1}
+  h1{margin:0;font-size:18px}
+  p.lead{margin:2px 0 0;color:var(--muted);font-size:13px}
 
-    .card:hover {
-        transform: translateY(-8px);
-        border-color: #3b82f6;
-        box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-    }
+  nav.top{
+    margin-left:auto;
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  nav.top a{
+    color:var(--muted);
+    text-decoration:none;padding:8px 12px;border-radius:10px;font-size:13px;
+  }
+  nav.top a.active{ color:#fff; background: rgba(255,255,255,0.03) }
 
-    .card img {
-        width: 95px;
-        height: 95px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 18px;
-        border: 3px solid #374151;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
+  main{
+    background: var(--panel);
+    padding:22px;border-radius:20px;
+    box-shadow:var(--shadow); border:1px solid rgba(255,255,255,0.03);
+  }
 
-    .card h3 {
-        font-size: 20px;
-        font-weight: 600;
-        margin: 0;
-        color: #f3f4f6;
-    }
+  .hero{
+    display:flex;gap:16px;align-items:center;margin-bottom:18px;
+  }
+  .hero .meta{flex:1}
+  .hero h2{margin:0 0 6px 0;font-size:18px}
+  .hero p{margin:0;color:var(--muted);font-size:13px}
 
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+  }
+
+  .card{
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:26px 20px;border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));
+    border:1px solid rgba(255,255,255,0.03);
+    min-height:180px;position:relative;overflow:hidden;
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .card:hover{ transform:translateY(-8px); box-shadow: 0 30px 60px rgba(2,8,23,0.75); }
+
+  .subject-img{
+    width:86px;height:86px;border-radius:999px;border:6px solid rgba(255,255,255,0.06);
+    overflow:hidden;display:block;margin-bottom:12px;box-shadow: 0 8px 20px rgba(2,6,23,0.6);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  }
+  .subject-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+  .card h3{margin:8px 0 6px;font-size:20px;color:#fff}
+  .card p.desc{margin:0;color:var(--muted);font-size:13px}
+
+  .links{
+    margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  }
+  .btn{
+    text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:700;font-size:13px;
+    display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,255,255,0.04);
+  }
+  .btn.primary{ background: linear-gradient(90deg, rgba(96,165,250,0.12), rgba(125,211,252,0.06)); color:var(--accent); }
+  .btn.ghost{ background:transparent;color:var(--muted); }
+
+  footer.note{ margin-top:18px;color:var(--muted);font-size:13px;text-align:center; }
+
+  /* small screens */
+  @media (max-width:520px){
+    body{padding:18px}
+    .hero{flex-direction:column;align-items:flex-start}
+    .card{padding:18px}
+    .subject-img{width:74px;height:74px}
+  }
 </style>
 </head>
-
 <body>
+  <div class="container">
+    <header>
+      <div class="logo">KT</div>
+      <div class="brand-title">
+        <h1>KTET — Category 2</h1>
+        <p class="lead">Subjects · Click a card to open the subject page</p>
+      </div>
 
-<div class="header">KTET Category 2 – Subjects</div>
+      <nav class="top" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="ktet_cat1.html">Cat 1</a>
+        <a href="ktet_cat2.html" class="active">Cat 2</a>
+        <a href="ktet_cat3.html">Cat 3</a>
+        <a href="courses.html">Courses</a>
+      </nav>
+    </header>
 
-<div class="container">
-    <div class="grid">
+    <main>
+      <section class="hero" aria-labelledby="cat2-title">
+        <div class="meta">
+          <h2 id="cat2-title">Category 2 — Subjects</h2>
+          <p>Each subject page follows this same section order: Video Classes → PDF Notes → MCQ Practice → Comments.</p>
+        </div>
+        <div>
+          <a class="btn ghost" href="ktet_cat1.html">Back to Category 1</a>
+        </div>
+      </section>
 
-        <a href="child_development_cat2.html">
-            <div class="card">
-                <img src="images/pestalozzi.jpg" alt="Child Development">
-                <h3>Child Development & Pedagogy</h3>
-            </div>
-        </a>
+      <section class="grid" aria-label="Category 2 subjects">
+        <!-- Child Development & Pedagogy -->
+        <article class="card" role="article" aria-labelledby="ped-title">
+          <a href="cat2_pedagogy.html" style="text-decoration:none;color:inherit;">
+            <span class="subject-img" aria-hidden="true">
+              <img src="https://images.unsplash.com/photo-1529338296731-4f30d1f4b8a7?w=120&auto=format&fit=crop&q=60" alt="Teacher portrait">
+            </span>
+            <h3 id="ped-title">Child Development & Pedagogy</h3>
+            <p class="desc">Teaching methodology, child psychology and classroom strategies.</p>
+          </a>
+          <div class="links" aria-hidden="false">
+            <a class="btn primary" href="cat2_pedagogy.html#videos">Open</a>
+            <a class="btn ghost" href="cat2_pedagogy.html#mcq">MCQs</a>
+          </div>
+        </article>
 
-        <a href="malayalam_cat2.html">
-            <div class="card">
-                <img src="images/vaikom_basheer.jpg" alt="Malayalam">
-                <h3>Malayalam</h3>
-            </div>
-        </a>
+        <!-- Malayalam -->
+        <article class="card" role="article" aria-labelledby="mal-title">
+          <a href="cat2_malayalam.html" style="text-decoration:none;color:inherit;">
+            <span class="subject-img" aria-hidden="true">
+              <img src="https://images.unsplash.com/photo-1526318472351-c75fcf0706a9?w=120&auto=format&fit=crop&q=60" alt="Malayalam literature">
+            </span>
+            <h3 id="mal-title">Malayalam</h3>
+            <p class="desc">Language, literature and comprehension practice.</p>
+          </a>
+          <div class="links">
+            <a class="btn primary" href="cat2_malayalam.html#videos">Open</a>
+            <a class="btn ghost" href="cat2_malayalam.html#notes">Notes</a>
+          </div>
+        </article>
 
-        <a href="english_cat2.html">
-            <div class="card">
-                <img src="images/shakespeare.jpg" alt="English">
-                <h3>English</h3>
-            </div>
-        </a>
+        <!-- English -->
+        <article class="card" role="article" aria-labelledby="eng-title">
+          <a href="cat2_english.html" style="text-decoration:none;color:inherit;">
+            <span class="subject-img" aria-hidden="true">
+              <img src="https://images.unsplash.com/photo-1510936111840-5a0d0d4a3b3b?w=120&auto=format&fit=crop&q=60" alt="English literature">
+            </span>
+            <h3 id="eng-title">English</h3>
+            <p class="desc">Grammar, comprehension and teaching tips.</p>
+          </a>
+          <div class="links">
+            <a class="btn primary" href="cat2_english.html#videos">Open</a>
+            <a class="btn ghost" href="cat2_english.html#notes">Notes</a>
+          </div>
+        </article>
 
-        <a href="mathematics_cat2.html">
-            <div class="card">
-                <img src="images/ramanujan.jpg" alt="Mathematics">
-                <h3>Mathematics</h3>
-            </div>
-        </a>
+        <!-- Mathematics -->
+        <article class="card" role="article" aria-labelledby="math-title">
+          <a href="cat2_mathematics.html" style="text-decoration:none;color:inherit;">
+            <span class="subject-img" aria-hidden="true">
+              <img src="https://images.unsplash.com/photo-1526378726631-2d5ef6f3f3b8?w=120&auto=format&fit=crop&q=60" alt="Mathematics">
+            </span>
+            <h3 id="math-title">Mathematics</h3>
+            <p class="desc">Problem solving, examples and exam practice.</p>
+          </a>
+          <div class="links">
+            <a class="btn primary" href="cat2_mathematics.html#videos">Open</a>
+            <a class="btn ghost" href="cat2_mathematics.html#mcq">MCQs</a>
+          </div>
+        </article>
 
-        <a href="science_cat2.html">
-            <div class="card">
-                <img src="images/einstein.jpg" alt="General Science">
-                <h3>General Science</h3>
-            </div>
-        </a>
+        <!-- Science -->
+        <article class="card" role="article" aria-labelledby="sci-title">
+          <a href="cat2_science.html" style="text-decoration:none;color:inherit;">
+            <span class="subject-img" aria-hidden="true">
+              <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=120&auto=format&fit=crop&q=60" alt="Science">
+            </span>
+            <h3 id="sci-title">Science</h3>
+            <p class="desc">Biology, Physics, Chemistry — experiments and concepts.</p>
+          </a>
+          <div class="links">
+            <a class="btn primary" href="cat2_science.html#videos">Open</a>
+            <a class="btn ghost" href="cat2_science.html#notes">Notes</a>
+          </div>
+        </article>
 
-        <a href="social_science_cat2.html">
-            <div class="card">
-                <img src="images/ambedkar.jpg" alt="Social Science">
-                <h3>Social Science</h3>
-            </div>
-        </a>
+        <!-- Social Science -->
+        <article class="card" role="article" aria-labelledby="soc-title">
+          <a href="cat2_socialscience.html" style="text-decoration:none;color:inherit;">
+            <span class="subject-img" aria-hidden="true">
+              <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=120&auto=format&fit=crop&q=60" alt="Social science">
+            </span>
+            <h3 id="soc-title">Social Science</h3>
+            <p class="desc">History, Civics and Geography with focused practice.</p>
+          </a>
+          <div class="links">
+            <a class="btn primary" href="cat2_socialscience.html#videos">Open</a>
+            <a class="btn ghost" href="cat2_socialscience.html#mcq">MCQs</a>
+          </div>
+        </article>
 
-    </div>
-</div>
+      </section>
 
+      <footer class="note">
+        Replace the Unsplash URLs with your own images later if you prefer local photos (images/...). Each subject page should include anchors: <code>#videos</code>, <code>#notes</code>, <code>#mcq</code>, <code>#comments</code>.
+      </footer>
+    </main>
+
+    <footer style="margin-top:16px;color:var(--muted);font-size:13px;text-align:center">
+      © KTET Resources — Premium responsive design
+    </footer>
+  </div>
 </body>
 </html>
