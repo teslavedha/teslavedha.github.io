@@ -5,119 +5,128 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KTET Category 2 – Subjects</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<!-- Styling -->
 <style>
     body {
+        font-family: 'Poppins', sans-serif;
+        background: #0e0e0f;
         margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: #0d0d0d;
-        color: #ffffff;
+        padding: 0;
+        color: white;
     }
 
     .header {
+        background: linear-gradient(135deg, #111827, #1f2937);
+        padding: 28px;
         text-align: center;
-        padding: 40px 20px;
-        background: #121212;
-        border-bottom: 1px solid #222;
-    }
-
-    .header h1 {
-        font-size: 32px;
-        font-weight: 600;
-        color: #fff;
+        color: white;
+        font-size: 27px;
+        font-weight: 700;
+        border-bottom: 1px solid #2d3748;
     }
 
     .container {
-        width: 90%;
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 40px auto;
+        padding: 20px;
+    }
+
+    .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 35px;
     }
 
     .card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        padding: 30px;
-        border-radius: 18px;
+        background: #111827;
+        padding: 30px 25px;
         text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
+        border-radius: 22px;
+        transition: 0.3s ease-in-out;
+        border: 1px solid #1f2937;
         cursor: pointer;
+        box-shadow: 0 0 0 rgba(0,0,0,0);
     }
 
     .card:hover {
         transform: translateY(-8px);
-        background: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.3);
+        border-color: #3b82f6;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    .card img {
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 18px;
+        border: 3px solid #374151;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
     .card h3 {
-        margin-bottom: 15px;
-        font-size: 22px;
-        font-weight: 500;
-        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+        color: #f3f4f6;
     }
 
-    .card a {
+    a {
         text-decoration: none;
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 22px;
-        border-radius: 6px;
-        background: #ffffff;
-        color: #000;
-        font-weight: 500;
-        transition: 0.3s;
-    }
-
-    .card a:hover {
-        background: #e6e6e6;
+        color: inherit;
     }
 </style>
 </head>
+
 <body>
 
-<div class="header">
-    <h1>KTET Category 2 – Subjects</h1>
-</div>
+<div class="header">KTET Category 2 – Subjects</div>
 
 <div class="container">
+    <div class="grid">
 
-    <div class="card">
-        <h3>Child Development & Pedagogy</h3>
-        <a href="cat2_child_development.html">Open</a>
+        <a href="child_development_cat2.html">
+            <div class="card">
+                <img src="images/pestalozzi.jpg" alt="Child Development">
+                <h3>Child Development & Pedagogy</h3>
+            </div>
+        </a>
+
+        <a href="malayalam_cat2.html">
+            <div class="card">
+                <img src="images/vaikom_basheer.jpg" alt="Malayalam">
+                <h3>Malayalam</h3>
+            </div>
+        </a>
+
+        <a href="english_cat2.html">
+            <div class="card">
+                <img src="images/shakespeare.jpg" alt="English">
+                <h3>English</h3>
+            </div>
+        </a>
+
+        <a href="mathematics_cat2.html">
+            <div class="card">
+                <img src="images/ramanujan.jpg" alt="Mathematics">
+                <h3>Mathematics</h3>
+            </div>
+        </a>
+
+        <a href="science_cat2.html">
+            <div class="card">
+                <img src="images/einstein.jpg" alt="General Science">
+                <h3>General Science</h3>
+            </div>
+        </a>
+
+        <a href="social_science_cat2.html">
+            <div class="card">
+                <img src="images/ambedkar.jpg" alt="Social Science">
+                <h3>Social Science</h3>
+            </div>
+        </a>
+
     </div>
-
-    <div class="card">
-        <h3>Malayalam</h3>
-        <a href="cat2_malayalam.html">Open</a>
-    </div>
-
-    <div class="card">
-        <h3>English</h3>
-        <a href="cat2_english.html">Open</a>
-    </div>
-
-    <div class="card">
-        <h3>Mathematics</h3>
-        <a href="cat2_mathematics.html">Open</a>
-    </div>
-
-    <div class="card">
-        <h3>Science</h3>
-        <a href="cat2_science.html">Open</a>
-    </div>
-
-    <div class="card">
-        <h3>Social Science</h3>
-        <a href="cat2_social_science.html">Open</a>
-    </div>
-
 </div>
 
 </body>
