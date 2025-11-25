@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English – MCQ Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4ff;
+        }
+
+        .header {
+            background-color: #0056d6;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 640px;
+            margin: auto;
+        }
+
+        .question-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .question-card button {
+            background-color: #0056d6;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .question-card button:hover {
+            background-color: #0044b5;
+        }
+
+        .answer {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #f1f8ff;
+            border-radius: 8px;
+            display: none;
+            font-size: 16px;
+        }
+
+        .answer.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>English – MCQ Practice</h1>
+    </div>
+
+    <div class="container">
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <button onclick="toggleAnswer(1)">Q1: What is the synonym of 'happy'?</button>
+            <div id="answer-1" class="answer">
+                A) Sad <br>
+                B) Angry <br>
+                C) Joyful <br>
+                D) Tired
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <button onclick="toggleAnswer(2)">Q2: What is the capital of England?</button>
+            <div id="answer-2" class="answer">
+                A) Paris <br>
+                B) London <br>
+                C) Berlin <br>
+                D) Madrid
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <button onclick="toggleAnswer(3)">Q3: What is the opposite of 'big'?</button>
+            <div id="answer-3" class="answer">
+                A) Small <br>
+                B) Large <br>
+                C) Huge <br>
+                D) Tall
+            </div>
+        </div>
+
+        <!-- Add more questions as needed -->
+
+    </div>
+
+    <script>
+        function toggleAnswer(questionId) {
+            var answer = document.getElementById('answer-' + questionId);
+            answer.classList.toggle('show');
+        }
+    </script>
+
+</body>
+</html>
