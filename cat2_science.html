@@ -1,142 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KTET Category 2 – Science</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTET Category 2 - Science</title>
 
-<style>
-    body { font-family:'Poppins', sans-serif; margin:0; background:#f4f6fa; }
-    header { background:#2a4d9b; padding:20px; color:#fff; text-align:center;
-        font-size:26px; font-weight:700; }
+    <style>
+        body { font-family: Poppins, sans-serif; margin: 0; background: #eef3ff; }
 
-    .banner {
-        background:url('https://images.pexels.com/photos/256262/pexels-photo-256262.jpeg') center/cover;
-        height:180px; border-radius:0 0 20px 20px;
-        display:flex; align-items:center; justify-content:center;
-        color:white; font-size:28px; font-weight:700;
-        text-shadow:0 4px 10px rgba(0,0,0,0.5);
-    }
+        header {
+            background: linear-gradient(135deg, #005bea, #00c6fb);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-    .section { padding:25px; }
-    h2 { margin-bottom:15px; color:#222; }
+        .subject-nav {
+            display: flex; overflow-x: auto;
+            background: white; padding: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            gap: 14px;
+        }
 
-    .grid {
-        display:grid; gap:20px;
-        grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    }
+        .subject-nav a {
+            padding: 10px 20px;
+            background: #e5eeff;
+            color: #003b8e;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+        }
 
-    .card {
-        background:white; padding:15px; border-radius:15px;
-        box-shadow:0 8px 20px rgba(0,0,0,0.08);
-        transition:.3s; text-align:center;
-    }
+        section { width: 92%; margin: 35px auto; }
+        h2 {
+            color: #003b8e;
+            border-left: 6px solid #005bea;
+            padding-left: 12px;
+            font-size: 26px;
+        }
 
-    .card:hover { transform:translateY(-5px); }
-    .thumb {
-        width:100%; height:150px; border-radius:12px;
-        object-fit:cover; margin-bottom:10px;
-    }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+            gap: 20px;
+        }
 
-    button {
-        background:#2a4d9b; border:none; padding:10px 20px; color:#fff;
-        border-radius:10px; font-size:14px; cursor:pointer;
-        transition:0.3s;
-    }
-    button:hover { background:#1f3f82; }
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+            transition: 0.3s;
+        }
 
-    /* MCQ Section */
-    .mcq-box {
-        background:white; padding:20px; border-radius:15px;
-        box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    }
+        .card:hover { transform: translateY(-6px); }
 
-    .option { margin:8px 0; padding:10px; background:#eef2ff; border-radius:10px; cursor:pointer; }
-    .option:hover { background:#dde4ff; }
-    #result { margin-top:10px; font-weight:600; }
+        .thumb {
+            width: 100%; height: 160px;
+            background: linear-gradient(135deg, #7fb0ff, #0047b3);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
 
-    /* Comments */
-    textarea {
-        width:100%; padding:12px; border-radius:12px; border:1px solid #ccc; resize:none;
-    }
-    .submit-btn { margin-top:10px; background:#27ae60; }
-</style>
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            background: #005bea;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .mcq-box {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.14);
+        }
+
+        .mcq-option {
+            padding: 12px;
+            background: #eef4ff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%; height: 130px;
+            border-radius: 12px;
+            padding: 12px;
+            border: 1.5px solid #bcd0ff;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 12px 20px;
+            background: #0047b3;
+            border: none;
+            border-radius: 10px;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
 
 <header>KTET Category 2 – Science</header>
 
-<div class="banner">Science</div>
-
-<!-- VIDEO SECTION -->
-<div class="section" id="videos">
-    <h2>📺 Video Classes</h2>
-
-    <div class="grid">
-
-        <div class="card">
-            <img class="thumb" src="https://i.ytimg.com/vi/4WwAKi-VZ9U/maxresdefault.jpg">
-            <button>Biology Basics</button>
-        </div>
-
-        <div class="card">
-            <img class="thumb" src="https://i.ytimg.com/vi/9Z8I2Fw5WMg/maxresdefault.jpg">
-            <button>Physics Concepts</button>
-        </div>
-
-    </div>
+<div class="subject-nav">
+    <a href="cat2_malayalam.html">Malayalam</a>
+    <a href="cat2_english.html">English</a>
+    <a href="cat2_mathematics.html">Mathematics</a>
+    <a href="cat2_science.html">Science</a>
+    <a href="cat2_socialscience.html">Social Science</a>
+    <a href="cat2_pedagogy.html">Pedagogy</a>
 </div>
 
-<!-- NOTES SECTION -->
-<div class="section" id="notes">
-    <h2>📚 PDF Notes</h2>
+<section id="videos">
+    <h2>Video Classes</h2>
 
     <div class="grid">
-
         <div class="card">
-            <h3>Biology Notes</h3>
-            <button>Download PDF</button>
+            <div class="thumb"></div>
+            <h3>Biology – Cell Structure</h3>
+            <a class="btn">Watch Class</a>
         </div>
 
         <div class="card">
-            <h3>Physics Notes</h3>
-            <button>Download PDF</button>
+            <div class="thumb"></div>
+            <h3>Chemistry – Acids & Bases</h3>
+            <a class="btn">Watch Class</a>
         </div>
 
+        <div class="card">
+            <div class="thumb"></div>
+            <h3>Physics – Motion & Force</h3>
+            <a class="btn">Watch Class</a>
+        </div>
     </div>
-</div>
+</section>
 
-<!-- MCQ SECTION -->
-<div class="section" id="mcq">
-    <h2>📝 MCQ Practice</h2>
+<section id="notes">
+    <h2>PDF Notes</h2>
+
+    <div class="grid">
+        <div class="card"><h3>Biology Notes</h3><a class="btn">Download</a></div>
+        <div class="card"><h3>Chemistry Notes</h3><a class="btn">Download</a></div>
+        <div class="card"><h3>Physics Notes</h3><a class="btn">Download</a></div>
+    </div>
+</section>
+
+<section id="mcq">
+    <h2>MCQ Practice</h2>
 
     <div class="mcq-box">
+        <p><strong>Q1: Which organelle is the powerhouse of the cell?</strong></p>
 
-        <p><b>Q1:</b> Who is known as the father of modern physics?</p>
-
-        <div class="option" onclick="check('correct')">Albert Einstein</div>
-        <div class="option" onclick="check('wrong')">Isaac Newton</div>
-        <div class="option" onclick="check('wrong')">Galileo</div>
-
-        <div id="result"></div>
-
+        <div class="mcq-option">A) Nucleus</div>
+        <div class="mcq-option">B) Mitochondria</div>
+        <div class="mcq-option">C) Ribosome</div>
+        <div class="mcq-option">D) Golgi Body</div>
     </div>
-</div>
+</section>
 
-<!-- COMMENTS SECTION -->
-<div class="section" id="comments">
-    <h2>💬 Comments</h2>
-
-    <textarea rows="4" placeholder="Type your comment..."></textarea>
-    <button class="submit-btn">Submit</button>
-</div>
-
-<script>
-function check(ans){
-    document.getElementById('result').innerHTML =
-        ans === "correct" ? "✅ Correct!" : "❌ Wrong Answer";
-}
-</script>
+<section id="comments">
+    <h2>Comments</h2>
+    <textarea placeholder="Write your comment..."></textarea>
+    <button>Post Comment</button>
+</section>
 
 </body>
 </html>
