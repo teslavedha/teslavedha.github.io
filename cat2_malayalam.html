@@ -1,51 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malayalam – KTET Category 2</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KTET Category 2 – Malayalam</title>
 
 <style>
-body { margin: 0; background: #0d0d0d; font-family: "Poppins", sans-serif; color: #ffffff; }
-.header { text-align: center; padding: 40px 20px; border-bottom: 1px solid #222; }
-h1 { font-size: 30px; font-weight: 600; }
-.section { width: 90%; max-width: 900px; margin: 35px auto; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); }
-h2 { margin-bottom: 15px; font-size: 22px; font-weight: 500; }
-.item { margin: 10px 0; padding: 12px; background: rgba(255,255,255,0.08); border-radius: 10px; }
-.back-btn { display: block; width: fit-content; margin: 40px auto; padding: 12px 30px; background: #fff; color: #000; font-weight: 600; border-radius: 8px; text-decoration: none; }
+    body { font-family: 'Poppins', sans-serif; margin:0; background:#f7f8fa; }
+    header { background:#2a4d9b; padding:20px; color:#fff; text-align:center; font-size:26px; font-weight:700; }
+    .banner {
+        background:url('https://images.pexels.com/photos/3747460/pexels-photo-3747460.jpeg') center/cover;
+        height:180px; border-radius:0 0 20px 20px;
+        display:flex; align-items:center; justify-content:center;
+        color:white; font-size:28px; font-weight:700;
+        text-shadow:0 4px 10px rgba(0,0,0,0.5);
+    }
+    .section { padding:25px; }
+    h2 { margin-bottom:15px; color:#222; }
+    .grid { display:grid; gap:20px; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); }
+    .card {
+        background:white; padding:15px; border-radius:15px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.08); 
+        transition:.3s; text-align:center;
+    }
+    .card:hover { transform:translateY(-5px); }
+    .thumb {
+        width:100%; height:150px; border-radius:12px; object-fit:cover; margin-bottom:10px;
+    }
+    button {
+        background:#2a4d9b; border:none; padding:10px 20px; color:#fff;
+        border-radius:10px; font-size:14px; cursor:pointer; transition:0.3s;
+    }
+    button:hover { background:#1f3f82; }
+    /* MCQ Section */
+    .mcq-box { background:white; padding:20px; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.08); }
+    .option { margin:8px 0; padding:10px; background:#eef2ff; border-radius:10px; cursor:pointer; }
+    .option:hover { background:#dde4ff; }
+    #result { margin-top:10px; font-weight:600; }
+    /* Comment Section */
+    textarea {
+        width:100%; padding:12px; border-radius:12px; border:1px solid #ccc; resize:none;
+    }
+    .submit-btn { margin-top:10px; background:#27ae60; }
 </style>
-
 </head>
 <body>
 
-<div class="header">
-    <h1>Malayalam</h1>
-    <p>KTET Category 2</p>
+<header>KTET Category 2 – Malayalam</header>
+<div class="banner">Malayalam</div>
+
+<!-- VIDEO SECTION -->
+<div class="section" id="videos">
+    <h2>📺 Video Classes</h2>
+    <div class="grid">
+        <div class="card">
+            <img class="thumb" src="https://i.ytimg.com/vi/1xqZlWJ7tRA/maxresdefault.jpg">
+            <button>Watch Lesson 1</button>
+        </div>
+        <div class="card">
+            <img class="thumb" src="https://i.ytimg.com/vi/kVJ1Ax7AnCM/maxresdefault.jpg">
+            <button>Watch Lesson 2</button>
+        </div>
+    </div>
 </div>
 
-<div class="section">
-    <h2>📹 Video Classes</h2>
-    <div class="item">Video 1</div>
+<!-- NOTES SECTION -->
+<div class="section" id="notes">
+    <h2>📚 PDF Notes</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Grammar Notes</h3>
+            <button>Download PDF</button>
+        </div>
+        <div class="card">
+            <h3>Prose Notes</h3>
+            <button>Download PDF</button>
+        </div>
+    </div>
 </div>
 
-<div class="section">
-    <h2>📄 PDF Notes</h2>
-    <div class="item">PDF 1</div>
-</div>
-
-<div class="section">
+<!-- MCQ SECTION -->
+<div class="section" id="mcq">
     <h2>📝 MCQ Practice</h2>
-    <div class="item">MCQ Test 1</div>
+    <div class="mcq-box">
+        <p><b>Q1:</b> മലയാളത്തിന്റെ പിതാവ് ആരാണ്?</p>
+        <div class="option" onclick="check('wrong')">വള്ളത്തോൾ</div>
+        <div class="option" onclick="check('correct')">തുൻച്ചത്ത് എഴുത്തച്ഛൻ</div>
+        <div class="option" onclick="check('wrong')">ചങ്ങമ്പുഴ</div>
+        <div id="result"></div>
+    </div>
 </div>
 
-<div class="section">
+<!-- COMMENTS SECTION -->
+<div class="section" id="comments">
     <h2>💬 Comments</h2>
-    <div class="item">Comment box placeholder</div>
+    <textarea rows="4" placeholder="Enter your comment..."></textarea>
+    <button class="submit-btn">Submit</button>
 </div>
 
-<a href="ktet_category2.html" class="back-btn">← Back to Category 2</a>
-
+<script>
+function check(ans){
+    document.getElementById('result').innerHTML =
+        ans === "correct" ? "✅ Correct!" : "❌ Wrong Answer";
+}
+</script>
 </body>
 </html>
