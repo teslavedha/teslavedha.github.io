@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Malayalam — MCQ Practice</title>
+<style>
+  :root{--blue:#1e88e5;--bg:#f4f7ff}
+  body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#07203a}
+  .header{background:linear-gradient(90deg,var(--blue),#0d6fd1);color:#fff;padding:24px;text-align:center}
+  .wrap{max-width:820px;margin:18px auto;padding:18px}
+  .card{background:#fff;border-radius:12px;padding:18px;margin:12px 0;box-shadow:0 8px 20px rgba(12,30,70,0.06)}
+  .q{font-weight:700;color:#0b2b4b;margin-bottom:10px}
+  .opt{background:#eef6ff;padding:12px;border-radius:10px;margin:8px 0;cursor:pointer}
+  .opt.correct{background:#d4f7e5;border:1px solid #7ae0a3}
+  .opt.wrong{background:#ffe6e6;border:1px solid #ff9a9a}
+  .small{color:#54758e;font-size:13px}
+</style>
+</head>
+<body>
+  <header class="header"><h1>Malayalam — MCQ Practice</h1></header>
+  <main class="wrap">
+
+    <!-- MCQ 1 -->
+    <div class="card">
+      <div class="q">Q1: (Sample question 1)</div>
+      <div class="opt" onclick="answer(this,false,1)">A) Option A</div>
+      <div class="opt" onclick="answer(this,true,1)">B) Option B (correct)</div>
+      <div class="opt" onclick="answer(this,false,1)">C) Option C</div>
+      <div class="opt" onclick="answer(this,false,1)">D) Option D</div>
+      <div class="small" id="r1"></div>
+    </div>
+
+    <!-- MCQ 2 -->
+    <div class="card">
+      <div class="q">Q2: (Sample question 2)</div>
+      <div class="opt" onclick="answer(this,false,2)">A) Option A</div>
+      <div class="opt" onclick="answer(this,true,2)">B) Option B (correct)</div>
+      <div class="opt" onclick="answer(this,false,2)">C) Option C</div>
+      <div class="opt" onclick="answer(this,false,2)">D) Option D</div>
+      <div class="small" id="r2"></div>
+    </div>
+
+    <!-- MCQ 3 -->
+    <div class="card">
+      <div class="q">Q3: (Sample question 3)</div>
+      <div class="opt" onclick="answer(this,false,3)">A) Option A</div>
+      <div class="opt" onclick="answer(this,true,3)">B) Option B (correct)</div>
+      <div class="opt" onclick="answer(this,false,3)">C) Option C</div>
+      <div class="opt" onclick="answer(this,false,3)">D) Option D</div>
+      <div class="small" id="r3"></div>
+    </div>
+
+    <!-- MCQ 4 -->
+    <div class="card">
+      <div class="q">Q4: (Sample question 4)</div>
+      <div class="opt" onclick="answer(this,false,4)">A) Option A</div>
+      <div class="opt" onclick="answer(this,true,4)">B) Option B (correct)</div>
+      <div class="opt" onclick="answer(this,false,4)">C) Option C</div>
+      <div class="opt" onclick="answer(this,false,4)">D) Option D</div>
+      <div class="small" id="r4"></div>
+    </div>
+
+    <!-- MCQ 5 -->
+    <div class="card">
+      <div class="q">Q5: (Sample question 5)</div>
+      <div class="opt" onclick="answer(this,false,5)">A) Option A</div>
+      <div class="opt" onclick="answer(this,true,5)">B) Option B (correct)</div>
+      <div class="opt" onclick="answer(this,false,5)">C) Option C</div>
+      <div class="opt" onclick="answer(this,false,5)">D) Option D</div>
+      <div class="small" id="r5"></div>
+    </div>
+
+  </main>
+
+<script>
+function answer(el,isCorrect,qid){
+  // visually mark selection
+  const card = el.parentElement;
+  Array.from(card.querySelectorAll('.opt')).forEach(o=>{
+    o.classList.remove('correct','wrong');
+    o.style.pointerEvents='auto';
+  });
+  if(isCorrect){
+    el.classList.add('correct');
+    document.getElementById('r'+qid).textContent = '✅ Correct';
+  } else {
+    el.classList.add('wrong');
+    document.getElementById('r'+qid).textContent = '❌ Wrong';
+  }
+  // disable further clicks for options within this card
+  Array.from(card.querySelectorAll('.opt')).forEach(o=>o.style.pointerEvents='none');
+}
+</script>
+</body>
+</html>
