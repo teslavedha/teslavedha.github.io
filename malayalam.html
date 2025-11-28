@@ -8,87 +8,72 @@
     <style>
         body {
             margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #e6f0ff, #f6fbff);
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
         }
 
-        /* Header */
-        .header {
-            background: #1678f2;
+        header {
+            background: linear-gradient(45deg, #1e88e5, #42a5f5);
             color: white;
-            padding: 22px;
+            padding: 20px;
             text-align: center;
-            font-size: 26px;
-            font-weight: 700;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
         }
 
-        .container {
+        .wrap {
+            max-width: 760px;
+            margin: auto;
             padding: 20px;
         }
 
-        /* Glass Cards */
         .card {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(12px);
-            border-radius: 18px;
-            padding: 18px 20px;
-            margin: 18px 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            display: block;
+            background: white;
+            padding: 20px;
+            margin: 12px 0;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
             transition: 0.2s;
         }
 
         .card:hover {
             transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.55);
-        }
-
-        .icon {
-            font-size: 28px;
-        }
-
-        .text {
-            font-size: 20px;
-            font-weight: 600;
-            color: #0b2d57;
+            background: #e3f2fd;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">Malayalam – KTET Category 1</div>
+<header>
+    <h1>Malayalam – KTET Category 1</h1>
+</header>
 
-    <div class="container">
+<main class="wrap">
 
-        <div class="card" onclick="location.href='videos_malayalam.html'">
-            <div class="icon">🎥</div>
-            <div class="text">Video Classes</div>
-        </div>
+    <!-- VIDEO CLASSES -->
+    <a href="https://teslavedha.github.io/cat1_malayalam_videos.html" class="card">
+        🎥 Video Classes
+    </a>
 
-        <div class="card" onclick="location.href='pdf_malayalam.html'">
-            <div class="icon">📄</div>
-            <div class="text">PDF Notes</div>
-        </div>
+    <!-- PDF NOTES -->
+    <a href="https://teslavedha.github.io/cat1_malayalam_notes.html" class="card">
+        📚 PDF Notes
+    </a>
 
-        <div class="card" onclick="location.href='mcq_malayalam.html'">
-            <div class="icon">❓</div>
-            <div class="text">MCQ Practice</div>
-        </div>
+    <!-- MCQ PRACTICE -->
+    <a href="https://teslavedha.github.io/cat1_malayalam_mcq.html" class="card">
+        ❓ MCQ Practice
+    </a>
 
-        <div class="card" onclick="location.href='reviews_malayalam.html'">
-            <div class="icon">💬</div>
-            <div class="text">Comments / Reviews</div>
-        </div>
+    <!-- COMMENTS -->
+    <a href="https://teslavedha.github.io/cat1_malayalam_comments.html" class="card">
+        💬 Comments / Reviews
+    </a>
 
-    </div>
+</main>
 
 </body>
 </html>
