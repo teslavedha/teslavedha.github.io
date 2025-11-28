@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Category 1 — English</title>
+  <meta name="description" content="KTET Category 1 — English. Video classes, PDF notes, MCQ practice and comments." />
+  <!-- Premium modern styling - self-contained so each file is standalone -->
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa6b2;
+      --accent:#7c3aed;
+      --accent-2:#06b6d4;
+      --glass:rgba(255,255,255,0.03);
+      --radius:14px;
+      --card-padding:18px;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg, var(--bg), #071022 120%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+      display:flex;
+      justify-content:center;
+    }
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:18px;box-shadow:0 6px 20px rgba(12,10,20,0.6);
+    }
+    h1{margin:0;font-size:20px;letter-spacing:0.2px}
+    .nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .nav a{
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius:10px;
+      background:var(--glass);
+      color:var(--muted);
+      font-weight:600;
+      font-size:14px;
+    }
+    .nav a.active{background:linear-gradient(90deg, rgba(124,58,237,0.15), rgba(6,182,212,0.06)); color: #eaf5ff; box-shadow: 0 6px 20px rgba(7,9,20,0.5)}
+    main{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:22px;
+      border-radius:var(--radius);
+      box-shadow: 0 10px 40px rgba(6,9,20,0.7);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:var(--card-padding);
+      min-height:150px;
+      display:flex;flex-direction:column;justify-content:space-between;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .card h3{margin:0 0 8px 0;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
+    .cta-row{display:flex;gap:10px;align-items:center;margin-top:12px}
+    .btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:700;
+      font-size:14px;
+      color:white;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      box-shadow:0 8px 24px rgba(7,9,20,0.6);
+    }
+    .ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.04);
+      color:var(--muted);
+      padding:8px 10px;font-weight:700;border-radius:10px;
+    }
+    /* Section titles */
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-top:18px;
+      margin-bottom:8px;
+    }
+    .section-title h2{margin:0;font-size:15px}
+    .small{font-size:13px;color:var(--muted)}
+    /* Responsive footer nav for page-specific actions */
+    footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .hint{color:var(--muted);font-size:13px}
+    /* MCQ card specifics */
+    .mcq-item{padding:14px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)}
+    .options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .opt{padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);font-weight:600}
+    /* comment list */
+    .comment{padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);display:flex;gap:12px}
+    .avatar{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700}
+    .comment-body{flex:1}
+    .meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+    /* video grid */
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px}
+    .video-card{border-radius:10px;padding:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:10px}
+    .video-thumb{width:100%;height:140px;border-radius:8px;overflow:hidden;background:#071021;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+    .video-title{font-size:14px;margin:0}
+    /* embed responsive */
+    .embed-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px}
+    .embed-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+    @media (max-width:520px){
+      header{flex-direction:column;align-items:stretch;gap:10px}
+      .logo{width:48px;height:48px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">KT</div>
+        <div>
+          <h1>Category 1 — English</h1>
+          <div class="small">KTET / Kerala PSC | Clean modern card layout</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="primary">
+        <a href="https://myusername.github.io/cat1_english.html" class="active">Overview</a>
+        <a href="https://myusername.github.io/cat1_english_videos.html">🎥 Videos</a>
+        <a href="https://myusername.github.io/cat1_english_notes.html">📚 Notes</a>
+        <a href="https://myusername.github.io/cat1_english_mcq.html">❓ MCQ Practice</a>
+        <a href="https://myusername.github.io/cat1_english_comments.html">💬 Comments</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Section: Video Classes -->
+      <div class="section-title">
+        <h2>🎥 Video Classes</h2>
+        <div class="small">Curated lessons — click to open the full video list</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div>
+            <h3>Beginner Grammar — Overview</h3>
+            <p>Short primer covering nouns, verbs, adjectives and sentence structure for Category 1.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn" href="https://myusername.github.io/cat1_english_videos.html">Open Videos</a>
+            <a class="ghost" href="https://myusername.github.io/cat1_english_notes.html">Open Notes</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Reading Comprehension Tips</h3>
+            <p>Techniques to quickly identify main idea, tone, and inference questions.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn" href="https://myusername.github.io/cat1_english_videos.html">Watch Now</a>
+            <a class="ghost" href="https://myusername.github.io/cat1_english_mcq.html">Try MCQs</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Vocabulary & Synonyms</h3>
+            <p>Targeted lists and usage examples — ideal for quick revision.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn" href="https://myusername.github.io/cat1_english_notes.html">Download PDF</a>
+            <a class="ghost" href="https://myusername.github.io/cat1_english_comments.html">Discuss</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: PDF Notes -->
+      <div class="section-title">
+        <h2>📚 PDF Notes</h2>
+        <div class="small">Comprehensive notes & quick revision sheets</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div>
+            <h3>English Notes — Complete Pack (PDF)</h3>
+            <p>Grammar, comprehension practice, vocabulary lists and solved papers in one PDF.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn" href="https://myusername.github.io/cat1_english_notes.html">Open Notes</a>
+            <a class="ghost" href="https://myusername.github.io/cat1_english_videos.html">Watch Related Videos</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Quick Revision Sheet</h3>
+            <p>Two-page printable sheet for last-minute review before exams.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn" href="https://myusername.github.io/cat1_english_notes.html">Download</a>
+            <a class="ghost" href="https://myusername.github.io/cat1_english_comments.html">Ask Questions</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: MCQ Practice -->
+      <div class="section-title">
+        <h2>❓ MCQ Practice</h2>
+        <div class="small">Timed practice, instant answers & explanations</div>
+      </div>
+
+      <div class="grid">
+        <div class="card mcq-item">
+          <div>
+            <h3>Practice Set — 25 Questions</h3>
+            <p>Mixed MCQ set focused on grammar and comprehension.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn" href="https://myusername.github.io/cat1_english_mcq.html">Start Practice</a>
+            <a class="ghost" href="https://myusername.github.io/cat1_english_videos.html">Video Help</a>
+          </div>
+        </div>
+
+        <div class="card mcq-item">
+          <div>
+            <h3>Synonym/Antonym Drill</h3>
+            <p>Strengthen vocabulary with focused MCQs.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn" href="https://myusername.github.io/cat1_english_mcq.html">Try Now</a>
+            <a class="ghost" href="https://myusername.github.io/cat1_english_notes.html">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Comments -->
+      <div class="section-title">
+        <h2>💬 Comments</h2>
+        <div class="small">Student questions and discussion for English</div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-direction:column;margin-top:8px">
+        <div class="card comment" style="align-items:flex-start">
+          <div class="avatar">GG</div>
+          <div class="comment-body">
+            <div class="meta">Gopika G • 2 days ago</div>
+            <div>Where can I find practice papers for comprehension passages?</div>
+          </div>
+        </div>
+
+        <div class="card comment" style="align-items:flex-start">
+          <div class="avatar">AN</div>
+          <div class="comment-body">
+            <div class="meta">Anon • 1 week ago</div>
+            <div>The vocabulary PDF is very helpful — thank you!</div>
+          </div>
+        </div>
+
+        <div class="cta-row" style="margin-top:6px">
+          <a class="btn" href="https://myusername.github.io/cat1_english_comments.html">View All Comments</a>
+          <a class="ghost" href="https://myusername.github.io/cat1_english_notes.html">Open Notes</a>
+        </div>
+      </div>
+
+      <footer>
+        <div class="hint">All pages fully responsive. Use the top links to navigate between sections.</div>
+        <div class="small">Files: cat1_english.html • cat1_english_videos.html • cat1_english_notes.html • cat1_english_mcq.html • cat1_english_comments.html</div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
