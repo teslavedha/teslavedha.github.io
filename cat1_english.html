@@ -1,89 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English – KTET Category 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category 1 – English</title>
 
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #eef4f7;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    /* Header */
-    .header {
-        background: linear-gradient(145deg, #0b75ff, #16c47f);
-        padding: 40px 20px;
-        text-align: center;
-        color: white;
-        border-bottom-left-radius: 35px;
-        border-bottom-right-radius: 35px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f2f6ff;
+        }
 
-    .header h1 {
-        margin: 0;
-        font-size: 26px;
-        font-weight: bold;
-    }
+        header {
+            background: linear-gradient(90deg, #6d28d9, #8b5cf6);
+            color: white;
+            padding: 25px 10px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 600;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
 
-    /* Main Button Cards */
-    .container {
-        padding: 25px;
-    }
+        .container {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 10px;
+        }
 
-    .card {
-        background: white;
-        padding: 18px 20px;
-        margin-bottom: 18px;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        font-size: 19px;
-        font-weight: 600;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-        transition: 0.2s;
-        text-decoration: none;
-        color: #000;
-    }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+            transition: transform 0.2s;
+        }
 
-    .card:hover {
-        transform: scale(1.02);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
+        .card:hover {
+            transform: translateY(-4px);
+        }
 
-    .icon {
-        font-size: 28px;
-    }
-</style>
+        .info {
+            font-size: 20px;
+            font-weight: 600;
+            color: #4c1d95;
+        }
+
+        .desc {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .open-btn {
+            background: #6d28d9;
+            padding: 10px 22px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 3px 8px rgba(109,40,217,0.35);
+        }
+
+        .open-btn:hover {
+            background: #5b21b6;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="header">
-    <h1>English – KTET Category 1</h1>
-</div>
+<header>Category 1 – English</header>
 
 <div class="container">
 
-    <a href="https://myusername.github.io/cat1_english_videos.html" class="card">
-        <span class="icon">🎥</span> Video Classes
-    </a>
+    <!-- Videos -->
+    <div class="card">
+        <div>
+            <div class="info">🎥 Video Classes</div>
+            <div class="desc">Learn Grammar, Comprehension, Vocabulary, Pedagogy</div>
+        </div>
+        <a class="open-btn" href="https://teslavedha.github.io/cat1_english_videos.html">Open</a>
+    </div>
 
-    <a href="https://myusername.github.io/cat1_english_notes.html" class="card">
-        <span class="icon">📄</span> PDF Notes
-    </a>
+    <!-- Notes -->
+    <div class="card">
+        <div>
+            <div class="info">📚 PDF Notes</div>
+            <div class="desc">Download complete English notes (Grammar + Pedagogy)</div>
+        </div>
+        <a class="open-btn" href="https://teslavedha.github.io/cat1_english_notes.html">Open</a>
+    </div>
 
-    <a href="https://myusername.github.io/cat1_english_mcq.html" class="card">
-        <span class="icon">❓</span> MCQ Practice
-    </a>
+    <!-- MCQ -->
+    <div class="card">
+        <div>
+            <div class="info">❓ MCQ Practice</div>
+            <div class="desc">Test yourself with important English MCQs</div>
+        </div>
+        <a class="open-btn" href="https://teslavedha.github.io/cat1_english_mcq.html">Open</a>
+    </div>
 
-    <a href="https://myusername.github.io/cat1_english_comments.html" class="card">
-        <span class="icon">💬</span> Comments / Reviews
-    </a>
+    <!-- Comments -->
+    <div class="card">
+        <div>
+            <div class="info">💬 Comments / Discussion</div>
+            <div class="desc">Ask questions & discuss English topics</div>
+        </div>
+        <a class="open-btn" href="https://teslavedha.github.io/cat1_english_comments.html">Open</a>
+    </div>
 
 </div>
 
