@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>KTET Category1 — Admin Panel (All Subjects)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body{font-family:Poppins, sans-serif;margin:0;background:#f3f6ff;padding:18px}
+  header{background:linear-gradient(90deg,#0ea5a3,#06b6d4);color:#fff;padding:18px;border-radius:12px}
+  .wrap{max-width:1100px;margin:18px auto}
+  label{font-weight:600;color:#0f1724}
+  select,input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #cbd5e1;margin-top:6px;margin-bottom:10px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .full{grid-column:1/-1}
+  .btn{background:#06b6d4;color:#fff;padding:10px 14px;border:0;border-radius:8px;font-weight:700;cursor:pointer}
+  .small{font-size:13px;color:#475569}
+  .sec{background:white;padding:14px;border-radius:10px;box-shadow:0 6px 16px rgba(2,6,23,0.06);margin-bottom:12px}
+  footer{max-width:1100px;margin:8px auto;color:#475569;font-size:13px;text-align:center}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h2 style="margin:0">KTET Category1 — Admin Panel (All Subjects)</h2></header>
+
+<div class="wrap">
+  <div class="sec">
+    <div class="small">This admin stores data in the browser's localStorage. You can manage videos (10), notes PDFs (5) and MCQ PDFs (5) per subject.</div>
+  </div>
+
+  <div class="sec">
+    <label for="subject">Select Subject</label>
+    <select id="subject">
+      <option value="malayalam">Malayalam</option>
+      <option value="english">English</option>
+      <option value="mathematics">Mathematics</option>
+      <option value="evs">EVS</option>
+      <option value="psychology">Psychology</option>
+    </select>
+  </div>
+
+  <div class="sec">
+    <label>Video URLs (10) — paste full YouTube links (one per box)</label>
+    <div id="videosInputs"></div>
+  </div>
+
+  <div class="sec">
+    <label>Notes PDF URLs (5)</label>
+    <div id="notesInputs"></div>
+  </div>
+
+  <div class="sec">
+    <label>MCQ PDF URLs (5)</label>
+    <div id="mcqInputs"></div>
+  </div>
+
+  <div class="sec grid">
+    <div>
+      <button class="btn" onclick="saveAll()">Save Videos & PDFs</button>
+    </div>
+    <div>
+      <button class="btn" style="background:#f97316" onclick="clearSubject()">Clear Selected Subject</button>
+    </div>
+    <div class="full">
+      <button class="btn" style="background:#0f1724" onclick="exportAll()">Export All Data (JSON)</button>
+      <button class="btn" style="background:#0ea5a3;margin-left:8px" onclick="importPrompt()">Import JSON</button>
+    </div>
+  </div>
+
+  <div class="sec small">
+    <strong>Usage notes:</strong>
+    <ul>
+      <li>For YouTube links use standard watch URL: <code>https://www.youtube.com/watch?v=VIDEO_ID</code>. Admin extracts ID automatically.</li>
+      <li>PDF URLs should be direct links (raw GitHub file or hosted file).</li>
+      <li>After saving, open the subject user pages to see changes:</li>
+      <ul>
+        <li>Main: <code>https://teslavedha.github.io/cat1_SUBJECT.html</code></li>
+        <li>Videos: <code>https://teslavedha.github.io/cat1_SUBJECT_videos.html</code></li>
+        <li>Notes: <code>https://teslavedha.github.io/cat1_SUBJECT_notes.html</code></li>
+        <li>MCQ: <code>https://teslavedha.github.io/cat1_SUBJECT_mcq.html</code></li>
+      </ul>
+    </ul>
+  </div>
+</div>
+
+<footer>Admin data is stored locally in your browser. To share data across devices, ask to upgrade to Firebase or Google Sheets.</footer>
+
+<script>
+/* Helper functions */
+function qs(s){return document.querySelector(s);}
+function qsi(s){return document.querySelectorAll(s);}
+
+const videoCount = 10;
+const notesCount = 5;
+const mcqCount = 5;
+
+function createInputs(){
+  const vbox = document.getElementById('videosInputs');
+  const nbox = document.getElementById('notesInputs');
+  const mbox = document.getElementById('mcqInputs');
+  vbox.innerHTML = ''; nbox.innerHTML=''; mbox.innerHTML='';
+
+  for(let i=1;i<=videoCount;i++){
+    const div=document.createElement('div');
+    div.innerHTML = `<input id="v${i}" placeholder="Video ${i} URL (YouTube watch URL)"/>`;
+    vbox.appendChild(div);
+  }
+  for(let i=1;i<=notesCount;i++){
+    const div=document.createElement('div');
+    div.innerHTML = `<input id="note${i}" placeholder="Note PDF ${i} URL"/>`;
+    nbox.appendChild(div);
+  }
+  for(let i=1;i<=mcqCount;i++){
+    const div=document.createElement('div');
+    div.innerHTML = `<input id="mcq${i}" placeholder="MCQ PDF ${i} URL"/>`;
+    mbox.appendChild(div);
+  }
+}
+
+createInputs();
+
+function subjectKey(sub){
+  return 'ktet_cat1_data_v1'; // single global key
+}
+
+/* Data shape:
+{ malayalam:{videos:[...], notes:[...], mcq:[...], comments:[]}, english:{...}, ... }
+*/
+function getAll(){
+  const raw = localStorage.getItem(subjectKey());
+  return raw ? JSON.parse(raw) : {};
+}
+
+function saveAll(){
+  const sub = document.getElementById('subject').value;
+  const all = getAll();
+  all[sub] = all[sub] || {videos:[],notes:[],mcq:[],comments:[]};
+
+  // videos: extract ID
+  const videos = [];
+  for(let i=1;i<=videoCount;i++){
+    const url = document.getElementById('v'+i).value.trim();
+    videos.push(extractID(url));
+  }
+  // notes
+  const notes = [];
+  for(let i=1;i<=notesCount;i++){
+    notes.push(document.getElementById('note'+i).value.trim() || '');
+  }
+  // mcq
+  const mcq = [];
+  for(let i=1;i<=mcqCount;i++){
+    mcq.push(document.getElementById('mcq'+i).value.trim() || '');
+  }
+
+  all[sub].videos = videos;
+  all[sub].notes = notes;
+  all[sub].mcq = mcq;
+
+  localStorage.setItem(subjectKey(), JSON.stringify(all));
+  alert('Saved for '+sub);
+}
+
+function loadFor(subject){
+  const all = getAll();
+  const data = all[subject] || {videos:Array(videoCount).fill(''),notes:Array(notesCount).fill(''),mcq:Array(mcqCount).fill('')};
+  for(let i=1;i<=videoCount;i++){
+    document.getElementById('v'+i).value = data.videos[i-1] ? 'https://www.youtube.com/watch?v='+data.videos[i-1] : '';
+  }
+  for(let i=1;i<=notesCount;i++){
+    document.getElementById('note'+i).value = data.notes[i-1] || '';
+  }
+  for(let i=1;i<=mcqCount;i++){
+    document.getElementById('mcq'+i).value = data.mcq[i-1] || '';
+  }
+}
+
+function extractID(url){
+  if(!url) return '';
+  try{
+    // common patterns
+    if(url.includes('youtube.com/watch')){
+      const q = new URL(url).searchParams.get('v');
+      return q ? q : '';
+    }
+    if(url.includes('youtu.be/')){
+      const p = url.split('youtu.be/')[1];
+      return p ? p.split(/[?&]/)[0] : '';
+    }
+    if(url.includes('youtube.com/embed/')){
+      return url.split('embed/')[1].split(/[?&]/)[0];
+    }
+    return '';
+  }catch(e){return '';}
+}
+
+document.getElementById('subject').addEventListener('change', function(){
+  loadFor(this.value);
+});
+
+// clear subject data
+function clearSubject(){
+  const sub = document.getElementById('subject').value;
+  const all = getAll();
+  if(all[sub]) delete all[sub];
+  localStorage.setItem(subjectKey(), JSON.stringify(all));
+  createInputs();
+  loadFor(sub);
+  alert('Cleared data for '+sub);
+}
+
+// export JSON
+function exportAll(){
+  const all = getAll();
+  const blob = new Blob([JSON.stringify(all,null,2)],{type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='ktet_cat1_data.json'; document.body.appendChild(a); a.click(); a.remove();
+}
+
+// import
+function importPrompt(){
+  const t = prompt('Paste full JSON here (overwrites local storage). Cancel to abort.');
+  if(!t) return;
+  try{
+    const o = JSON.parse(t);
+    localStorage.setItem(subjectKey(), JSON.stringify(o));
+    alert('Imported data — refresh admin to load.');
+    location.reload();
+  }catch(e){
+    alert('Invalid JSON');
+  }
+}
+
+// load initial (on first run load malayalam)
+loadFor(document.getElementById('subject').value);
+</script>
+</body>
+</html>
