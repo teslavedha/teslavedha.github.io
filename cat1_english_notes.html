@@ -1,108 +1,36 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Category 1 — English Notes</title>
-  <meta name="description" content="Downloadable PDF notes for Category 1 English." />
-  <style>
-    :root{
-      --bg:#071126;
-      --muted:#9aa6b2;
-      --accent:#7c3aed;
-      --accent-2:#06b6d4;
-      --radius:14px;
-      --max-width:1100px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;padding:26px;font-family:Inter,system-ui,Segoe UI,Roboto;color:#eaf5ff;background:linear-gradient(180deg,var(--bg),#031018);display:flex;justify-content:center}
-    .container{width:100%;max-width:var(--max-width)}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700}
-    .nav{display:flex;gap:8px}
-    .nav a{padding:9px 12px;border-radius:10px;text-decoration:none;color:var(--muted);background:rgba(255,255,255,0.02);font-weight:700}
-    .nav a.active{background:linear-gradient(90deg, rgba(124,58,237,0.14), rgba(6,182,212,0.06));color:#fff}
-    main{padding:18px;border-radius:var(--radius);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.03)}
-    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-    .notes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-    .note-card{background:rgba(255,255,255,0.02);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .note-card h3{margin:0 0 6px 0}
-    .muted{color:var(--muted);font-size:13px}
-    .btn{display:inline-block;padding:9px 12px;border-radius:10px;text-decoration:none;font-weight:800;color:white;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
-    .embed-pdf{width:100%;height:560px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);overflow:hidden;margin-top:12px}
-    @media (max-width:520px){header{flex-direction:column;align-items:flex-start}}
-  </style>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>English — Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+ body{font-family:Poppins, sans-serif;margin:0;background:#f7f7ff}
+ header{background:linear-gradient(90deg,#6d28d9,#8b5cf6);color:#fff;padding:18px;text-align:center;border-bottom-left-radius:14px;border-bottom-right-radius:14px}
+ .container{max-width:980px;margin:18px auto;padding:12px}
+ .card{background:#fff;border-radius:12px;padding:12px;margin-bottom:14px;box-shadow:0 6px 18px rgba(2,6,23,0.05);display:flex;justify-content:space-between;align-items:center}
+ .btn{background:#6d28d9;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+ .muted{color:#64748b}
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div style="display:flex;gap:12px;align-items:center">
-        <div class="logo">KT</div>
-        <div>
-          <h1 style="margin:0;font-size:18px">English — Notes</h1>
-          <div style="color:var(--muted);font-size:13px">PDF notes, quick revision sheets & downloads</div>
-        </div>
-      </div>
+<header><strong>English — PDF Notes</strong></header>
+<div class="container" id="notes"></div>
 
-      <nav class="nav">
-        <a href="https://myusername.github.io/cat1_english.html">Overview</a>
-        <a href="https://myusername.github.io/cat1_english_videos.html">🎥 Videos</a>
-        <a href="https://myusername.github.io/cat1_english_notes.html" class="active">📚 Notes</a>
-        <a href="https://myusername.github.io/cat1_english_mcq.html">❓ MCQ</a>
-        <a href="https://myusername.github.io/cat1_english_comments.html">💬 Comments</a>
-      </nav>
-    </header>
-
-    <main>
-      <div class="section-title">
-        <h2>📚 Download Notes</h2>
-        <div style="color:var(--muted)">Complete PDF pack + quick sheets for revision</div>
-      </div>
-
-      <div class="notes-grid">
-        <div class="note-card">
-          <h3>English — Complete Notes (PDF)</h3>
-          <div class="muted">Grammar, comprehension, vocabulary & solved papers • 120 pages</div>
-          <div style="margin-top:12px">
-            <!-- Replace with your actual PDF link (raw file on gh-pages) -->
-            <a class="btn" href="https://myusername.github.io/assets/cat1_english_complete_notes.pdf" target="_blank">Download PDF</a>
-          </div>
-        </div>
-
-        <div class="note-card">
-          <h3>Quick Revision — 2-Page Sheet</h3>
-          <div class="muted">Printable summary of rules and tips</div>
-          <div style="margin-top:12px">
-            <a class="btn" href="https://myusername.github.io/assets/cat1_english_quick_sheet.pdf" target="_blank">Download Quick Sheet</a>
-          </div>
-        </div>
-
-        <div class="note-card">
-          <h3>Vocabulary Handbook</h3>
-          <div class="muted">High-frequency words with usage examples</div>
-          <div style="margin-top:12px">
-            <a class="btn" href="https://myusername.github.io/assets/cat1_english_vocab.pdf" target="_blank">Download Vocabulary</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Embedded sample PDF viewer -->
-      <div style="margin-top:16px">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="font-weight:800">Preview — Quick Revision Sheet</div>
-          <div style="color:var(--muted)">Open full notes or download above</div>
-        </div>
-        <div class="embed-pdf">
-          <!-- If your PDF is hosted at the URL above, embed like this. Replace with actual path. -->
-          <iframe src="https://myusername.github.io/assets/cat1_english_quick_sheet.pdf" width="100%" height="100%"></iframe>
-        </div>
-      </div>
-
-      <footer style="margin-top:14px;display:flex;justify-content:space-between;align-items:center">
-        <div style="color:var(--muted)">Files: cat1_english_notes.html</div>
-        <div style="color:var(--muted)">Note: Update asset URLs to your repository assets folder.</div>
-      </footer>
-    </main>
-  </div>
+<script>
+const SUBJECT='english', storageKey='ktet_cat1_data_v1';
+function loadNotes(){
+  const raw=localStorage.getItem(storageKey); const data=raw?JSON.parse(raw):{};
+  const notes = (data[SUBJECT] && data[SUBJECT].notes) ? data[SUBJECT].notes : Array(5).fill('');
+  const box=document.getElementById('notes'); let html='';
+  for(let i=0;i<5;i++){
+    const url = notes[i]||'';
+    html += `<div class="card"><div><div style="font-weight:700">PDF ${i+1}</div><div class="muted">Notes PDF</div></div>`;
+    html += `<div>` + (url ? `<a class="btn" href="${url}" target="_blank">View PDF</a>` : `<span class="muted">Not set</span>`) + `</div></div>`;
+  }
+  box.innerHTML=html;
+}
+loadNotes();
+</script>
 </body>
 </html>
