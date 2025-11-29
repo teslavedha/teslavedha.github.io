@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Maths Videos Admin Panel</title>
+<style>
+body{
+    font-family: Poppins, sans-serif;
+    background: #f0fff4;
+    padding:20px;
+}
+h2{color:#047857;}
+input{
+    width:100%;
+    padding:10px;
+    margin-bottom:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+button{
+    background:#047857;
+    color:white;
+    padding:12px 20px;
+    border-radius:10px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h2>Mathematics – Video Admin Panel</h2>
+<p>Paste YouTube links below. Click “Save Videos”.</p>
+
+<div id="inputs"></div>
+
+<button onclick="saveVideos()">Save Videos</button>
+
+<script>
+function renderInputs(){
+    let box = document.getElementById("inputs");
+    let html = "";
+    for(let i=1;i<=10;i++){
+        html += `
+            <label>Video ${i} URL:</label>
+            <input id="v${i}" placeholder="https://www.youtube.com/watch?v=XXXXXX">
+        `;
+    }
+    box.innerHTML = html;
+}
+
+renderInputs();
+
+function extractID(url){
+    let id = url.split("v=")[1];
+    if(id) id = id.split("&")[0];
+    return id ? id : "";
+}
+
+function saveVideos(){
+    let list = [];
+    for(let i=1;i<=10;i++){
+        let url = document.getElementById("v"+i).value;
+        list.push(extractID(url));
+    }
+    localStorage.setItem("mathsVideos", JSON.stringify(list));
+    alert("Videos Saved Successfully!");
+}
+</script>
+
+</body>
+</html>
