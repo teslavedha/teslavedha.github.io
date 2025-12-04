@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>EVS — MCQ PDFs</title>
+<style>
+  body{margin:0;font-family:Poppins,system-ui;background:#fffef6}
+  header{background:linear-gradient(90deg,#059669,#10b981);color:#fff;padding:20px;text-align:center}
+  .wrap{max-width:980px;margin:18px auto;padding:12px}
+  .card{background:#fff;border-radius:12px;padding:12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+  .btn{background:#059669;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:700}
+  .muted{color:#475569}
+</style>
+</head>
+<body>
+<header>EVS — MCQ PDFs</header>
+<div class="wrap" id="mcqList">Loading...</div>
+
+<script>
+function loadMcq(){
+  const arr = JSON.parse(localStorage.getItem('mcq_evs') || '[]');
+  let html='';
+  for(let i=0;i<5;i++){
+    const url=arr[i] || '';
+    html += `
+    <div class="card">
+      <div><div style="font-weight:700">MCQ ${i+1}</div><div class="muted">${url? 'Tap to open' : 'No MCQ set'}</div></div>
+      ${url? `<a class="btn" href="${url}" target="_blank">Open</a>` : `<div class="muted">—</div>`}
+    </div>`;
+  }
+  document.getElementById('mcqList').innerHTML = html;
+}
+window.addEventListener('load', loadMcq);
+</script>
+</body>
+</html>
