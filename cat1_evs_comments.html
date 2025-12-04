@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>EVS — Comments</title>
+<style>
+  body{margin:0;font-family:Poppins,system-ui;background:#f7fffb}
+  header{background:linear-gradient(90deg,#059669,#10b981);color:#fff;padding:20px;text-align:center}
+  .wrap{max-width:980px;margin:18px auto;padding:12px}
+  .composer{background:#fff;padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06);margin-bottom:12px}
+  input,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid #e2e8f0;margin-top:8px}
+  button{background:#059669;color:white;padding:8px 12px;border-radius:8px;border:0;cursor:pointer;margin-top:8px}
+  .comment{background:#fff;padding:10px;border-radius:10px;margin-bottom:8px;box-shadow:0 4px 12px rgba(2,6,23,0.04)}
+  .meta{font-size:13px;color:#475569}
+</style>
+</head>
+<body>
+<header>EVS — Comments</header>
+<div class="wrap">
+  <div class="composer">
+    <input id="name" placeholder="Your name (optional)"/>
+    <textarea id="msg" rows="3" placeholder="Write your comment..."></textarea>
+    <div style="display:flex;gap:8px">
+      <button onclick="post()">Post</button>
+      <button onclick="clearComments()">Clear All</button>
+    </div>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+<script>
+const KEY='comments_evs';
+
+function render(){
+  const arr=JSON.parse(localStorage.getItem(KEY) || '[]');
+  document.getElementById('list').innerHTML =
+    arr.length
+    ? arr.map(c=>`
+      <div class="comment">
+        <div style="display:flex;justify-content:space-between">
+          <b>${escape(c.name)}</b>
+          <div class="meta">${c.time}</div>
+        </div>
+        <div style="margin-top:6px">${escape(c.msg)}</div>
+      </div>`).join('')
+    : '<div class="meta">No comments yet.</div>';
+}
+
+function post(){
+  const name=document.getElementById('name').value.trim() || 'Anonymous';
+  const msg=document.getElementById('msg').value.trim();
+  if(!msg) return alert("Write a comment");
+  const arr=JSON.parse(localStorage.getItem(KEY) || '[]');
+  arr.unshift({name,msg,time:new Date().toLocaleString()});
+  localStorage.setItem(KEY,JSON.stringify(arr));
+  document.getElementById('msg').value='';
+  render();
+}
+
+function clearComments(){ if(confirm("Clear all comments?")){ localStorage.removeItem(KEY); render(); } }
+
+function escape(s){ return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+render();
+</script>
+</body>
+</html>
