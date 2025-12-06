@@ -3,4 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <title>MCQ Practice</title>
-<meta name="viewport
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- 🔹 COMMON FILES (ONLY ONE LINE EACH) -->
+<script src="firebase_init.js"></script>
+<script src="student_guard.js"></script>
+
+<style>
+body{
+    margin:0;
+    font-family:Poppins;
+    background:#fff7ed;
+}
+header{
+    background:#ea580c;
+    color:white;
+    padding:22px;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:12px;
+}
+.mcq-item{
+    background:white;
+    padding:16px;
+    border-radius:12px;
+    margin-bottom:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.mcq-item a{
+    text-decoration:none;
+    font-weight:600;
+    color:#ea580c;
+}
+.empty{
+    text-align:center;
+    color:#555;
+    font-weight:600;
+    padding:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header id="title">MCQ</header>
+
+<div class="container" id="mcqList"></div>
+
+<script>
+/* 🔹 READ URL PARAMETERS */
+const params = new URLSearchParams(window.location.search);
+const category = params.get("cat");     // cat1 / cat2
+const subject  = params.get("sub");     // malayalam / english etc
+
+title.innerText =
+  `${category.toUpperCase()} – ${subject.toUpperCase()} MCQ`;
+
+/* 🔹 READ MCQ FROM FIREBASE */
+db.collection("content")
+  .doc(category)
+  .collection("subjects")
+  .doc(subject)
+  .get()
+  .then(doc => {
+
+    const mcqs = doc.data()?.mcq || [];
+
+    if(mcqs.length === 0){
+      mcqList.innerHTML =
+        `<div class="empty">MCQ not available</div>`;
+      return;
+    }
+
+    mcqs.forEach((link, index)=>{
+        if(link){
+            mcqList.innerHTML += `
+            <div class="mcq-item">
+                ✅ <a href="${link}" target="_blank">
+                MCQ Set ${index + 1}
+                </a>
+            </div>`;
+        }
+    });
+  })
+  .catch(err=>{
+    mcqList.innerHTML =
+      `<div class="empty">Error loading MCQ</div>`;
+  });
+</script>
+
+</body>
+</html>
