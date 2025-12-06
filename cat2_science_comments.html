@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Science Comments</title>
+
+<style>
+body{margin:0;font-family:Poppins;background:#fff7ed}
+header{background:#ea580c;color:white;padding:20px;text-align:center}
+.container{max-width:900px;margin:auto;padding:12px}
+.box{background:white;padding:12px;border-radius:10px;margin-bottom:10px}
+input,textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #ccc;margin-top:6px}
+button{background:#ea580c;color:white;padding:8px 14px;border:none;
+border-radius:8px;margin-top:6px;font-weight:600}
+.comment{background:white;padding:10px;border-radius:10px;margin-bottom:8px}
+</style>
+</head>
+
+<body>
+<header>Science – Comments</header>
+
+<div class="container">
+<div class="box">
+<input id="name" placeholder="Name (optional)">
+<textarea id="msg" placeholder="Type comment"></textarea>
+<button onclick="post()">Post</button>
+</div>
+
+<div id="list"></div>
+</div>
+
+<script>
+const key="comments_cat2_science";
+function load(){
+let arr=JSON.parse(localStorage.getItem(key)||"[]");
+document.getElementById("list").innerHTML=
+arr.map(c=>`<div class="comment"><b>${c.n}</b><br>${c.m}</div>`).join("");
+}
+function post(){
+let arr=JSON.parse(localStorage.getItem(key)||"[]");
+arr.unshift({n:name.value||"Anonymous",m:msg.value});
+localStorage.setItem(key,JSON.stringify(arr));
+msg.value="";load();
+}
+load();
+</script>
+
+</body>
+</html>
