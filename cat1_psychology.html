@@ -1,54 +1,84 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Category 1 – Psychology</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>KTET Category 1 – Psychology</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-  body{margin:0;font-family:Poppins,system-ui;background:#fdf7fb;color:#0f1724}
-  header{background:linear-gradient(90deg,#d946ef,#7c3aed);color:#fff;padding:26px;text-align:center;font-weight:700;border-bottom-left-radius:18px;border-bottom-right-radius:18px}
-  .wrap{max-width:980px;margin:20px auto;padding:12px}
-  .card{background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 24px rgba(2,6,23,0.06)}
-  .title{font-weight:700;color:#6b21a8;font-size:18px}
-  .desc{color:#475569;margin-top:6px;font-size:13px}
-  .btn{background:#7c3aed;color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:700}
+body{
+  margin:0;
+  font-family:Poppins;
+  background:#f1f4ff;
+}
+header{
+  background:linear-gradient(90deg,#7c2d12,#fb7185);
+  color:white;
+  padding:24px;
+  text-align:center;
+  font-size:24px;
+  font-weight:600;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:12px;
+}
+.card{
+  background:white;
+  padding:18px;
+  border-radius:14px;
+  margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 5px 16px rgba(0,0,0,.12);
+}
+.card span{
+  font-size:18px;
+  font-weight:600;
+  color:#7c2d12;
+}
+.card a{
+  background:#fb7185;
+  color:white;
+  padding:10px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+}
 </style>
 </head>
+
 <body>
+
 <header>Category 1 – Psychology</header>
-<div class="wrap">
+
+<div class="container">
+
   <div class="card">
-    <div>
-      <div class="title">🎥 Video Classes</div>
-      <div class="desc">10 video slots (play inside app)</div>
-    </div>
-    <a class="btn" href="https://teslavedha.github.io/cat1_psychology_videos.html">Open</a>
+    <span>🎥 Video Classes</span>
+    <a href="videos.html?cat=cat1&sub=psychology">Open</a>
   </div>
 
   <div class="card">
-    <div>
-      <div class="title">📚 PDF Notes</div>
-      <div class="desc">5 PDFs (view in-app)</div>
-    </div>
-    <a class="btn" href="https://teslavedha.github.io/cat1_psychology_notes.html">Open</a>
+    <span>📚 PDF Notes</span>
+    <a href="notes.html?cat=cat1&sub=psychology">Open</a>
   </div>
 
   <div class="card">
-    <div>
-      <div class="title">❓ MCQ (PDF)</div>
-      <div class="desc">5 MCQ PDFs for practice</div>
-    </div>
-    <a class="btn" href="https://teslavedha.github.io/cat1_psychology_mcq.html">Open</a>
+    <span>❓ MCQ</span>
+    <a href="mcq.html?cat=cat1&sub=psychology">Open</a>
   </div>
 
   <div class="card">
-    <div>
-      <div class="title">💬 Comments</div>
-      <div class="desc">Discussion / doubts (localStorage)</div>
-    </div>
-    <a class="btn" href="https://teslavedha.github.io/cat1_psychology_comments.html">Open</a>
+    <span>💬 Comments</span>
+    <a href="comments.html?cat=cat1&sub=psychology">Open</a>
   </div>
+
 </div>
+
 </body>
 </html>
