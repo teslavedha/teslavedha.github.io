@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>KTET Teacher Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+<style>
+body{margin:0;font-family:Poppins;background:#f1f5f9}
+header{background:#047857;color:white;padding:18px;text-align:center;font-size:22px;font-weight:600}
+.container{max-width:1000px;margin:auto;padding:16px}
+.box{background:white;padding:16px;border-radius:14px;margin-bottom:16px;
+box-shadow:0 6px 18px rgba(0,0,0,.1)}
+h3{margin-top:0;color:#065f46}
+input,select{
+width:100%;padding:8px;margin-bottom:8px;
+border-radius:8px;border:1px solid #ccc}
+button{
+background:#047857;color:white;padding:8px 14px;
+border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.hidden{display:none}
+.warn{color:#b91c1c;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+</style>
+</head>
+
+<body>
+<header>KTET TEACHER PANEL</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div class="box" id="loginBox">
+<h3>Teacher Login</h3>
+<input id="email" placeholder="Teacher Email">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+<p class="warn" id="loginError"></p>
+</div>
+
+<!-- PANEL -->
+<div id="panelBox" class="hidden">
+
+<div class="box">
+<h3>Assigned Subject</h3>
+<p><b>Category:</b> <span id="cat"></span></p>
+<p><b>Subject:</b> <span id="sub"></span></p>
+</div>
+
+<div class="box">
+<h3>🎥 Video URLs (10)</h3>
+<div class="grid" id="videos"></div>
+</div>
+
+<div class="box">
+<h3>📚 Notes PDF URLs (5)</h3>
+<div class="grid" id="notes"></div>
+</div>
+
+<div class="box">
+<h3>❓ MCQ PDF URLs (5)</h3>
+<div class="grid" id="mcq"></div>
+</div>
+
+<div class="box">
+<button onclick="saveContent()">Save Content</button>
+</div>
+
+</div>
+</div>
+
+<script>
+// 🔥 FIREBASE CONFIG
+const firebaseConfig = {
+  YOUR_FIREBASE_CONFIG_HERE
+};
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+let teacherCategory = "";
+let teacherSubject = "";
+
+// INPUTS
+function makeInputs(id,count){
+  let box=document.getElementById(id);
+  for(let i=1;i<=count;i++)
+    box.innerHTML+=`<input id="${id}${i}" placeholder="${id.toUpperCase()} ${i} URL">`;
+}
+makeInputs("videos",10);
+makeInputs("notes",5);
+makeInputs("mcq",5);
+
+// LOGIN
+function login(){
+  auth.signInWithEmailAndPassword(email.value,password.value)
+  .then(res=>{
+    return db.collection("users").doc(res.user.uid).get();
+  })
+  .then(doc=>{
+    if(!doc.exists || doc.data().role!=="teacher"){
+      loginError.innerText="Access denied. Not a teacher.";
+      auth.signOut();
+      return;
+    }
+    teacherCategory = doc.data().category;
+    teacherSubject  = doc.data().subject;
+
+    cat.innerText=teacherCategory;
+    sub.innerText=teacherSubject;
+
+    loginBox.classList.add("hidden");
+    panelBox.classList.remove("hidden");
+
+    loadContent();
+  })
+  .catch(e=>loginError.innerText=e.message);
+}
+
+// LOAD CONTENT
+function loadContent(){
+  db.collection("content")
+    .doc(teacherCategory)
+    .collection("subjects")
+    .doc(teacherSubject)
+    .get()
+    .then(doc=>{
+      if(!doc.exists) return;
+      let d=doc.data();
+      d.videos?.forEach((v,i)=>videos["videos"+(i+1)].value=v||"");
+      d.notes?.forEach((v,i)=>notes["notes"+(i+1)].value=v||"");
+      d.mcq?.forEach((v,i)=>mcq["mcq"+(i+1)].value=v||"");
+    });
+}
+
+// SAVE CONTENT
+function saveContent(){
+  let data={videos:[],notes:[],mcq:[]};
+
+  for(let i=1;i<=10;i++) data.videos.push(videos["videos"+i].value);
+  for(let i=1;i<=5;i++){
+    data.notes.push(notes["notes"+i].value);
+    data.mcq.push(mcq["mcq"+i].value);
+  }
+
+  db.collection("content")
+    .doc(teacherCategory)
+    .collection("subjects")
+    .doc(teacherSubject)
+    .set(data)
+    .then(()=>alert("Content updated successfully"));
+}
+</script>
+
+</body>
+</html>
