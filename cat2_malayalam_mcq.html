@@ -1,32 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malayalam – MCQ Practice</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Malayalam MCQ</title>
 
 <style>
-body { margin:0; font-family:Arial; background:#f5f7fb; }
-header { background:#0057b7; color:white; padding:22px; text-align:center;
-        font-size:26px; font-weight:bold; }
-.container { width:90%; margin:auto; padding-top:30px; }
-.card {
-    background:white; padding:20px; margin:15px 0; border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12); font-size:18px; font-weight:bold;
-}
+body{margin:0;font-family:Poppins;background:#fffbe6}
+header{background:#1e40af;color:white;padding:20px;text-align:center}
+.container{max-width:900px;margin:auto;padding:12px}
+.row{background:white;padding:14px;border-radius:12px;
+display:flex;justify-content:space-between;
+align-items:center;margin-bottom:12px;
+box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.btn{background:#1e40af;color:white;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600}
 </style>
-
 </head>
+
 <body>
+<header>Malayalam – MCQ PDF</header>
+<div class="container" id="list"></div>
 
-<header>Malayalam – MCQ Practice</header>
-
-<div class="container">
-
-    <div class="card">MCQ Set 1 – (Add questions later)</div>
-    <div class="card">MCQ Set 2 – (Add questions later)</div>
-
-</div>
+<script>
+let arr = JSON.parse(localStorage.getItem("mcq_cat2_malayalam")||"[]");
+let html="";
+for(let i=0;i<5;i++){
+html+=`<div class="row">
+<div>MCQ ${i+1}</div>
+${arr[i]?`<a class="btn" href="${arr[i]}" target="_blank">Open</a>`:`—`}
+</div>`;
+}
+document.getElementById("list").innerHTML = html;
+</script>
 
 </body>
 </html>
