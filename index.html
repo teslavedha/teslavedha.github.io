@@ -1,126 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teslavedha Login</title>
+<meta charset="UTF-8">
+<title>KTET Learning Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #0d0d0d, #1a1a1a);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-        .login-box {
-            width: 350px;
-            background: #111;
-            padding: 35px;
-            border-radius: 14px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.7);
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
-        }
+<style>
+body{
+    margin:0;
+    font-family:Poppins;
+    background:#f1f5f9;
+}
+header{
+    background:linear-gradient(90deg,#1e3a8a,#3b82f6);
+    color:white;
+    padding:22px;
+    text-align:center;
+    font-size:24px;
+    font-weight:600;
+}
+.container{
+    max-width:900px;
+    margin:20px auto;
+    padding:10px;
+}
+.card{
+    background:white;
+    padding:18px;
+    border-radius:14px;
+    margin-bottom:16px;
+    box-shadow:0 6px 18px rgba(0,0,0,.1);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.title{
+    font-size:18px;
+    font-weight:600;
+    color:#1e40af;
+}
+.desc{
+    font-size:13px;
+    color:#555;
+}
+.btn{
+    background:#2563eb;
+    color:white;
+    padding:10px 16px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+}
+.logout{
+    background:#dc2626;
+    padding:6px 12px;
+    border-radius:8px;
+    font-size:13px;
+    cursor:pointer;
+    margin-top:10px;
+    display:inline-block;
+}
+</style>
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 
-        .logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-            border: 2px solid #444;
-        }
+<script>
+const firebaseConfig = {
+  YOUR_FIREBASE_CONFIG_HERE
+};
+firebase.initializeApp(firebaseConfig);
 
-        h2 {
-            margin: 10px 0 25px;
-            font-weight: 600;
-            font-size: 22px;
-            letter-spacing: 1px;
-        }
+firebase.auth().onAuthStateChanged(user=>{
+  if(!user){
+    window.location.href="student_login.html";
+  }
+});
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 8px;
-            background: #222;
-            color: white;
-            font-size: 15px;
-        }
-
-        input:focus {
-            outline: 2px solid #555;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #0066ff;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #0053cc;
-        }
-
-        .error-text {
-            color: #ff4444;
-            margin-top: 8px;
-            font-size: 14px;
-            display: none;
-        }
-    </style>
+function logout(){
+  firebase.auth().signOut().then(()=>{
+    window.location.href="student_login.html";
+  });
+}
+</script>
 </head>
 
 <body>
 
-    <div class="login-box">
+<header>
+KTET Learning Portal
+<br>
+<span class="logout" onclick="logout()">Logout</span>
+</header>
 
-        <!-- Your logo file inside GitHub -->
-        <img src="photo_2025-11-19_13-35-50.jpg" class="logo" alt="Logo">
+<div class="container">
 
-        <h2>TESLAVEDHA LOGIN</h2>
+<!-- CATEGORY 1 -->
+<div class="card">
+  <div>
+    <div class="title">KTET Category 1</div>
+    <div class="desc">Malayalam | English | Maths | EVS | Psychology</div>
+  </div>
+  <a class="btn" href="cat1_subjects.html">Open</a>
+</div>
 
-        <input type="text" id="username" placeholder="Enter Username">
-        <input type="password" id="password" placeholder="Enter Password">
+<!-- CATEGORY 2 -->
+<div class="card">
+  <div>
+    <div class="title">KTET Category 2</div>
+    <div class="desc">English | Maths | Science | Social Science</div>
+  </div>
+  <a class="btn" href="cat2_subjects.html">Open</a>
+</div>
 
-        <button onclick="login()">Login</button>
-
-        <p id="error" class="error-text">Invalid username or password</p>
-    </div>
-
-
-    <script>
-        function login() {
-            const u = document.getElementById("username").value;
-            const p = document.getElementById("password").value;
-            const error = document.getElementById("error");
-
-            // TEMP CREDENTIALS FOR TESTING
-            if (u === "test" && p === "1234") {
-                window.location.href = "courses.html";
-            } else {
-                error.style.display = "block";
-            }
-        }
-    </script>
+</div>
 
 </body>
 </html>
