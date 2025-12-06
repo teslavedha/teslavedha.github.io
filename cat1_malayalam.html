@@ -1,81 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KTET Category 1 – Malayalam</title>
+<meta charset="UTF-8">
+<title>KTET Category 1 – Malayalam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-        * { box-sizing: border-box; }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-        }
-
-        header {
-            background: linear-gradient(45deg, #1e88e5, #42a5f5);
-            color: white;
-            padding: 18px;
-            text-align: center;
-        }
-
-        .wrap {
-            max-width: 780px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .option-card {
-            display: block;
-            background: white;
-            padding: 15px;
-            margin: 12px 0;
-            border-radius: 12px;
-            box-shadow: 0 3px 7px rgba(0,0,0,0.12);
-            font-size: 18px;
-            text-decoration: none;
-            color: #333;
-            transition: 0.2s;
-        }
-
-        .option-card:hover {
-            transform: scale(1.02);
-            background: #e3f2fd;
-        }
-    </style>
+<style>
+body{
+  margin:0;
+  font-family:Poppins;
+  background:#f1f4ff;
+}
+header{
+  background:linear-gradient(90deg,#065f46,#10b981);
+  color:white;
+  padding:24px;
+  text-align:center;
+  font-size:24px;
+  font-weight:600;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:12px;
+}
+.card{
+  background:white;
+  padding:18px;
+  border-radius:14px;
+  margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 5px 16px rgba(0,0,0,.12);
+}
+.card span{
+  font-size:18px;
+  font-weight:600;
+  color:#065f46;
+}
+.card a{
+  background:#10b981;
+  color:white;
+  padding:10px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-    <h1>KTET Category 1 – Malayalam</h1>
-</header>
+<header>Category 1 – Malayalam</header>
 
-<main class="wrap">
+<div class="container">
 
-    <!-- VIDEO -->
-    <a href="https://teslavedha.github.io/cat1_malayalam_videos.html" class="option-card">
-        🎥 Video Classes
-    </a>
+  <div class="card">
+    <span>🎥 Video Classes</span>
+    <a href="videos.html?cat=cat1&sub=malayalam">Open</a>
+  </div>
 
-    <!-- NOTES -->
-    <a href="https://teslavedha.github.io/cat1_malayalam_notes.html" class="option-card">
-        📚 PDF Notes
-    </a>
+  <div class="card">
+    <span>📚 PDF Notes</span>
+    <a href="notes.html?cat=cat1&sub=malayalam">Open</a>
+  </div>
 
-    <!-- MCQ -->
-    <a href="https://teslavedha.github.io/cat1_malayalam_mcq.html" class="option-card">
-        📝 MCQ Practice
-    </a>
+  <div class="card">
+    <span>❓ MCQ</span>
+    <a href="mcq.html?cat=cat1&sub=malayalam">Open</a>
+  </div>
 
-    <!-- COMMENTS -->
-    <a href="https://teslavedha.github.io/cat1_malayalam_comments.html" class="option-card">
-        💬 Comments / Reviews
-    </a>
+  <div class="card">
+    <span>💬 Comments</span>
+    <a href="comments.html?cat=cat1&sub=malayalam">Open</a>
+  </div>
 
-</main>
+</div>
 
 </body>
 </html>
