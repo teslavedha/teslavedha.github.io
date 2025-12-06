@@ -1,35 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malayalam – Video Classes</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Category 2 Malayalam – Videos</title>
 
 <style>
-body { margin:0; font-family:Arial; background:#f5f7fb; }
-header { background:#0057b7; color:white; padding:22px; text-align:center;
-        font-size:26px; font-weight:bold; }
-.container { width:90%; margin:auto; padding-top:30px; }
-.card {
-    background:white; padding:20px; margin:15px 0; border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12); font-size:18px; font-weight:bold;
-}
+body{margin:0;font-family:Poppins;background:#eef3ff}
+header{background:#1e40af;color:white;padding:20px;text-align:center;font-size:22px}
+.container{max-width:900px;margin:auto;padding:12px}
+.box{background:white;padding:12px;border-radius:14px;margin-bottom:15px;
+box-shadow:0 4px 12px rgba(0,0,0,.1)}
+iframe{width:100%;height:220px;border-radius:10px;border:none}
+.placeholder{
+height:220px;background:#dbeafe;
+display:flex;align-items:center;justify-content:center;
+font-weight:600;color:#1e40af;border-radius:10px}
 </style>
-
 </head>
-<body>
 
+<body>
 <header>Malayalam – Video Classes</header>
 
-<div class="container">
+<div class="container" id="list"></div>
 
-    <div class="card">Video 1 – (YouTube URL here)</div>
-    <div class="card">Video 2 – (YouTube URL here)</div>
-    <div class="card">Video 3 – (YouTube URL here)</div>
-    <div class="card">Video 4 – (YouTube URL here)</div>
-    <div class="card">Video 5 – (YouTube URL here)</div>
-
-</div>
+<script>
+const key = "videos_cat2_malayalam";
+let data = JSON.parse(localStorage.getItem(key) || "[]");
+let html = "";
+for(let i=0;i<10;i++){
+html += `<div class="box">${
+data[i] ?
+`<iframe src="https://www.youtube.com/embed/${data[i]}" allowfullscreen></iframe>`
+:
+`<div class="placeholder">Video ${i+1} Not Set</div>`
+}</div>`;
+}
+document.getElementById("list").innerHTML = html;
+</script>
 
 </body>
 </html>
