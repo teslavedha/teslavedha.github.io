@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mathematics MCQ</title>
+
+<style>
+body{margin:0;font-family:Poppins;background:#fffbeb}
+header{background:#059669;color:white;padding:20px;text-align:center}
+.container{max-width:900px;margin:auto;padding:12px}
+.row{background:white;padding:14px;border-radius:12px;
+display:flex;justify-content:space-between;
+align-items:center;margin-bottom:12px;
+box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.btn{background:#059669;color:white;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+</style>
+</head>
+
+<body>
+<header>Mathematics – MCQ PDF</header>
+<div class="container" id="list"></div>
+
+<script>
+let arr=JSON.parse(localStorage.getItem("mcq_cat2_mathematics")||"[]");
+let html="";
+for(let i=0;i<5;i++){
+html+=`<div class="row">
+<div>MCQ ${i+1}</div>
+${arr[i]?`<a class="btn" href="${arr[i]}" target="_blank">Open</a>`:`—`}
+</div>`;
+}
+document.getElementById("list").innerHTML=html;
+</script>
+
+</body>
+</html>
