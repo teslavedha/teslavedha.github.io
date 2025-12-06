@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Video Classes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="firebase_init.js"></script>
+<script src="student_guard.js"></script>
+
+<style>
+body{font-family:Poppins;background:#eef2ff;margin:0}
+iframe{width:100%;height:220px;margin:12px;border-radius:12px;border:none}
+.placeholder{height:220px;background:#c7d2fe;
+display:flex;justify-content:center;align-items:center;
+margin:12px;border-radius:12px;font-weight:600}
+</style>
+</head>
+
+<body>
+<h2 id="title"></h2>
+<div id="videos"></div>
+
+<script>
+const url = new URLSearchParams(location.search);
+const category = url.get("cat");     // cat1 / cat2
+const subject  = url.get("sub");     // malayalam / english / maths ...
+
+title.innerText = `${category.toUpperCase()} - ${subject.toUpperCase()} Videos`;
+
+db.collection("content").doc(category)
+.collection("subjects").doc(subject)
+.get().then(doc=>{
+  let vids = doc.data()?.videos || [];
+  for(let i=0;i<10;i++){
+    videos.innerHTML += vids[i]
+      ? `<iframe src="https://www.youtube.com/embed/${vids[i]}" allowfullscreen></iframe>`
+      : `<div class="placeholder">Video ${i+1} Not Set</div>`;
+  }
+});
+</script>
+
+</body>
+</html>
