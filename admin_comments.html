@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin – Comment Moderation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+<!-- Shared Firebase init (contains firebaseConfig, auth, db) -->
+<script src="firebase_init.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins, system-ui;
+  background:#f1f5f9;
+}
+header{
+  background:#1e3a8a;
+  color:white;
+  padding:18px;
+  text-align:center;
+  font-size:20px;
+  font-weight:600;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:14px;
+}
+.box{
+  background:white;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.1);
+}
+h3{
+  margin:0 0 10px;
+  color:#1e40af;
+}
+select{
+  width:100%;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #cbd5f5;
+  margin-bottom:8px;
+}
+.comment{
+  background:#f8fafc;
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+.meta{
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:4px;
+}
+.text{
+  margin-bottom:8px;
+}
+.reply-box{
+  margin-top:8px;
+}
+textarea{
+  width:100%;
+  padding:6px;
+  border-radius:8px;
+  border:1px solid #cbd5f5;
+  resize:vertical;
+  min-height:50px;
+  font-family:Poppins;
+  font-size:13px;
+}
+button{
+  border:none;
+  border-radius:8px;
+  padding:6px 10px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  margin-right:6px;
+  margin-top:6px;
+}
+.btn-save{
+  background:#16a34a;
+  color:white;
+}
+.btn-delete{
+  background:#dc2626;
+  color:white;
+}
+.badge{
+  display:inline-block;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:11px;
+  background:#e0f2fe;
+  color:#0369a1;
+  margin-left:6px;
+}
+.error{
+  color:#b91c1c;
+  font-size:13px;
+}
+.info{
+  font-size:13px;
+  color:#475569;
+}
+</style>
+</head>
+
+<body>
+
+<header>Admin – Comment Moderation</header>
+
+<div class="container">
+
+  <!-- Access check -->
+  <div class="box" id="accessBox">
+    <h3>Admin Access</h3>
+    <p class="info">
+      This page is only for Admin accounts. 
+      Please make sure you are logged in as Admin in this browser.
+    </p>
+    <p class="error" id="accessError"></p>
+  </div>
+
+  <!-- Filter -->
+  <div class="box" id="filterBox" style="display:none;">
+    <h3>Filter Comments</h3>
+    <select id="category">
+      <option value="cat1">Category 1</option>
+      <option value="cat2">Category 2</option>
+    </select>
+
+    <select id="subject">
+      <option value="all">All Subjects</option>
+      <option value="malayalam">Malayalam</option>
+      <option value="english">English</option>
+      <option value="mathematics">Mathematics</option>
+      <option value="evs">EVS</option>
+      <option value="science">Science</option>
+      <option value="psychology">Psychology</option>
+      <option value="socialscience">Social Science</option>
+    </select>
+
+    <button class="btn-save" onclick="loadComments()">Load Comments</button>
+  </div>
+
+  <!-- Comments list -->
+  <div class="box" id="commentsBox" style="display:none;">
+    <h3>Comments</h3>
+    <div id="commentsList" class="info">No comments loaded yet.</div>
+  </div>
+
+</div>
+
+<script>
+let currentAdmin = null;
+
+/* 🔐 ADMIN ROLE CHECK */
+auth.onAuthStateChanged(async user => {
+  if (!user) {
+    document.getElementById("accessError").innerText =
+      "No user logged in. Please sign in as Admin via admin_panel.html.";
+    return;
+  }
+
+  try{
+    const doc = await db.collection("users").doc(user.uid).get();
+    if (!doc.exists || doc.data().role !== "admin") {
+      document.getElementById("accessError").innerText =
+        "Access denied. Your account is not marked as Admin.";
+      return;
+    }
+
+    currentAdmin = user;
+    document.getElementById("accessError").innerText = "";
+    document.getElementById("filterBox").style.display = "block";
+    document.getElementById("commentsBox").style.display = "block";
+
+  }catch(err){
+    document.getElementById("accessError").innerText =
+      "Error checking admin role: " + err.message;
+  }
+});
+
+/* 🔍 LOAD COMMENTS BASED ON FILTER */
+let unsubscribe = null;  // for real-time listener
+
+function loadComments(){
+  const cat = document.getElementById("category").value;
+  const sub = document.getElementById("subject").value;
+
+  const listDiv = document.getElementById("commentsList");
+  listDiv.innerHTML = "Loading…";
+
+  // Stop previous listener
+  if (unsubscribe) unsubscribe();
+
+  let query = db.collection("comments").where("category","==",cat);
+
+  if (sub !== "all") {
+    query = query.where("subject","==",sub);
+  }
+
+  query = query.orderBy("time","desc");
+
+  unsubscribe = query.onSnapshot(snapshot=>{
+    if (snapshot.empty) {
+      listDiv.innerHTML = "<div class='info'>No comments found.</div>";
+      return;
+    }
+
+    listDiv.innerHTML = "";
+    snapshot.forEach(doc=>{
+      const c = doc.data();
+      const id = doc.id;
+
+      const time = c.time ? c.time.toDate().toLocaleString() : "";
+
+      listDiv.innerHTML += `
+        <div class="comment" id="c-${id}">
+          <div class="meta">
+            <b>${c.user || "Unknown"}</b>
+            <span class="badge">${c.category} / ${c.subject}</span>
+            <div>${time}</div>
+          </div>
+          <div class="text">${c.text}</div>
+
+          <div class="reply-box">
+            <textarea id="reply-${id}" placeholder="Admin reply here...">${c.reply || ""}</textarea>
+            <br>
+            <button class="btn-save" onclick="saveReply('${id}')">Save Reply</button>
+            <button class="btn-delete" onclick="deleteComment('${id}')">Delete</button>
+          </div>
+        </div>
+      `;
+    });
+  },err=>{
+    listDiv.innerHTML =
+      "<div class='error'>Error loading comments: "+err.message+"</div>";
+  });
+}
+
+/* 💾 SAVE / UPDATE REPLY TEXT */
+function saveReply(id){
+  const replyText = document.getElementById("reply-"+id).value.trim();
+  db.collection("comments").doc(id).update({
+    reply: replyText
+  }).then(()=>{
+    alert("Reply saved.");
+  }).catch(err=>{
+    alert("Error saving reply: " + err.message);
+  });
+}
+
+/* ❌ DELETE COMMENT */
+function deleteComment(id){
+  if (!confirm("Delete this comment permanently?")) return;
+  db.collection("comments").doc(id).delete()
+    .catch(err=>alert("Error deleting comment: " + err.message));
+}
+</script>
+
+</body>
+</html>
