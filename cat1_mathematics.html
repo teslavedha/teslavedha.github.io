@@ -1,80 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category 1 – Mathematics</title>
+<meta charset="UTF-8">
+<title>KTET Category 1 – Mathematics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: #f2f6ff;
-        }
-
-        header {
-            background: linear-gradient(90deg, #059669, #10b981);
-            color: white;
-            padding: 25px 10px;
-            text-align: center;
-            font-size: 26px;
-            font-weight: 600;
-            border-bottom-left-radius: 18px;
-            border-bottom-right-radius: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 25px auto;
-            padding: 10px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-        }
-
-        .info {
-            font-size: 20px;
-            font-weight: 600;
-            color: #065f46;
-        }
-
-        .desc {
-            font-size: 14px;
-            color: #555;
-            margin-top: 5px;
-        }
-
-        .open-btn {
-            background: #059669;
-            padding: 10px 22px;
-            border-radius: 10px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            box-shadow: 0 3px 8px rgba(5,150,105,0.35);
-        }
-
-        .open-btn:hover {
-            background: #047857;
-        }
-    </style>
+<style>
+body{
+  margin:0;
+  font-family:Poppins;
+  background:#f1f4ff;
+}
+header{
+  background:linear-gradient(90deg,#4338ca,#6366f1);
+  color:white;
+  padding:24px;
+  text-align:center;
+  font-size:24px;
+  font-weight:600;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:12px;
+}
+.card{
+  background:white;
+  padding:18px;
+  border-radius:14px;
+  margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 5px 16px rgba(0,0,0,.12);
+}
+.card span{
+  font-size:18px;
+  font-weight:600;
+  color:#4338ca;
+}
+.card a{
+  background:#6366f1;
+  color:white;
+  padding:10px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+}
+</style>
 </head>
 
 <body>
@@ -83,41 +58,25 @@
 
 <div class="container">
 
-    <!-- Videos -->
-    <div class="card">
-        <div>
-            <div class="info">🎥 Video Classes</div>
-            <div class="desc">Learn concepts, examples & problem solving</div>
-        </div>
-        <a class="open-btn" href="https://teslavedha.github.io/cat1_mathematics_videos.html">Open</a>
-    </div>
+  <div class="card">
+    <span>🎥 Video Classes</span>
+    <a href="videos.html?cat=cat1&sub=mathematics">Open</a>
+  </div>
 
-    <!-- Notes -->
-    <div class="card">
-        <div>
-            <div class="info">📚 PDF Notes</div>
-            <div class="desc">Complete Mathematics notes for Category 1</div>
-        </div>
-        <a class="open-btn" href="https://teslavedha.github.io/cat1_mathematics_notes.html">Open</a>
-    </div>
+  <div class="card">
+    <span>📚 PDF Notes</span>
+    <a href="notes.html?cat=cat1&sub=mathematics">Open</a>
+  </div>
 
-    <!-- MCQ -->
-    <div class="card">
-        <div>
-            <div class="info">❓ MCQ Practice</div>
-            <div class="desc">Practice important Maths questions</div>
-        </div>
-        <a class="open-btn" href="https://teslavedha.github.io/cat1_mathematics_mcq.html">Open</a>
-    </div>
+  <div class="card">
+    <span>❓ MCQ</span>
+    <a href="mcq.html?cat=cat1&sub=mathematics">Open</a>
+  </div>
 
-    <!-- Comments -->
-    <div class="card">
-        <div>
-            <div class="info">💬 Comments / Discussion</div>
-            <div class="desc">Ask maths doubts & discuss</div>
-        </div>
-        <a class="open-btn" href="https://teslavedha.github.io/cat1_mathematics_comments.html">Open</a>
-    </div>
+  <div class="card">
+    <span>💬 Comments</span>
+    <a href="comments.html?cat=cat1&sub=mathematics">Open</a>
+  </div>
 
 </div>
 
