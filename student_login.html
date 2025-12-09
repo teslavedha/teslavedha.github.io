@@ -1,65 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Student Login – KTET</title>
+<meta charset="UTF-8">
+<title>Student Login – Tesla Vedha</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+<script src="firebase_init.js"></script>
 
 <style>
-body{margin:0;font-family:Poppins;background:#f1f5f9}
+body{
+  margin:0;
+  font-family:Poppins, system-ui;
+  background:#f1f5f9;
+}
+.header{
+  text-align:center;
+  padding:26px 12px;
+  background:linear-gradient(90deg,#1e3a8a,#3b82f6);
+  color:white;
+  font-weight:600;
+  font-size:20px;
+}
 .box{
-max-width:420px;margin:120px auto;
-background:white;padding:20px;border-radius:14px;
-box-shadow:0 6px 18px rgba(0,0,0,.1)}
-h2{text-align:center;color:#4f46e5}
-input,button{
-width:100%;padding:10px;margin-top:10px;
-border-radius:8px;border:1px solid #ccc}
-button{background:#4f46e5;color:white;font-weight:600;border:none}
-.err{color:red;text-align:center;font-size:14px}
+  max-width:380px;
+  margin:30px auto;
+  background:white;
+  padding:22px 18px;
+  border-radius:14px;
+  box-shadow:0 10px 24px rgba(15,23,42,0.18);
+}
+label{
+  display:block;
+  font-size:13px;
+  margin-top:8px;
+}
+input{
+  width:100%;
+  padding:9px;
+  border-radius:8px;
+  border:1px solid #cbd5e1;
+  font-family:Poppins;
+}
+button{
+  width:100%;
+  margin-top:14px;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  background:#16a34a;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+button:active{ opacity:0.9; }
+.msg{
+  margin-top:10px;
+  font-size:13px;
+}
+.error{ color:#b91c1c; }
+.info{ color:#475569; }
+a.back{
+  display:block;
+  margin-top:16px;
+  font-size:13px;
+  text-decoration:none;
+  color:#2563eb;
+  text-align:center;
+}
 </style>
 </head>
-
 <body>
 
+<div class="header">Student Login</div>
+
 <div class="box">
-<h2>Student Login</h2>
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-<p class="err" id="msg"></p>
+  <label>Email / Mobile (as registered)</label>
+  <input id="email" type="text" placeholder="student@example.com">
+
+  <label>Password</label>
+  <input id="password" type="password" placeholder="Enter password">
+
+  <button onclick="loginStudent()">Login</button>
+
+  <div id="msg" class="msg"></div>
+
+  <div class="msg info">
+    New student? Registration is done only by your Teacher / Admin.
+    <br>Ask them to create your account using your email or mobile.
+  </div>
+
+  <a class="back" href="index.html">← Back to Tesla Vedha</a>
 </div>
 
 <script>
-const firebaseConfig = {
-  YOUR_FIREBASE_CONFIG_HERE
-};
-firebase.initializeApp(firebaseConfig);
+function loginStudent(){
+  const email = document.getElementById('email').value.trim();
+  const pass  = document.getElementById('password').value.trim();
+  const msgEl = document.getElementById('msg');
 
-const auth = firebase.auth();
-const db = firebase.firestore();
+  msgEl.textContent = "";
+  msgEl.className = "msg";
 
-function login(){
-  auth.signInWithEmailAndPassword(email.value,password.value)
-  .then(res=>{
-    return db.collection("users").doc(res.user.uid).get();
-  })
-  .then(doc=>{
-    if(!doc.exists || doc.data().role!=="student"){
-      msg.innerText="Access denied";
-      auth.signOut();
-      return;
-    }
-    // ✅ LOGIN SUCCESS → main website
-    window.location.href="index.html";
-  })
-  .catch(e=>msg.innerText=e.message);
+  if(!email || !pass){
+    msgEl.textContent = "Please enter both email/mobile and password.";
+    msgEl.classList.add("error");
+    return;
+  }
+
+  auth.signInWithEmailAndPassword(email, pass)
+    .then(() => {
+      // Optional: you can check 'role' in Firestore if you want
+      window.location.href = "student_panel.html";
+    })
+    .catch(err => {
+      msgEl.textContent = err.message;
+      msgEl.classList.add("error");
+    });
 }
 </script>
 
