@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Tesla Vedha Academy</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     body{
       margin:0;
-      font-family:Poppins, system-ui;
+      font-family:'Poppins', system-ui, sans-serif;
       min-height:100vh;
       background:linear-gradient(135deg,#1e3a8a,#2563eb);
       display:flex;
@@ -18,35 +19,32 @@
       justify-content:center;
     }
 
-    .card{
-      background:white;
+    .login-card{
+      background:#ffffff;
       border-radius:18px;
-      padding:36px 28px 32px;
+      padding:36px 28px 30px;
       width:92%;
-      max-width:410px;
+      max-width:420px;
       text-align:center;
       box-shadow:0 25px 50px rgba(0,0,0,0.28);
     }
 
-    /* LOGO AREA */
-    .logo-wrap{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+    /* LOGO SECTION */
+    .logo-section{
       margin-bottom:20px;
     }
 
-    .logo-wrap img{
-      width:82px;
+    .logo-section img{
+      width:80px;
       height:auto;
       margin-bottom:10px;
     }
 
-    .logo-text{
+    .brand-name{
       font-size:26px;
       font-weight:700;
       color:#1e3a8a;
-      line-height:1.2;
+      margin:0;
     }
 
     .tagline{
@@ -68,20 +66,20 @@
       border-radius:10px;
       font-size:15px;
       font-weight:600;
-      color:white;
+      color:#ffffff;
       text-decoration:none;
-      margin-bottom:10px;
-      transition:transform .15s ease,box-shadow .15s ease;
+      margin-bottom:12px;
+      transition:transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .btn:hover{
       transform:translateY(-1px);
-      box-shadow:0 10px 20px rgba(0,0,0,.15);
+      box-shadow:0 10px 20px rgba(0,0,0,0.18);
     }
 
-    .student{ background:#16a34a; }
-    .teacher{ background:#2563eb; }
-    .admin{ background:#dc2626; }
+    .student-btn{ background:#16a34a; }
+    .teacher-btn{ background:#2563eb; }
+    .admin-btn{ background:#dc2626; }
 
     .note{
       font-size:12px;
@@ -94,24 +92,24 @@
 
 <body>
 
-  <div class="card">
+  <div class="login-card">
 
-    <div class="logo-wrap">
-      <!-- YOUR REAL LOGO -->
-      <img src="photo_2025-11-19_13-35-50.jpg" alt="Tesla Vedha Logo">
-
-      <div class="logo-text">Tesla Vedha</div>
+    <!-- LOGO + BRAND -->
+    <div class="logo-section">
+      <img src="assets/logo.jpg" alt="Tesla Vedha Logo">
+      <div class="brand-name">Tesla Vedha</div>
       <div class="tagline">KTET · PSC · AI Learning Academy</div>
     </div>
 
     <div class="divider"></div>
 
-    <a class="btn student" href="student_login.html">Student Login</a>
-    <a class="btn teacher" href="teacher_login.html">Teacher Login</a>
-    <a class="btn admin" href="admin-login.html">Admin Login</a>
+    <!-- LOGIN BUTTONS -->
+    <a class="btn student-btn" href="student_login.html">Student Login</a>
+    <a class="btn teacher-btn" href="teacher_login.html">Teacher Login</a>
+    <a class="btn admin-btn" href="admin-login.html">Admin Login</a>
 
     <div class="note">
-      All student and teacher accounts are created and managed only by authorised
+      Student and Teacher accounts are created and managed only by authorised
       Admins / Teachers.
     </div>
 
