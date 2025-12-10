@@ -9,10 +9,12 @@
 
 <style>
 :root{
-  --blue:#1e3a8a;
+  --blue-deep:#0b2a6f;
+  --blue-main:#1e40af;
+  --blue-soft:#2563eb;
   --green:#16a34a;
   --red:#dc2626;
-  --text:#0f172a;
+  --text-dark:#0f172a;
   --muted:#64748b;
 }
 
@@ -23,11 +25,11 @@ body{
   min-height:100vh;
   font-family:'Poppins',system-ui,sans-serif;
 
-  /* ✅ PREMIUM LIGHT BACKGROUND */
+  /* ✅ PREMIUM BLUE BACKGROUND */
   background:
-    radial-gradient(800px 300px at 20% 0%, #dbeafe, transparent 60%),
-    radial-gradient(600px 300px at 90% 80%, #e0f2fe, transparent 60%),
-    linear-gradient(180deg, #f8fafc, #eef2f7);
+    radial-gradient(900px 400px at 0% 0%, rgba(59,130,246,.35), transparent 60%),
+    radial-gradient(800px 400px at 100% 100%, rgba(30,64,175,.45), transparent 60%),
+    linear-gradient(180deg, var(--blue-deep), #081a40);
 
   display:flex;
   align-items:center;
@@ -39,29 +41,32 @@ body{
 .portal{
   width:100%;
   max-width:460px;
-  background:#ffffff;
-  border-radius:28px;
-  padding:30px 26px 28px;
-  box-shadow:
-    0 30px 60px rgba(15,23,42,.12),
-    inset 0 1px 0 rgba(255,255,255,.7);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.94));
+  border-radius:30px;
+  padding:34px 28px 30px;
   text-align:center;
+  box-shadow:
+    0 40px 80px rgba(2,6,23,.55),
+    inset 0 1px 0 rgba(255,255,255,.6);
 }
 
 /* LOGO */
 .logo-frame{
-  width:92px;
-  height:92px;
+  width:96px;
+  height:96px;
   margin:0 auto 14px;
-  border-radius:22px;
-  background:linear-gradient(145deg,#111827,#1f2937);
+  border-radius:24px;
+  background:linear-gradient(145deg,#0f172a,#1e293b);
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 14px 28px rgba(0,0,0,.25);
+  box-shadow:
+    0 18px 36px rgba(0,0,0,.45),
+    inset 0 0 0 1px rgba(255,255,255,.15);
 }
 .logo-frame img{
-  width:58px;
+  width:60px;
   height:auto;
 }
 
@@ -69,7 +74,7 @@ body{
 .brand{
   font-size:28px;
   font-weight:700;
-  color:var(--blue);
+  color:var(--blue-main);
 }
 .tagline{
   font-size:13px;
@@ -77,48 +82,82 @@ body{
   margin-top:4px;
 }
 
-.divider{
+.rule{
   height:1px;
   background:#e5e7eb;
-  margin:20px 0;
+  margin:22px 0;
 }
 
-/* BUTTONS */
+/* ✅ PREMIUM BUTTONS */
 .actions{
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:16px;
 }
 
 .actions a{
   padding:15px;
-  border-radius:14px;
+  border-radius:16px;
   font-size:15px;
   font-weight:600;
   color:#ffffff;
   text-decoration:none;
-  box-shadow:0 12px 24px rgba(15,23,42,.18);
+  letter-spacing:.3px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    0 14px 28px rgba(15,23,42,.22),
+    inset 0 1px 0 rgba(255,255,255,.25);
   transition:transform .15s ease, box-shadow .15s ease;
 }
-.actions a:hover{
-  transform:translateY(-2px);
-  box-shadow:0 18px 32px rgba(15,23,42,.22);
+
+/* SHINE EFFECT */
+.actions a::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:120%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.4),
+    transparent
+  );
+  transition:left .6s ease;
+}
+.actions a:hover::after{
+  left:120%;
 }
 
-.student{background:linear-gradient(135deg,#16a34a,#22c55e);}
-.teacher{background:linear-gradient(135deg,#2563eb,#3b82f6);}
-.admin{background:linear-gradient(135deg,#dc2626,#ef4444);}
+.actions a:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 22px 44px rgba(15,23,42,.35);
+}
 
+.student{
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+}
+.teacher{
+  background:linear-gradient(135deg,#2563eb,#60a5fa);
+}
+.admin{
+  background:linear-gradient(135deg,#dc2626,#f87171);
+}
+
+/* FOOTER NOTE */
 .note{
   font-size:12px;
-  color:#6b7280;
-  margin-top:16px;
-  line-height:1.5;
+  color:#4b5563;
+  margin-top:18px;
+  line-height:1.6;
 }
 
 @media(max-width:420px){
   .brand{font-size:24px;}
-  .portal{padding:26px 22px;}
+  .portal{padding:30px 22px;}
 }
 </style>
 </head>
@@ -134,7 +173,7 @@ body{
   <div class="brand">Tesla Vedha</div>
   <div class="tagline">KTET · PSC · AI Learning Academy</div>
 
-  <div class="divider"></div>
+  <div class="rule"></div>
 
   <div class="actions">
     <a class="student" href="student_login.html">Student Login</a>
