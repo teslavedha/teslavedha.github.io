@@ -9,13 +9,14 @@
 
 <style>
 :root{
-  --blue-deep:#0b2a6f;
-  --blue-main:#1e40af;
-  --blue-soft:#2563eb;
+  --blue-1:#020617;
+  --blue-2:#020f30;
+  --blue-3:#0b2a6f;
+  --blue-4:#1e40af;
   --green:#16a34a;
   --red:#dc2626;
-  --text-dark:#0f172a;
-  --muted:#64748b;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
 }
 
 *{box-sizing:border-box;}
@@ -25,30 +26,32 @@ body{
   min-height:100vh;
   font-family:'Poppins',system-ui,sans-serif;
 
-  /* ✅ PREMIUM BLUE BACKGROUND */
+  /* ✅ FULL PREMIUM DARK BLUE BACKGROUND */
   background:
-    radial-gradient(900px 400px at 0% 0%, rgba(59,130,246,.35), transparent 60%),
-    radial-gradient(800px 400px at 100% 100%, rgba(30,64,175,.45), transparent 60%),
-    linear-gradient(180deg, var(--blue-deep), #081a40);
+    radial-gradient(1200px 600px at 20% 0%, rgba(37,99,235,.35), transparent 60%),
+    radial-gradient(1000px 600px at 90% 80%, rgba(30,64,175,.45), transparent 60%),
+    linear-gradient(180deg, var(--blue-1), var(--blue-2));
 
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:22px;
+  padding:24px;
 }
 
-/* MAIN CARD */
+/* MAIN CONTAINER – NO WHITE */
 .portal{
   width:100%;
   max-width:460px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.94));
-  border-radius:30px;
-  padding:34px 28px 30px;
+    linear-gradient(180deg, rgba(15,23,42,.85), rgba(2,6,23,.85));
+  border-radius:26px;
+  padding:32px 28px 30px;
   text-align:center;
+
   box-shadow:
-    0 40px 80px rgba(2,6,23,.55),
-    inset 0 1px 0 rgba(255,255,255,.6);
+    0 40px 80px rgba(0,0,0,.65),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(18px);
 }
 
 /* LOGO */
@@ -57,16 +60,16 @@ body{
   height:96px;
   margin:0 auto 14px;
   border-radius:24px;
-  background:linear-gradient(145deg,#0f172a,#1e293b);
+  background:linear-gradient(145deg,#020617,#020f30);
   display:flex;
   align-items:center;
   justify-content:center;
   box-shadow:
-    0 18px 36px rgba(0,0,0,.45),
-    inset 0 0 0 1px rgba(255,255,255,.15);
+    0 18px 36px rgba(0,0,0,.65),
+    inset 0 0 0 1px rgba(255,255,255,.08);
 }
 .logo-frame img{
-  width:60px;
+  width:58px;
   height:auto;
 }
 
@@ -74,21 +77,21 @@ body{
 .brand{
   font-size:28px;
   font-weight:700;
-  color:var(--blue-main);
+  color:#ffffff;
 }
 .tagline{
   font-size:13px;
   color:var(--muted);
-  margin-top:4px;
+  margin-top:6px;
 }
 
 .rule{
   height:1px;
-  background:#e5e7eb;
+  background:linear-gradient(90deg,transparent,#334155,transparent);
   margin:22px 0;
 }
 
-/* ✅ PREMIUM BUTTONS */
+/* BUTTONS – PREMIUM */
 .actions{
   display:flex;
   flex-direction:column;
@@ -96,22 +99,23 @@ body{
 }
 
 .actions a{
+  position:relative;
   padding:15px;
-  border-radius:16px;
+  border-radius:14px;
   font-size:15px;
   font-weight:600;
   color:#ffffff;
   text-decoration:none;
   letter-spacing:.3px;
-  position:relative;
   overflow:hidden;
+
   box-shadow:
-    0 14px 28px rgba(15,23,42,.22),
+    0 14px 30px rgba(0,0,0,.55),
     inset 0 1px 0 rgba(255,255,255,.25);
   transition:transform .15s ease, box-shadow .15s ease;
 }
 
-/* SHINE EFFECT */
+/* shine */
 .actions a::after{
   content:"";
   position:absolute;
@@ -119,45 +123,28 @@ body{
   left:-120%;
   width:120%;
   height:100%;
-  background:linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,.4),
-    transparent
-  );
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);
   transition:left .6s ease;
 }
-.actions a:hover::after{
-  left:120%;
-}
-
+.actions a:hover::after{left:120%;}
 .actions a:hover{
   transform:translateY(-2px);
-  box-shadow:
-    0 22px 44px rgba(15,23,42,.35);
+  box-shadow:0 24px 48px rgba(0,0,0,.8);
 }
 
-.student{
-  background:linear-gradient(135deg,#16a34a,#22c55e);
-}
-.teacher{
-  background:linear-gradient(135deg,#2563eb,#60a5fa);
-}
-.admin{
-  background:linear-gradient(135deg,#dc2626,#f87171);
-}
+.student{background:linear-gradient(135deg,#16a34a,#22c55e);}
+.teacher{background:linear-gradient(135deg,#2563eb,#60a5fa);}
+.admin{background:linear-gradient(135deg,#dc2626,#f87171);}
 
-/* FOOTER NOTE */
 .note{
   font-size:12px;
-  color:#4b5563;
+  color:#9ca3af;
   margin-top:18px;
   line-height:1.6;
 }
 
 @media(max-width:420px){
   .brand{font-size:24px;}
-  .portal{padding:30px 22px;}
 }
 </style>
 </head>
