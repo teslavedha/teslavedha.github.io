@@ -1,162 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Tesla Vedha Academy</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Tesla Vedha Academy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --blue-main:#1e3a8a;
-      --blue-light:#2563eb;
-      --green:#16a34a;
-      --red:#dc2626;
-      --text-main:#0f172a;
-      --muted:#6b7280;
-    }
+<style>
+:root{
+  --blue-dark:#0f2a5f;
+  --blue-main:#1e40af;
+  --blue-light:#2563eb;
+  --green:#16a34a;
+  --red:#dc2626;
+  --text:#0f172a;
+  --muted:#64748b;
+}
 
-    *{box-sizing:border-box;}
+*{box-sizing:border-box;}
 
-    body{
-      margin:0;
-      font-family:'Poppins',system-ui,sans-serif;
-      min-height:100vh;
-      background:
-        radial-gradient(900px 400px at 10% 0%,rgba(37,99,235,0.35),transparent 55%),
-        radial-gradient(800px 400px at 90% 100%,rgba(56,189,248,0.25),transparent 55%),
-        #0f172a;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-    }
+body{
+  margin:0;
+  font-family:'Poppins',system-ui,sans-serif;
+  min-height:100vh;
+  background:
+    radial-gradient(900px 500px at 15% 10%, rgba(37,99,235,.25), transparent 55%),
+    radial-gradient(900px 500px at 85% 90%, rgba(30,64,175,.35), transparent 55%),
+    linear-gradient(180deg,#020617,#0f172a);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-    .shell{
-      width:100%;
-      max-width:460px;
-      border-radius:24px;
-      overflow:hidden;
-      box-shadow:0 24px 60px rgba(15,23,42,0.55);
-      background:#e5e7eb;
-    }
+/* MAIN GLASS CARD */
+.portal{
+  width:100%;
+  max-width:460px;
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.85),
+    rgba(255,255,255,0.92)
+  );
+  border-radius:26px;
+  box-shadow:
+    0 30px 70px rgba(2,6,23,.65),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  overflow:hidden;
+}
 
-    /* HEADER BAND WITH LOGO */
-    .shell-header{
-      background:linear-gradient(135deg,var(--blue-main),var(--blue-light));
-      padding:26px 22px 22px;
-      text-align:center;
-      color:#ffffff;
-    }
-    .logo-wrap{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-    }
-    .logo-wrap img{
-      width:78px;
-      height:auto;
-      border-radius:12px;
-      box-shadow:0 8px 18px rgba(0,0,0,0.45);
-    }
-    .brand-name{
-      font-size:26px;
-      font-weight:700;
-      letter-spacing:.4px;
-    }
-    .tagline{
-      font-size:13px;
-      opacity:.9;
-    }
+/* HEADER */
+.portal-header{
+  padding:32px 24px 22px;
+  text-align:center;
+  background:
+    radial-gradient(200px 120px at top, rgba(37,99,235,.18), transparent 70%);
+}
 
-    /* BODY AREA WITH BUTTONS */
-    .shell-body{
-      background:#f9fafb;
-      padding:22px 20px 20px;
-    }
+/* LOGO */
+.logo-box{
+  width:92px;
+  height:92px;
+  margin:0 auto 14px;
+  border-radius:20px;
+  background:rgba(15,23,42,.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:
+    0 14px 28px rgba(15,23,42,.45),
+    inset 0 0 0 1px rgba(255,255,255,.12);
+}
+.logo-box img{
+  width:56px;
+  height:auto;
+}
 
-    .divider{
-      height:1px;
-      background:#e5e7eb;
-      margin:6px 0 20px;
-    }
+/* BRAND */
+.brand{
+  font-size:28px;
+  font-weight:700;
+  color:var(--blue-dark);
+  letter-spacing:.4px;
+}
+.tagline{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:6px;
+}
 
-    .btn{
-      display:block;
-      width:100%;
-      padding:13px;
-      border-radius:999px;
-      border:none;
-      text-decoration:none;
-      font-size:15px;
-      font-weight:600;
-      color:#ffffff;
-      margin-bottom:12px;
-      text-align:center;
-      cursor:pointer;
-      transition:transform .15s ease, box-shadow .15s ease, opacity .1s ease;
-    }
-    .btn.student{background:var(--green);}
-    .btn.teacher{background:var(--blue-light);}
-    .btn.admin{background:var(--red);}
+/* BODY */
+.portal-body{
+  padding:22px 24px 26px;
+}
 
-    .btn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 24px rgba(15,23,42,0.25);
-      opacity:.97;
-    }
-    .btn:active{
-      transform:translateY(0);
-      box-shadow:0 6px 14px rgba(15,23,42,0.2);
-    }
+.rule{
+  height:1px;
+  background:linear-gradient(90deg,transparent,#e5e7eb,transparent);
+  margin-bottom:22px;
+}
 
-    .note{
-      font-size:12px;
-      color:var(--muted);
-      text-align:center;
-      margin-top:10px;
-      line-height:1.5;
-    }
+/* BUTTONS */
+.action{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
 
-    @media(max-width:480px){
-      .shell{
-        border-radius:18px;
-      }
-      .brand-name{font-size:22px;}
-    }
-  </style>
+.action a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px;
+  border-radius:14px;
+  font-size:15px;
+  font-weight:600;
+  color:white;
+  text-decoration:none;
+  letter-spacing:.2px;
+  box-shadow:0 12px 26px rgba(15,23,42,.22);
+  transition:transform .15s ease, box-shadow .15s ease, opacity .15s;
+}
+
+.action a:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 38px rgba(15,23,42,.28);
+}
+.action a:active{
+  transform:translateY(0);
+}
+
+.student{background:linear-gradient(135deg,#16a34a,#22c55e);}
+.teacher{background:linear-gradient(135deg,#2563eb,#3b82f6);}
+.admin{background:linear-gradient(135deg,#dc2626,#ef4444);}
+
+/* FOOTER */
+.footer-note{
+  margin-top:18px;
+  font-size:12px;
+  text-align:center;
+  color:#475569;
+  line-height:1.6;
+}
+
+@media(max-width:420px){
+  .brand{font-size:24px;}
+  .logo-box{width:82px;height:82px;}
+}
+</style>
 </head>
 
 <body>
 
-  <div class="shell">
+<section class="portal">
 
-    <!-- TOP BLUE BAND WITH LOGO + NAME -->
-    <div class="shell-header">
-      <div class="logo-wrap">
-        <img src="assets/logo.jpg" alt="Tesla Vedha Logo">
-        <div class="brand-name">Tesla Vedha</div>
-        <div class="tagline">KTET · PSC · AI Learning Academy</div>
-      </div>
+  <header class="portal-header">
+    <div class="logo-box">
+      <img src="assets/logo.jpg" alt="Tesla Vedha Logo">
     </div>
 
-    <!-- LOGIN BUTTON AREA -->
-    <div class="shell-body">
-      <div class="divider"></div>
+    <div class="brand">Tesla Vedha</div>
+    <div class="tagline">KTET · PSC · AI Learning Academy</div>
+  </header>
 
-      <a class="btn student" href="student_login.html">Student Login</a>
-      <a class="btn teacher" href="teacher_login.html">Teacher Login</a>
-      <a class="btn admin" href="admin-login.html">Admin Login</a>
+  <div class="portal-body">
+    <div class="rule"></div>
 
-      <div class="note">
-        Student and Teacher accounts are created and managed only by
-        authorised Admins / Teachers of Tesla Vedha Academy.
-      </div>
+    <div class="action">
+      <a class="student" href="student_login.html">Student Login</a>
+      <a class="teacher" href="teacher_login.html">Teacher Login</a>
+      <a class="admin" href="admin-login.html">Admin Login</a>
     </div>
 
+    <div class="footer-note">
+      Student and Teacher accounts are created and managed only by authorised
+      Admins / Teachers of Tesla Vedha Academy.
+    </div>
   </div>
+
+</section>
 
 </body>
 </html>
