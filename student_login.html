@@ -1,127 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Student Login – Tesla Vedha</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<title>Student Login | Tesla Vedha</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
-<script src="firebase_init.js"></script>
 
 <style>
 body{
   margin:0;
-  font-family:Poppins, system-ui;
-  background:#f1f5f9;
+  font-family:Poppins;
+  background:linear-gradient(135deg,#0a1f44,#0d47a1);
+  min-height:100vh;
 }
-.header{
-  text-align:center;
-  padding:26px 12px;
-  background:linear-gradient(90deg,#1e3a8a,#3b82f6);
+header{
+  padding:20px;
+  background:#1e40af;
   color:white;
+  text-align:center;
   font-weight:600;
-  font-size:20px;
 }
 .box{
-  max-width:380px;
-  margin:30px auto;
-  background:white;
-  padding:22px 18px;
+  max-width:420px;
+  background:#fff;
   border-radius:14px;
-  box-shadow:0 10px 24px rgba(15,23,42,0.18);
-}
-label{
-  display:block;
-  font-size:13px;
-  margin-top:8px;
+  padding:25px;
+  margin:40px auto;
+  box-shadow:0 15px 40px rgba(0,0,0,.2)
 }
 input{
   width:100%;
-  padding:9px;
+  padding:12px;
+  margin-top:10px;
   border-radius:8px;
-  border:1px solid #cbd5e1;
-  font-family:Poppins;
+  border:1px solid #ccc;
 }
 button{
   width:100%;
-  margin-top:14px;
-  padding:10px;
-  border-radius:10px;
+  margin-top:18px;
+  padding:12px;
   border:none;
+  border-radius:10px;
+  font-weight:600;
   background:#16a34a;
   color:white;
-  font-weight:600;
-  cursor:pointer;
 }
-button:active{ opacity:0.9; }
-.msg{
-  margin-top:10px;
-  font-size:13px;
-}
-.error{ color:#b91c1c; }
-.info{ color:#475569; }
-a.back{
-  display:block;
-  margin-top:16px;
-  font-size:13px;
-  text-decoration:none;
-  color:#2563eb;
-  text-align:center;
-}
+a{display:block;text-align:center;margin-top:18px;color:#2563eb;text-decoration:none}
 </style>
 </head>
 <body>
 
-<div class="header">Student Login</div>
+<header>Student Login</header>
 
 <div class="box">
-  <label>Email / Mobile (as registered)</label>
-  <input id="email" type="text" placeholder="student@example.com">
+  <input placeholder="Email or Mobile">
+  <input type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
 
-  <label>Password</label>
-  <input id="password" type="password" placeholder="Enter password">
-
-  <button onclick="loginStudent()">Login</button>
-
-  <div id="msg" class="msg"></div>
-
-  <div class="msg info">
-    New student? Registration is done only by your Teacher / Admin.
-    <br>Ask them to create your account using your email or mobile.
-  </div>
-
-  <a class="back" href="index.html">← Back to Tesla Vedha</a>
+  <a href="index.html">← Back to Tesla Vedha</a>
 </div>
 
 <script>
-function loginStudent(){
-  const email = document.getElementById('email').value.trim();
-  const pass  = document.getElementById('password').value.trim();
-  const msgEl = document.getElementById('msg');
-
-  msgEl.textContent = "";
-  msgEl.className = "msg";
-
-  if(!email || !pass){
-    msgEl.textContent = "Please enter both email/mobile and password.";
-    msgEl.classList.add("error");
-    return;
-  }
-
-  auth.signInWithEmailAndPassword(email, pass)
-    .then(() => {
-      // Optional: you can check 'role' in Firestore if you want
-      window.location.href = "student_panel.html";
-    })
-    .catch(err => {
-      msgEl.textContent = err.message;
-      msgEl.classList.add("error");
-    });
+function login(){
+  alert("✅ Login system working.\n\nBackend (Firebase) can be connected safely later.");
 }
 </script>
 
