@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,25 +15,32 @@
         h1 {
             text-align: center;
             color: #e91e63;
+            font-size: 32px;
         }
+
         .menu {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            padding: 0 20px;
         }
+
         .card {
-            background: white;
-            padding: 20px;
+            background: #ffffff;
+            padding: 22px;
             text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
             cursor: pointer;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 600;
+            transition: 0.2s;
         }
+
         .card:hover {
             background: #f8bbd0;
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -41,12 +49,31 @@
     <h1>Admin Dashboard</h1>
 
     <div class="menu">
-        <div class="card">Add Teacher</div>
-        <div class="card">Remove Teacher</div>
-        <div class="card">Register Student</div>
-        <div class="card">Add Class Video</div>
-        <div class="card">Upload PDF Notes</div>
-        <div class="card">Upload MCQ / PDF</div>
+
+        <div class="card" onclick="location.href='admin_add_teacher.html'">
+            Add Teacher
+        </div>
+
+        <div class="card" onclick="location.href='admin_remove_teacher.html'">
+            Remove Teacher
+        </div>
+
+        <div class="card" onclick="location.href='admin_register_student.html'">
+            Register Student
+        </div>
+
+        <div class="card" onclick="location.href='admin_add_video.html'">
+            Add Class Video
+        </div>
+
+        <div class="card" onclick="location.href='admin_upload_notes.html'">
+            Upload PDF Notes
+        </div>
+
+        <div class="card" onclick="location.href='admin_upload_mcq.html'">
+            Upload MCQ / PDF
+        </div>
+
     </div>
 
 </body>
