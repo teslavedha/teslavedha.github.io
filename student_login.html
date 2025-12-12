@@ -1,60 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Student Login</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
-body { font-family:Poppins; background:#0b61d1; height:100vh; display:flex; justify-content:center; align-items:center; }
-.card { background:white; padding:25px; width:350px; border-radius:12px; box-shadow:0px 8px 20px rgba(0,0,0,0.2); }
-input,button { width:100%; padding:12px; margin-top:10px; border-radius:8px; border:1px solid #ddd; }
-button { background:#16a34a; color:white; border:none; font-weight:600; }
-.msg { color:red; margin-top:10px; }
-</style>
-</head>
-
-<body>
-<script src="firebase_init.js"></script>
-
-<div class="card">
-<h2 style="text-align:center">Student Login</h2>
-
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
-
-<button onclick="studentLogin()">Login</button>
-
-<div id="msg" class="msg"></div>
-</div>
-
 <script>
 async function studentLogin(){
     let u = username.value.trim();
     let p = password.value.trim();
     msg.textContent = "";
 
+    // block empty input
+    if(u.length !== 10){
+        msg.textContent = "Invalid mobile number";
+        return;
+    }
+    if(p.length !== 8){
+        msg.textContent = "Password must be DOB (DDMMYYYY)";
+        return;
+    }
+
     let snap = await db.collection("users").doc(u).get();
 
     if(!snap.exists){
-        msg.textContent = "User not found";
+        msg.textContent = "❌ Student not registered. Contact Admin.";
         return;
     }
 
     let data = snap.data();
 
-    if(data.password !== p){
-        msg.textContent = "Wrong password";
-        return;
-    }
-
     if(data.role !== "student"){
-        msg.textContent = "Not a student account";
+        msg.textContent = "❌ This is not a student account";
         return;
     }
 
+    if(data.password !== p){
+        msg.textContent = "❌ Incorrect password";
+        return;
+    }
+
+    // SUCCESS
     localStorage.setItem("tv_user", JSON.stringify(data));
     window.location.href = "student_courses.html";
 }
 </script>
-
-</body>
-</html>
