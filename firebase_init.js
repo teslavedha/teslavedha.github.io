@@ -1,10 +1,11 @@
-<!-- LOAD FIREBASE (COMPAT VERSION FOR EASY USE) -->
+<!-- firebase_init.js -->
+
+<!-- Firebase COMPAT version (CORRECT for your old HTML project) -->
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 
 <script>
-// Your Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyAF616w_YOJQiYICXQ8RxuEp4bDRzZPQuk",
     authDomain: "teslavedha-58fd3.firebaseapp.com",
@@ -15,12 +16,9 @@ const firebaseConfig = {
     measurementId: "G-DHXV7L8TM"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Make auth & db available globally
+// FIXED — Make global so every page can use it
 window.auth = firebase.auth();
 window.db   = firebase.firestore();
-
-console.log("Firebase Loaded Successfully");
 </script>
