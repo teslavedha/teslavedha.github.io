@@ -1,153 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Student Login | Tesla Vedha</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Student Login</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#0a1f44,#0d47a1,#0f5fd1);
-  display:flex;
-  flex-direction:column;
-}
-
-/* Header */
-header{
-  padding:18px;
-  background:#1e40af;
-  text-align:center;
-  color:#ffffff;
-  font-size:20px;
-  font-weight:600;
-}
-
-/* Center Container */
-.container{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-/* Login Card */
-.card{
-  width:100%;
-  max-width:420px;
-  background:#ffffff;
-  border-radius:16px;
-  padding:28px 24px 26px;
-  box-shadow:0 20px 45px rgba(15,23,42,.28);
-}
-
-/* Labels */
-label{
-  font-weight:600;
-  font-size:14px;
-  color:#0f172a;
-}
-
-/* Inputs */
-input{
-  width:100%;
-  padding:12px;
-  margin:8px 0 18px;
-  border-radius:10px;
-  border:1px solid #cbd5f5;
-  background:#eef4ff;
-  font-size:15px;
-}
-
-/* Button */
-button{
-  width:100%;
-  padding:13px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(135deg,#22c55e,#16a34a);
-  color:#ffffff;
-  font-size:15px;
-  font-weight:600;
-  cursor:pointer;
-}
-button:hover{opacity:.95}
-
-/* Messages */
-.msg{
-  margin-top:12px;
-  font-size:13px;
-}
-.msg.error{color:#b91c1c;}
-.msg.info{color:#475569;}
-
-/* Back link */
-.back{
-  display:block;
-  text-align:center;
-  margin-top:18px;
-  text-decoration:none;
-  color:#2563eb;
-  font-size:13px;
-  font-weight:500;
-}
+body { font-family:Poppins; background:#0b61d1; height:100vh; display:flex; justify-content:center; align-items:center; }
+.card { background:white; padding:25px; width:350px; border-radius:12px; box-shadow:0px 8px 20px rgba(0,0,0,0.2); }
+input,button { width:100%; padding:12px; margin-top:10px; border-radius:8px; border:1px solid #ddd; }
+button { background:#16a34a; color:white; border:none; font-weight:600; }
+.msg { color:red; margin-top:10px; }
 </style>
 </head>
 
 <body>
+<script src="firebase_init.js"></script>
 
-<header>Student Login</header>
+<div class="card">
+<h2 style="text-align:center">Student Login</h2>
 
-<div class="container">
-  <div class="card">
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
 
-    <label>Email or Mobile</label>
-    <input id="user" placeholder="student1@teslavedha.com">
+<button onclick="studentLogin()">Login</button>
 
-    <label>Password</label>
-    <input id="pass" type="password" placeholder="Student@123">
-
-    <button onclick="studentLogin()">Login</button>
-
-    <div id="loginMsg" class="msg"></div>
-
-    <div class="msg info">
-      New student? Account is created only by Admin / Teacher.
-    </div>
-
-    <a class="back" href="index.html">← Back to Tesla Vedha</a>
-
-  </div>
+<div id="msg" class="msg"></div>
 </div>
 
 <script>
-function studentLogin(){
-  const user = document.getElementById("user").value.trim();
-  const pass = document.getElementById("pass").value.trim();
-  const msg  = document.getElementById("loginMsg");
+async function studentLogin(){
+    let u = username.value.trim();
+    let p = password.value.trim();
+    msg.textContent = "";
 
-  msg.textContent = "";
-  msg.className = "msg";
+    let snap = await db.collection("users").doc(u).get();
 
-  const validUsers = [
-    "student1@teslavedha.com",
-    "9876543210"
-  ];
+    if(!snap.exists){
+        msg.textContent = "User not found";
+        return;
+    }
 
-  const validPassword = "Student@123";
+    let data = snap.data();
 
-  if(validUsers.includes(user) && pass === validPassword){
-    localStorage.setItem("tv_student_logged_in", "yes");
+    if(data.password !== p){
+        msg.textContent = "Wrong password";
+        return;
+    }
+
+    if(data.role !== "student"){
+        msg.textContent = "Not a student account";
+        return;
+    }
+
+    localStorage.setItem("tv_user", JSON.stringify(data));
     window.location.href = "student_courses.html";
-  } else {
-    msg.textContent = "❌ Invalid username or password";
-    msg.classList.add("error");
-  }
 }
 </script>
 
