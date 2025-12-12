@@ -1,166 +1,895 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>KTET Admin Panel</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Admin Panel — Tesla Vedha</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600,700&display=swap" rel="stylesheet">
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+<!-- Firebase init (you already added firebase_init.js in repo root) -->
+<script src="firebase_init.js"></script>
 
 <style>
-body{margin:0;font-family:Poppins;background:#f1f5f9}
-header{background:#1e40af;color:white;padding:18px;text-align:center;font-size:22px;font-weight:600}
-.container{max-width:1100px;margin:auto;padding:16px}
-.box{background:white;padding:16px;border-radius:14px;margin-bottom:16px;
-box-shadow:0 6px 18px rgba(0,0,0,.1)}
-h3{margin-top:0;color:#1e40af}
-input,select{
-width:100%;padding:8px;margin-bottom:8px;
-border-radius:8px;border:1px solid #ccc}
-button{
-background:#1e40af;color:white;padding:8px 14px;
-border:none;border-radius:8px;font-weight:600;margin-right:6px;cursor:pointer}
-.danger{background:#dc2626}
-.hidden{display:none}
+  :root{
+    --bg-1: #071226;
+    --bg-2: #0b1220;
+    --panel: #071027;
+    --accent: #00ff9d;
+    --muted: #9aa6b2;
+    --card: #071a2b;
+    --glass: rgba(255,255,255,0.03);
+    --shadow: 0 10px 30px rgba(2,6,23,0.6);
+    --radius: 12px;
+  }
+  html,body{height:100%;margin:0;font-family:'Poppins',system-ui,-apple-system; background:linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:#e6f0f2;}
+  .app {
+    display:flex;
+    height:100vh;
+    gap:20px;
+    padding:18px;
+    box-sizing:border-box;
+  }
+
+  /* Sidebar */
+  .sidebar{
+    width:280px;
+    background:linear-gradient(180deg,#041426,#08243a);
+    border-radius:14px;
+    padding:18px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+  }
+  .brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:18px;
+  }
+  .logo{
+    width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,#0be6a6,#0077ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:#022;font-size:18px;
+  }
+  .brand h2{margin:0;font-size:18px;letter-spacing:0.2px}
+  .userbox{margin-top:10px;padding:10px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));}
+  .userbox small{color:var(--muted);display:block}
+  .nav { margin-top:16px; display:flex; flex-direction:column; gap:8px; }
+  .nav button{ background:transparent;border:none;color:var(--muted);text-align:left;padding:12px;border-radius:10px;cursor:pointer;font-weight:600 }
+  .nav button.active{ color:var(--accent); background:linear-gradient(90deg, rgba(0,255,157,0.05), rgba(0,255,157,0.02)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02) }
+  .side-foot{ margin-top:auto; display:flex; gap:8px; align-items:center; justify-content:space-between;}
+  .logout{ background:#ff4d6d; color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; font-weight:700}
+
+  /* Main */
+  .main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+  }
+  .search{
+    flex:1;
+    display:flex;
+    gap:8px;
+  }
+  .search input{
+    width:100%;
+    padding:12px 14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.04);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    color:#e8f7f0;
+  }
+
+  /* Cards/Blocks */
+  .card-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:18px;
+    border-radius:12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    min-height:92px;
+  }
+  .card h3{margin:0 0 8px;font-size:15px;color:var(--accent)}
+  .card p{margin:0;color:var(--muted);font-size:13px}
+
+  /* content area */
+  .content{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:12px;
+    padding:18px;
+    box-shadow:var(--shadow);
+    flex:1;
+    overflow:auto;
+  }
+
+  /* forms */
+  .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:start; }
+  label{ display:block; font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:600 }
+  input, select, textarea{ width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); color:#e6f0f2 }
+  button.primary{ background:linear-gradient(90deg,#00ff9d,#00d2ff); color:#042; border:none; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer }
+  button.ghost{ background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px }
+
+  table{ width:100%; border-collapse:collapse; margin-top:12px }
+  th,td{ padding:10px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.03); font-size:14px; color:#cfeee8 }
+  th{ color:var(--muted); font-weight:600; font-size:13px }
+
+  .small-muted{ color:var(--muted); font-size:13px }
+
+  /* responsive */
+  @media(max-width:1000px){
+    .card-grid{ grid-template-columns:1fr; }
+    .sidebar{ display:none }
+    .app{ padding:12px }
+  }
 </style>
 </head>
-
 <body>
-<header>KTET ADMIN PANEL (Firebase)</header>
 
-<div class="container">
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" role="navigation" aria-label="Admin navigation">
+    <div class="brand">
+      <div class="logo">TV</div>
+      <div>
+        <h2>Tesla Vedha</h2>
+        <div class="small-muted">Admin Panel</div>
+      </div>
+    </div>
 
-<!-- LOGIN -->
-<div class="box" id="loginBox">
-<h3>Admin Login</h3>
-<input id="email" placeholder="Admin Email">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-</div>
+    <div class="userbox" id="adminInfo">
+      <div style="font-weight:700" id="adminName">Admin</div>
+      <small id="adminRole">—</small>
+    </div>
 
-<!-- ADMIN PANEL -->
-<div id="adminBox" class="hidden">
+    <nav class="nav" id="nav">
+      <button class="active" data-view="dashboard">Dashboard</button>
+      <button data-view="students">Students</button>
+      <button data-view="teachers">Teachers</button>
+      <button data-view="content">Content</button>
+      <button data-view="notes">Notes</button>
+      <button data-view="mcq">MCQ</button>
+      <button data-view="comments">Comments</button>
+      <button data-view="settings">Settings</button>
+    </nav>
 
-<!-- USER MANAGEMENT -->
-<div class="box">
-<h3>User Management</h3>
+    <div class="side-foot">
+      <div style="font-size:13px;color:var(--muted)">Signed in as <strong id="whoami">—</strong></div>
+      <button class="logout" id="logoutBtn">Logout</button>
+    </div>
+  </aside>
 
-<select id="role">
-  <option value="teacher">Teacher</option>
-  <option value="student">Student</option>
-</select>
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="search">
+        <input id="globalSearch" placeholder="Search students, teachers, subjects...">
+      </div>
 
-<input id="newEmail" placeholder="Email">
-<input id="newPass" type="password" placeholder="Password">
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="small-muted">Server: Firebase</div>
+      </div>
+    </div>
 
-<button onclick="addUser()">Add User</button>
-<button class="danger" onclick="removeUser()">Remove User</button>
-</div>
+    <!-- quick stats -->
+    <div class="card-grid">
+      <div class="card">
+        <h3>Students</h3>
+        <p id="statStudents">—</p>
+      </div>
+      <div class="card">
+        <h3>Teachers</h3>
+        <p id="statTeachers">—</p>
+      </div>
+      <div class="card">
+        <h3>Content</h3>
+        <p id="statContent">videos / notes / mcq</p>
+      </div>
+    </div>
 
-<!-- CONTENT MANAGEMENT -->
-<div class="box">
-<h3>Content Management</h3>
-
-<select id="category">
-<option value="cat1">Category 1</option>
-<option value="cat2">Category 2</option>
-</select>
-
-<select id="subject">
-<option value="malayalam">Malayalam</option>
-<option value="english">English</option>
-<option value="mathematics">Mathematics</option>
-<option value="science">Science</option>
-<option value="evs">EVS</option>
-<option value="psychology">Psychology</option>
-<option value="socialscience">Social Science</option>
-</select>
-
-<h4>Videos (YouTube URLs – 10)</h4>
-<div id="videos"></div>
-
-<h4>Notes PDFs (5)</h4>
-<div id="notes"></div>
-
-<h4>MCQ PDFs (5)</h4>
-<div id="mcq"></div>
-
-<button onclick="saveContent()">Save Content</button>
-</div>
-
-</div>
+    <section class="content" id="contentArea" role="main">
+      <!-- dynamic area: views are inserted here -->
+    </section>
+  </main>
 </div>
 
 <script>
-// 🔥 FIREBASE CONFIG
-const firebaseConfig = {
-  YOUR_FIREBASE_CONFIG_HERE
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+/*
+  Admin Panel (dark premium)
+  Uses firebase compat globals: db, storage (firebase_init.js must expose them)
+  - Only admin allowed (checked via localStorage tv_user)
+  - Views: dashboard, students, teachers, content, notes, mcq, comments, settings
+*/
 
-// 🔐 LOGIN
-function login(){
-  auth.signInWithEmailAndPassword(email.value,password.value)
-  .then(()=>adminBox.classList.remove("hidden"))
-  .catch(e=>alert(e.message));
+// session check (admin must be logged in; tv_user stored by admin login page)
+const stored = localStorage.getItem('tv_user');
+if(!stored){
+  alert('Not logged in. Redirecting to admin login.');
+  window.location.href = 'https://teslavedha.github.io/admin_login.html';
+}
+const admin = JSON.parse(stored);
+if(!admin || admin.role !== 'admin'){
+  alert('Admin access required. Redirecting to login.');
+  window.location.href = 'https://teslavedha.github.io/admin_login.html';
 }
 
-// 👩‍🏫👨‍🎓 ADD USER
-function addUser(){
-  auth.createUserWithEmailAndPassword(newEmail.value,newPass.value)
-  .then(cred=>{
-    return db.collection("users").doc(cred.user.uid).set({
-      role: role.value,
-      email: newEmail.value
-    });
-  }).then(()=>alert("User added"))
-  .catch(e=>alert(e.message));
-}
+document.getElementById('adminName').textContent = admin.name || admin.username || 'Admin';
+document.getElementById('adminRole').textContent = (admin.role || 'admin').toUpperCase();
+document.getElementById('whoami').textContent = admin.username || admin.name || 'Admin';
 
-// ❌ REMOVE USER
-function removeUser(){
-  alert("User removal requires Firebase Admin SDK (backend). You can disable user instead.");
-}
+// navigation
+const navButtons = Array.from(document.querySelectorAll('.nav button'));
+const contentArea = document.getElementById('contentArea');
+navButtons.forEach(btn => btn.addEventListener('click', (e)=>{
+  navButtons.forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  showView(btn.dataset.view);
+}));
 
-// 🧱 INPUT CREATION
-function makeInputs(id,count){
-  let box=document.getElementById(id);
-  for(let i=1;i<=count;i++)
-    box.innerHTML+=`<input id="${id}${i}" placeholder="${id.toUpperCase()} ${i} URL">`;
-}
-makeInputs("videos",10);
-makeInputs("notes",5);
-makeInputs("mcq",5);
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  localStorage.removeItem('tv_user');
+  window.location.href = 'https://teslavedha.github.io/index.html';
+});
 
-// 💾 SAVE CONTENT
-function saveContent(){
-  const ref=db.collection("content")
-  .doc(category.value)
-  .collection("subjects")
-  .doc(subject.value);
+// initial stats & view
+showView('dashboard');
+loadStats();
 
-  let data={
-    videos:[],notes:[],mcq:[]
-  };
-
-  for(let i=1;i<=10;i++)
-    data.videos.push(videos["videos"+i].value);
-
-  for(let i=1;i<=5;i++){
-    data.notes.push(notes["notes"+i].value);
-    data.mcq.push(mcq["mcq"+i].value);
+// show view loader
+function showView(name){
+  switch(name){
+    case 'dashboard': renderDashboard(); break;
+    case 'students': renderStudents(); break;
+    case 'teachers': renderTeachers(); break;
+    case 'content': renderContentManager(); break;
+    case 'notes': renderNotesManager(); break;
+    case 'mcq': renderMcqManager(); break;
+    case 'comments': renderCommentsManager(); break;
+    case 'settings': renderSettings(); break;
+    default: renderDashboard();
   }
-
-  ref.set(data).then(()=>alert("Content saved"));
 }
-</script>
 
+/* ---------------- DASHBOARD ---------------- */
+function renderDashboard(){
+  contentArea.innerHTML = `
+    <h2 style="margin:0 0 12px;color:var(--accent)">Dashboard</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px">
+        <h4 style="margin:0 0 8px">Quick Actions</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" onclick="openAddStudent()">Add Student</button>
+          <button class="ghost" onclick="openAddTeacher()">Add Teacher</button>
+          <button class="primary" onclick="showView('content')">Manage Videos</button>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px">
+        <h4 style="margin:0 0 8px">System Info</h4>
+        <p class="small-muted">Firestore project: <strong>${(window.firebase && firebase.app) ? firebase.app().options.projectId : 'unknown'}</strong></p>
+        <p class="small-muted">Signed in as: <strong>${admin.username}</strong></p>
+      </div>
+    </div>
+
+    <div style="margin-top:14px">
+      <h3 style="color:var(--accent)">Recent Students</h3>
+      <div id="recentStudents">Loading…</div>
+    </div>
+  `;
+  loadRecentStudents();
+}
+
+/* ---------------- STATS ---------------- */
+async function loadStats(){
+  try{
+    const usersSnap = await db.collection('users').get();
+    let sCount = 0, tCount = 0;
+    usersSnap.forEach(d=>{
+      const r = d.data().role;
+      if(r === 'student') sCount++;
+      if(r === 'teacher') tCount++;
+    });
+    document.getElementById('statStudents').textContent = sCount;
+    document.getElementById('statTeachers').textContent = tCount;
+    // content count: videos docs
+    const videosSnap = await db.collection('videos').get();
+    document.getElementById('statContent').textContent = `${videosSnap.size} subjects`;
+  }catch(e){
+    console.error(e);
+  }
+}
+
+/* ---------------- STUDENTS VIEW ---------------- */
+function renderStudents(){
+  contentArea.innerHTML = `
+    <h2 style="margin:0 0 12px;color:var(--accent)">Students</h2>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+      <button class="primary" onclick="openAddStudent()">Add Student</button>
+      <input id="filterStudent" placeholder="Search mobile / name" style="padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#e6f0f2;flex:1">
+    </div>
+    <div id="studentsList">Loading students…</div>
+  `;
+  document.getElementById('filterStudent').addEventListener('input', loadStudents);
+  loadStudents();
+}
+
+async function loadStudents(){
+  const container = document.getElementById('studentsList');
+  container.innerHTML = 'Loading…';
+  const q = document.getElementById('filterStudent') ? document.getElementById('filterStudent').value.trim().toLowerCase() : '';
+  try{
+    const snap = await db.collection('users').where('role','==','student').get();
+    if(snap.empty){ container.innerHTML = '<div class="small-muted">No students yet.</div>'; return; }
+    let rows = `<table><thead><tr><th>Mobile</th><th>Name</th><th>Course</th><th>Created</th><th>Actions</th></tr></thead><tbody>`;
+    snap.forEach(doc=>{
+      const d = doc.data();
+      const mobile = doc.id;
+      const name = d.name || '';
+      const course = d.course || '';
+      const created = d.createdAt ? new Date(d.createdAt.seconds*1000).toLocaleString() : '-';
+      const rowText = (mobile+' '+name+' '+course).toLowerCase();
+      if(q && !rowText.includes(q)) return;
+      rows += `<tr>
+        <td>${mobile}</td>
+        <td>${name}</td>
+        <td>${course}</td>
+        <td>${created}</td>
+        <td>
+          <button class="ghost" onclick="resetStudent('${mobile}')">Reset PW</button>
+          <button class="ghost" onclick="deleteStudent('${mobile}')">Delete</button>
+        </td>
+      </tr>`;
+    });
+    rows += '</tbody></table>';
+    container.innerHTML = rows;
+  }catch(e){
+    container.innerHTML = 'Error loading students: ' + e.message;
+  }
+}
+
+async function resetStudent(mobile){
+  const ok = confirm('Reset student password to DOB (DDMMYYYY)? This requires you know the DOB or set new password.');
+  if(!ok) return;
+  const newPass = prompt('Enter new password (DDMMYYYY or any):');
+  if(!newPass) return;
+  try{
+    await db.collection('users').doc(mobile).update({ password: newPass });
+    alert('Password updated');
+    loadStudents();
+  }catch(e){ alert('Error: '+e.message); }
+}
+
+async function deleteStudent(mobile){
+  if(!confirm('Delete student ' + mobile + ' ?')) return;
+  try{
+    await db.collection('users').doc(mobile).delete();
+    alert('Deleted');
+    loadStudents();
+    loadStats();
+  }catch(e){ alert('Error: '+e.message); }
+}
+
+/* ---------------- TEACHERS VIEW ---------------- */
+function renderTeachers(){
+  contentArea.innerHTML = `
+    <h2 style="margin:0 0 12px;color:var(--accent)">Teachers</h2>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+      <button class="primary" onclick="openAddTeacher()">Add Teacher</button>
+      <input id="filterTeacher" placeholder="Search username / name" style="padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#e6f0f2;flex:1">
+    </div>
+    <div id="teachersList">Loading teachers…</div>
+  `;
+  document.getElementById('filterTeacher').addEventListener('input', loadTeachers);
+  loadTeachers();
+}
+
+async function loadTeachers(){
+  const container = document.getElementById('teachersList');
+  container.innerHTML = 'Loading…';
+  const q = document.getElementById('filterTeacher') ? document.getElementById('filterTeacher').value.trim().toLowerCase() : '';
+  try{
+    const snap = await db.collection('users').where('role','==','teacher').get();
+    if(snap.empty){ container.innerHTML = '<div class="small-muted">No teachers yet.</div>'; return; }
+    let rows = `<table><thead><tr><th>Username</th><th>Name</th><th>Created</th><th>Actions</th></tr></thead><tbody>`;
+    snap.forEach(doc=>{
+      const d = doc.data();
+      const username = doc.id;
+      const name = d.name || '';
+      const created = d.createdAt ? new Date(d.createdAt.seconds*1000).toLocaleString() : '-';
+      const rowText = (username+' '+name).toLowerCase();
+      if(q && !rowText.includes(q)) return;
+      rows += `<tr>
+        <td>${username}</td>
+        <td>${name}</td>
+        <td>${created}</td>
+        <td>
+          <button class="ghost" onclick="resetTeacher('${username}')">Reset PW</button>
+          <button class="ghost" onclick="deleteTeacher('${username}')">Delete</button>
+        </td>
+      </tr>`;
+    });
+    rows += '</tbody></table>';
+    container.innerHTML = rows;
+  }catch(e){
+    container.innerHTML = 'Error loading teachers: ' + e.message;
+  }
+}
+
+async function resetTeacher(username){
+  const newPass = prompt('Enter new password for ' + username);
+  if(!newPass) return;
+  try{
+    await db.collection('users').doc(username).update({ password: newPass });
+    alert('Password updated');
+    loadTeachers();
+  }catch(e){ alert('Error: '+e.message); }
+}
+
+async function deleteTeacher(username){
+  if(!confirm('Delete teacher ' + username + ' ?')) return;
+  try{
+    await db.collection('users').doc(username).delete();
+    alert('Deleted');
+    loadTeachers();
+    loadStats();
+  }catch(e){ alert('Error: '+e.message); }
+}
+
+/* ---------------- CONTENT (VIDEOS) ---------------- */
+function renderContentManager(){
+  contentArea.innerHTML = `
+    <h2 style="margin:0 0 12px;color:var(--accent)">Manage Videos</h2>
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:12px">
+      <div style="background:transparent">
+        <div style="margin-bottom:12px;">
+          <label>Subject ID (e.g. cat1_malayalam)</label>
+          <input id="c_subject" placeholder="cat1_malayalam">
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          <div>
+            <label>Slot (1–10)</label>
+            <input id="c_slot" type="number" min="1" max="10" value="1">
+          </div>
+          <div>
+            <label>Video Title</label>
+            <input id="c_title" placeholder="Lesson title">
+          </div>
+        </div>
+
+        <div style="margin-top:8px">
+          <label>YouTube URL or embed</label>
+          <input id="c_youtube" placeholder="https://www.youtube.com/watch?v=VIDEOID">
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="primary" onclick="saveVideoSlot()">Save Slot</button>
+          <button class="ghost" onclick="clearVideoForm()">Clear</button>
+        </div>
+
+        <div id="videoMsg" style="margin-top:10px;color:var(--muted)"></div>
+
+        <div style="margin-top:18px">
+          <h4 style="color:var(--accent)">Existing slots (preview)</h4>
+          <div id="videoPreview">Select subject and click Load</div>
+          <div style="margin-top:8px"><button class="ghost" onclick="loadVideoPreview()">Load Preview</button></div>
+        </div>
+      </div>
+
+      <div style="background:transparent">
+        <h4 style="color:var(--accent);margin-top:0">Bulk upload notes / mcq</h4>
+        <p class="small-muted">Use Notes/MCQ tabs to upload PDFs per subject.</p>
+
+        <div style="margin-top:16px">
+          <h4 style="margin:0 0 8px">Quick operations</h4>
+          <button class="primary" onclick="openAddStudent()">Add Student</button>
+          <button class="ghost" onclick="openAddTeacher()">Add Teacher</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+async function saveVideoSlot(){
+  const subject = document.getElementById('c_subject').value.trim();
+  let slot = parseInt(document.getElementById('c_slot').value) || 1;
+  const title = document.getElementById('c_title').value.trim() || ('Video ' + slot);
+  let youtube = document.getElementById('c_youtube').value.trim();
+  const msg = document.getElementById('videoMsg'); msg.textContent = '';
+  if(!subject || !youtube){ msg.textContent = 'Enter subject and youtube url'; return; }
+  // convert to embed
+  if(youtube.includes('watch?v=')) youtube = youtube.replace('watch?v=', 'embed/');
+  const idMatch = youtube.match(/([A-Za-z0-9_-]{11})$/);
+  if(idMatch && !youtube.includes('embed')) youtube = 'https://www.youtube.com/embed/' + idMatch[1];
+
+  try{
+    const ref = db.collection('videos').doc(subject);
+    const snap = await ref.get();
+    let arr = snap.exists ? (snap.data().videos || []) : [];
+    const idx = slot - 1;
+    arr[idx] = { title, youtube, slot, updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+    for(let i=0;i<10;i++){ if(!arr[i]) arr[i] = null; }
+    await ref.set({ videos: arr }, { merge: true });
+    msg.textContent = 'Saved slot ' + slot + ' for ' + subject;
+    loadStats();
+  }catch(e){ msg.textContent = 'Error: ' + e.message; }
+}
+
+async function loadVideoPreview(){
+  const subject = document.getElementById('c_subject').value.trim();
+  if(!subject){ document.getElementById('videoPreview').innerHTML = 'Enter subject id'; return; }
+  try{
+    const snap = await db.collection('videos').doc(subject).get();
+    if(!snap.exists){ document.getElementById('videoPreview').innerHTML = '<div class="small-muted">No videos found</div>'; return; }
+    const videos = snap.data().videos || [];
+    let html = '<table><thead><tr><th>Slot</th><th>Title</th><th>URL</th></tr></thead><tbody>';
+    videos.forEach((v,i)=>{
+      if(!v) return;
+      html += `<tr><td>${i+1}</td><td>${v.title||''}</td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis">${v.youtube}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    document.getElementById('videoPreview').innerHTML = html;
+  }catch(e){ document.getElementById('videoPreview').innerHTML = 'Error: '+ e.message; }
+}
+
+function clearVideoForm(){
+  document.getElementById('c_subject').value='';
+  document.getElementById('c_slot').value='1';
+  document.getElementById('c_title').value='';
+  document.getElementById('c_youtube').value='';
+  document.getElementById('videoMsg').textContent='';
+}
+
+/* ---------------- NOTES MANAGER ---------------- */
+function renderNotesManager(){
+  contentArea.innerHTML = `
+    <h2 style="margin:0 0 12px;color:var(--accent)">Notes (PDF)</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="card">
+        <label>Subject ID</label><input id="note_subject" placeholder="cat1_malayalam">
+        <label>Title</label><input id="note_title" placeholder="Chapter 1">
+        <label>PDF File</label><input id="note_file" type="file" accept="application/pdf">
+        <div style="margin-top:10px"><button class="primary" onclick="uploadNote()">Upload Note</button></div>
+        <div id="noteMsg" style="margin-top:8px;color:var(--muted)"></div>
+      </div>
+
+      <div class="card">
+        <h4 style="color:var(--accent)">Existing Notes</h4>
+        <div id="notesList">Select subject and click Load</div>
+        <div style="margin-top:8px"><button class="ghost" onclick="loadNotes()">Load Notes</button></div>
+      </div>
+    </div>
+  `;
+}
+
+async function uploadNote(){
+  const subject = document.getElementById('note_subject').value.trim();
+  const title = document.getElementById('note_title').value.trim() || 'Note';
+  const file = document.getElementById('note_file').files[0];
+  const msg = document.getElementById('noteMsg'); msg.textContent = '';
+  if(!subject || !file){ msg.textContent = 'Subject and PDF required'; return; }
+  try{
+    const path = `notes/${subject}/${Date.now()}_${file.name}`;
+    const ref = storage.ref().child(path);
+    const task = ref.put(file);
+    task.on('state_changed', null, err=>{ msg.textContent = 'Upload error: ' + err.message; }, async ()=>{
+      const url = await ref.getDownloadURL();
+      const notesRef = db.collection('notes').doc(subject);
+      const snap = await notesRef.get();
+      const arr = snap.exists ? (snap.data().pdfs || []) : [];
+      arr.push({ title, url, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+      await notesRef.set({ pdfs: arr }, { merge: true });
+      msg.textContent = 'Uploaded and saved note';
+    });
+  }catch(e){ msg.textContent = 'Error: ' + e.message; }
+}
+
+async function loadNotes(){
+  const subject = document.getElementById('note_subject').value.trim();
+  if(!subject){ document.getElementById('notesList').innerHTML='Enter subject'; return; }
+  try{
+    const snap = await db.collection('notes').doc(subject).get();
+    if(!snap.exists){ document.getElementById('notesList').innerHTML='<div class="small-muted">No notes</div>'; return; }
+    const arr = snap.data().pdfs || [];
+    let html = '<ul>';
+    arr.forEach((n,i)=> html += `<li>${n.title} — <a href="${n.url}" target="_blank">Open</a> <button class="ghost" onclick="deleteNote('${subject}',${i})">Delete</button></li>`);
+    html += '</ul>';
+    document.getElementById('notesList').innerHTML = html;
+  }catch(e){ document.getElementById('notesList').innerHTML = 'Error: ' + e.message; }
+}
+
+async function deleteNote(subject, idx){
+  if(!confirm('Delete note?')) return;
+  const ref = db.collection('notes').doc(subject);
+  const snap = await ref.get();
+  if(!snap.exists) return alert('Not found');
+  const arr = snap.data().pdfs || [];
+  arr.splice(idx,1);
+  await ref.set({ pdfs: arr }, { merge: true });
+  loadNotes();
+}
+
+/* ---------------- MCQ MANAGER (same as notes) ---------------- */
+function renderMcqManager(){
+  contentArea.innerHTML = `
+    <h2 style="margin:0 0 12px;color:var(--accent)">MCQ (PDF)</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="card">
+        <label>Subject ID</label><input id="mcq_subject" placeholder="cat1_malayalam">
+        <label>Title</label><input id="mcq_title" placeholder="MCQ set 1">
+        <label>PDF File</label><input id="mcq_file" type="file" accept="application/pdf">
+        <div style="margin-top:10px"><button class="primary" onclick="uploadMcq()">Upload MCQ</button></div>
+        <div id="mcqMsg" style="margin-top:8px;color:var(--muted)"></div>
+      </div>
+
+      <div class="card">
+        <h4 style="color:var(--accent)">Existing MCQ</h4>
+        <div id="mcqList">Select subject and click Load</div>
+        <div style="margin-top:8px"><button class="ghost" onclick="loadMcq()">Load MCQ</button></div>
+      </div>
+    </div>
+  `;
+}
+
+async function uploadMcq(){
+  const subject = document.getElementById('mcq_subject').value.trim();
+  const title = document.getElementById('mcq_title').value.trim() || 'MCQ';
+  const file = document.getElementById('mcq_file').files[0];
+  const msg = document.getElementById('mcqMsg'); msg.textContent = '';
+  if(!subject || !file){ msg.textContent = 'Subject and PDF required'; return; }
+  try{
+    const path = `mcq/${subject}/${Date.now()}_${file.name}`;
+    const ref = storage.ref().child(path);
+    const task = ref.put(file);
+    task.on('state_changed', null, err=>{ msg.textContent = 'Upload error: ' + err.message; }, async ()=>{
+      const url = await ref.getDownloadURL();
+      const notesRef = db.collection('mcq').doc(subject);
+      const snap = await notesRef.get();
+      const arr = snap.exists ? (snap.data().pdfs || []) : [];
+      arr.push({ title, url, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+      await notesRef.set({ pdfs: arr }, { merge: true });
+      msg.textContent = 'Uploaded and saved MCQ';
+    });
+  }catch(e){ msg.textContent = 'Error: ' + e.message; }
+}
+
+async function loadMcq(){
+  const subject = document.getElementById('mcq_subject').value.trim();
+  if(!subject){ document.getElementById('mcqList').innerHTML='Enter subject'; return; }
+  try{
+    const snap = await db.collection('mcq').doc(subject).get();
+    if(!snap.exists){ document.getElementById('mcqList').innerHTML='<div class="small-muted">No MCQ</div>'; return; }
+    const arr = snap.data().pdfs || [];
+    let html = '<ul>';
+    arr.forEach((n,i)=> html += `<li>${n.title} — <a href="${n.url}" target="_blank">Open</a> <button class="ghost" onclick="deleteMcq('${subject}',${i})">Delete</button></li>`);
+    html += '</ul>';
+    document.getElementById('mcqList').innerHTML = html;
+  }catch(e){ document.getElementById('mcqList').innerHTML = 'Error: ' + e.message; }
+}
+
+async function deleteMcq(subject, idx){
+  if(!confirm('Delete MCQ?')) return;
+  const ref = db.collection('mcq').doc(subject);
+  const snap = await ref.get();
+  if(!snap.exists) return alert('Not found');
+  const arr = snap.data().pdfs || [];
+  arr.splice(idx,1);
+  await ref.set({ pdfs: arr }, { merge: true });
+  loadMcq();
+}
+
+/* ---------------- COMMENTS MANAGEMENT ---------------- */
+function renderCommentsManager(){
+  contentArea.innerHTML = `
+    <h2 style="margin:0 0 12px;color:var(--accent)">Comments</h2>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+      <input id="commentSubject" placeholder="subject id e.g. cat1_malayalam" style="padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);flex:1">
+      <button class="primary" onclick="loadComments()">Load</button>
+    </div>
+    <div id="commentsList">Enter subject and click Load</div>
+  `;
+}
+
+async function loadComments(){
+  const subject = document.getElementById('commentSubject').value.trim();
+  if(!subject){ document.getElementById('commentsList').innerHTML='Enter subject'; return; }
+  try{
+    const snap = await db.collection('comments').doc(subject).get();
+    const container = document.getElementById('commentsList');
+    container.innerHTML = '';
+    if(!snap.exists){ container.innerHTML = '<div class="small-muted">No comments</div>'; return; }
+    const arr = snap.data().messages || [];
+    let html = '<table><thead><tr><th>User</th><th>Comment</th><th>Replies</th><th>Actions</th></tr></thead><tbody>';
+    arr.forEach((m,i)=>{
+      const replies = (m.replies || []).map(r=> `<div style="font-size:13px;color:#d0f3e6">${r.by}: ${r.text}</div>`).join('');
+      html += `<tr>
+        <td>${m.name || m.userId}</td>
+        <td>${m.text}</td>
+        <td>${replies || '-'}</td>
+        <td>
+          <button class="ghost" onclick="replyComment('${subject}', ${i})">Reply</button>
+          <button class="ghost" onclick="deleteComment('${subject}', ${i})">Delete</button>
+        </td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  }catch(e){ document.getElementById('commentsList').innerHTML = 'Error: ' + e.message; }
+}
+
+async function replyComment(subject, idx){
+  const reply = prompt('Reply text:');
+  if(!reply) return;
+  const ref = db.collection('comments').doc(subject);
+  const snap = await ref.get();
+  if(!snap.exists) return alert('Not found');
+  const arr = snap.data().messages || [];
+  arr[idx].replies = arr[idx].replies || [];
+  arr[idx].replies.push({ by: admin.username || 'admin', text: reply, ts: firebase.firestore.FieldValue.serverTimestamp() });
+  await ref.set({ messages: arr }, { merge: true });
+  loadComments();
+}
+
+async function deleteComment(subject, idx){
+  if(!confirm('Delete comment?')) return;
+  const ref = db.collection('comments').doc(subject);
+  const snap = await ref.get();
+  if(!snap.exists) return alert('Not found');
+  const arr = snap.data().messages || [];
+  arr.splice(idx,1);
+  await ref.set({ messages: arr }, { merge: true });
+  loadComments();
+}
+
+/* ---------------- SETTINGS ---------------- */
+function renderSettings(){
+  contentArea.innerHTML = `
+    <h2 style="margin:0 0 12px;color:var(--accent)">Settings</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="card">
+        <h4>Project</h4>
+        <p class="small-muted">Project ID: <strong>${(window.firebase && firebase.app) ? firebase.app().options.projectId : 'unknown'}</strong></p>
+      </div>
+      <div class="card">
+        <h4>Danger Zone</h4>
+        <p class="small-muted">Reset demo data / wipe certain collections (use carefully)</p>
+        <button class="ghost" onclick="wipeDemo()">Wipe sample videos</button>
+      </div>
+    </div>
+  `;
+}
+
+async function wipeDemo(){
+  if(!confirm('This will remove videos collection documents you created. Continue?')) return;
+  try{
+    const snap = await db.collection('videos').get();
+    const batch = db.batch();
+    snap.forEach(d => batch.delete(d.ref));
+    await batch.commit();
+    alert('Videos cleared');
+    loadStats();
+  }catch(e){ alert('Error: '+e.message); }
+}
+
+/* ---------------- Utilities - Add student/teacher modals ---------------- */
+function openAddStudent(){
+  contentArea.innerHTML = `
+    <h2 style="color:var(--accent)">Create Student</h2>
+    <div style="max-width:640px">
+      <div class="form-grid">
+        <div>
+          <label>Full name</label>
+          <input id="as_name" placeholder="Student name">
+        </div>
+        <div>
+          <label>Mobile (10 digits) - will be username</label>
+          <input id="as_mobile" placeholder="9876543210">
+        </div>
+        <div>
+          <label>DOB (DDMMYYYY) - will be password</label>
+          <input id="as_dob" placeholder="DDMMYYYY">
+        </div>
+        <div>
+          <label>Course</label>
+          <select id="as_course"><option value="">Select</option><option>KTET Category 1</option><option>KTET Category 2</option><option>KTET Category 3</option><option>PSC 10th Level</option><option>PSC Degree Level</option><option>AI Course – Students</option></select>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <button class="primary" onclick="createStudent()">Create Student</button>
+        <button class="ghost" onclick="renderStudents()">Cancel</button>
+      </div>
+      <div id="as_msg" style="margin-top:10px;color:var(--muted)"></div>
+    </div>
+  `;
+}
+
+async function createStudent(){
+  const n = document.getElementById('as_name').value.trim();
+  const mobile = document.getElementById('as_mobile').value.trim();
+  const dob = document.getElementById('as_dob').value.trim();
+  const course = document.getElementById('as_course').value;
+  const msg = document.getElementById('as_msg');
+  msg.textContent = '';
+  if(!n||mobile.length!==10||dob.length!==8||!course){ msg.textContent='Please fill all fields correctly'; return; }
+  try{
+    const uref = db.collection('users').doc(mobile);
+    const snap = await uref.get();
+    if(snap.exists){ msg.textContent = 'Mobile already registered'; return; }
+    await uref.set({ username: mobile, password: dob, role: 'student', name: n, mobile, dob, course, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+    msg.textContent = 'Student created. Username: ' + mobile + ' | Password: ' + dob;
+    loadStats();
+  }catch(e){ msg.textContent = 'Error: ' + e.message; }
+}
+
+/* Add teacher modal */
+function openAddTeacher(){
+  contentArea.innerHTML = `
+    <h2 style="color:var(--accent)">Create Teacher</h2>
+    <div style="max-width:640px">
+      <div class="form-grid">
+        <div>
+          <label>Username</label>
+          <input id="t_username" placeholder="teacher1">
+        </div>
+        <div>
+          <label>Password</label>
+          <input id="t_password" placeholder="password">
+        </div>
+        <div>
+          <label>Full name</label>
+          <input id="t_name" placeholder="Teacher name">
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <button class="primary" onclick="createTeacher()">Create Teacher</button>
+        <button class="ghost" onclick="renderTeachers()">Cancel</button>
+      </div>
+      <div id="t_msg" style="margin-top:10px;color:var(--muted)"></div>
+    </div>
+  `;
+}
+
+async function createTeacher(){
+  const username = document.getElementById('t_username').value.trim();
+  const password = document.getElementById('t_password').value.trim();
+  const name = document.getElementById('t_name').value.trim();
+  const msg = document.getElementById('t_msg');
+  msg.textContent = '';
+  if(!username || !password){ msg.textContent='Enter username and password'; return; }
+  try{
+    const uref = db.collection('users').doc(username);
+    const snap = await uref.get();
+    if(snap.exists){ msg.textContent = 'Username exists'; return; }
+    await uref.set({ username, password, role: 'teacher', name, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+    msg.textContent = 'Teacher created: ' + username;
+    loadStats();
+  }catch(e){ msg.textContent = 'Error: ' + e.message; }
+}
+
+/* ---------------- Recent students for dashboard ---------------- */
+async function loadRecentStudents(){
+  try{
+    const snap = await db.collection('users').where('role','==','student').orderBy('createdAt','desc').limit(6).get();
+    let html = '<table><thead><tr><th>Mobile</th><th>Name</th><th>Course</th></tr></thead><tbody>';
+    snap.forEach(d=>{
+      const data = d.data();
+      html += `<tr><td>${d.id}</td><td>${data.name||''}</td><td>${data.course||''}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    document.getElementById('recentStudents').innerHTML = html;
+  }catch(e){ document.getElementById('recentStudents').innerHTML = 'Error: ' + e.message; }
+}
+
+/* initial load wrap-up */
+async function loadInitial(){
+  await loadStats();
+}
+loadInitial();
+
+</script>
 </body>
 </html>
