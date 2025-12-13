@@ -1,53 +1,157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Teacher Login — Tesla Vedha</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .login-box{max-width:700px;margin:40px auto;padding:30px;border-radius:14px;background:#fff;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
-    h2{color:#0b5a3c}
-    label{display:block;margin-top:12px}
-    input{width:100%;padding:12px;border-radius:8px;border:1px solid #e6e9ef;background:#f3f7fb}
-    button{margin-top:18px;padding:12px 18px;border:none;border-radius:8px;background:#0b8d4f;color:#fff;font-weight:700}
-    .error{color:#b91c1c;margin-top:12px}
-  </style>
+<meta charset="UTF-8">
+<title>Teacher Login | Tesla Vedha</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#020617,#1e3a8a);
+}
+
+.login-box{
+    width:360px;
+    background:#ffffff;
+    padding:28px;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.45);
+}
+
+.login-box h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#1e3a8a;
+}
+
+label{
+    font-weight:600;
+    margin-top:12px;
+    display:block;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    margin-top:20px;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.msg{
+    margin-top:12px;
+    text-align:center;
+    font-weight:600;
+}
+
+.error{ color:#dc2626; }
+.success{ color:#16a34a; }
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    text-decoration:none;
+    color:#2563eb;
+    font-weight:600;
+}
+</style>
 </head>
+
 <body>
+
+<!-- ✅ FIREBASE INIT (MANDATORY) -->
 <script src="firebase_init.js"></script>
 
-<div class="login-box" role="main">
-  <h2>Teacher Login</h2>
+<div class="login-box">
+    <h2>Teacher Login</h2>
 
-  <label for="t_user">Email / Username</label>
-  <input id="t_user" type="text" placeholder="Vedha">
+    <label>Username</label>
+    <input id="t_user" type="text" placeholder="Teacher username">
 
-  <label for="t_pass">Password</label>
-  <input id="t_pass" type="password" placeholder="Password">
+    <label>Password</label>
+    <input id="t_pass" type="password" placeholder="Password">
 
-  <button onclick="teacherLogin()">Login</button>
+    <button onclick="teacherLogin()">Login</button>
 
-  <p id="t_msg" class="error" aria-live="polite"></p>
+    <div id="msg" class="msg"></div>
 
-  <a href="index.html">← Back to site</a>
+    <a class="back" href="index.html">← Back to Home</a>
 </div>
 
 <script>
-function teacherLogin(){
-  const u = document.getElementById('t_user').value.trim();
-  const p = document.getElementById('t_pass').value.trim();
-  const msg = document.getElementById('t_msg');
-  msg.textContent = '';
+async function teacherLogin(){
 
-  // DEMO teacher credentials
-  if (u === 'Vedha' && p === '122025'){
-    localStorage.setItem('teacher_logged', 'yes');
-    window.location.href = 'teacher_panel.html';
-  } else {
-    msg.textContent = 'Invalid teacher login';
-  }
+    const username = document.getElementById("t_user").value.trim();
+    const password = document.getElementById("t_pass").value.trim();
+    const msg      = document.getElementById("msg");
+
+    msg.textContent = "";
+    msg.className = "msg";
+
+    if(!username || !password){
+        msg.textContent = "Please enter username and password";
+        msg.classList.add("error");
+        return;
+    }
+
+    try{
+        const snap = await db
+            .collection("teachers")
+            .where("username","==",username)
+            .where("password","==",password)
+            .limit(1)
+            .get();
+
+        if(!snap.empty){
+            // ✅ LOGIN SUCCESS
+            localStorage.setItem("teacher_logged","yes");
+            localStorage.setItem("teacher_user",username);
+
+            msg.textContent = "Login successful. Redirecting...";
+            msg.classList.add("success");
+
+            setTimeout(()=>{
+                window.location.href = "teacher_panel.html";
+            },800);
+
+        }else{
+            msg.textContent = "Invalid teacher username or password";
+            msg.classList.add("error");
+        }
+
+    }catch(err){
+        msg.textContent = "Login error: " + err.message;
+        msg.classList.add("error");
+    }
 }
 </script>
+
 </body>
 </html>
