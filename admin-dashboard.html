@@ -1,80 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #fce4ec;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #e91e63;
-            font-size: 32px;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #fce4ec;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #d81b60;
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+    .menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+    .card {
+        background: white;
+        padding: 25px;
+        text-align: center;
+        border-radius: 14px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        transition: 0.2s ease;
+    }
+    .card:hover {
+        background: #f8bbd0;
+        transform: scale(1.05);
+    }
+</style>
 
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-            padding: 0 20px;
-        }
+<script>
+// Redirect to pages
+function go(page){
+    window.location.href = page;
+}
+</script>
 
-        .card {
-            background: #ffffff;
-            padding: 22px;
-            text-align: center;
-            border-radius: 12px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-
-        .card:hover {
-            background: #f8bbd0;
-            transform: translateY(-3px);
-        }
-    </style>
 </head>
+
 <body>
 
-    <h1>Admin Dashboard</h1>
+<h1>Admin Dashboard</h1>
 
-    <div class="menu">
+<div class="menu">
 
-        <div class="card" onclick="location.href='admin_add_teacher.html'">
-            Add Teacher
-        </div>
+    <div class="card" onclick="go('add_teacher.html')">Add Teacher</div>
+    <div class="card" onclick="go('remove_teacher.html')">Remove Teacher</div>
+    <div class="card" onclick="go('register_student.html')">Register Student</div>
 
-        <div class="card" onclick="location.href='admin_remove_teacher.html'">
-            Remove Teacher
-        </div>
+    <div class="card" onclick="go('upload_video.html')">Add Class Video</div>
+    <div class="card" onclick="go('upload_notes.html')">Upload PDF Notes</div>
+    <div class="card" onclick="go('upload_mcq.html')">Upload MCQ / PDF</div>
 
-        <div class="card" onclick="location.href='admin_register_student.html'">
-            Register Student
-        </div>
-
-        <div class="card" onclick="location.href='admin_add_video.html'">
-            Add Class Video
-        </div>
-
-        <div class="card" onclick="location.href='admin_upload_notes.html'">
-            Upload PDF Notes
-        </div>
-
-        <div class="card" onclick="location.href='admin_upload_mcq.html'">
-            Upload MCQ / PDF
-        </div>
-
-    </div>
+</div>
 
 </body>
 </html>
