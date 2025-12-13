@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Upload Class Video</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+body { background:#eef2ff; font-family:Arial; padding:20px; }
+.box {
+    max-width:550px; margin:auto; background:white; padding:25px;
+    border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.15);
+}
+select, input {
+    width:100%; padding:12px; margin:10px 0;
+    border-radius:8px; border:1px solid #bbb;
+}
+button {
+    width:100%; padding:12px;
+    background:#4f46e5; color:white; border:none;
+    border-radius:8px; font-size:18px; cursor:pointer;
+}
+button:hover { background:#3730a3; }
+.success { color:green; margin-top:10px; }
+.error { color:red; margin-top:10px; }
+</style>
+</head>
+
+<body>
+
+<script src="firebase_init.js"></script>
+
+<div class="box">
+    <h2>Upload Class Video</h2>
+
+    <label>Course</label>
+    <select id="course">
+        <option value="KTET">KTET</option>
+        <option value="PSC">PSC</option>
+        <option value="SET">SET</option>
+        <option value="AI">AI Courses</option>
+    </select>
+
+    <label>Category</label>
+    <select id="category">
+        <option value="cat1">Category 1</option>
+        <option value="cat2">Category 2</option>
+        <option value="cat3">Category 3</option>
+    </select>
+
+    <label>Subject</label>
+    <select id="subject">
+        <option value="Malayalam">Malayalam</option>
+        <option value="English">English</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="EVS">EVS</option>
+        <option value="Psychology">Psychology</option>
+        <option value="Science">Science</option>
+        <option value="SocialScience">Social Science</option>
+    </select>
+
+    <label>Video Title</label>
+    <input type="text" id="title" placeholder="Enter Video Title">
+
+    <label>YouTube URL</label>
+    <input type="text" id="url" placeholder="Paste full YouTube link">
+
+    <button onclick="uploadVideo()">Upload Video</button>
+
+    <p id="msg"></p>
+</div>
+
+<script>
+async function uploadVideo() {
+
+    const course   = document.getElementById("course").value;
+    const category = document.getElementById("category").value;
+    const subject  = document.getElementById("subject").value;
+    const title    = document.getElementById("title").value.trim();
+    const url      = document.getElementById("url").value.trim();
+    const msg      = document.getElementById("msg");
+
+    msg.textContent = "";
+
+    if (!title || !url) {
+        msg.textContent = "Please fill all fields.";
+        msg.className = "error";
+        return;
+    }
+
+    try {
+        await db.collection("videos").add({
+            course, category, subject, title, url,
+            timestamp: Date.now()
+        });
+
+        msg.textContent = "Video uploaded successfully!";
+        msg.className = "success";
+
+        document.getElementById("title").value = "";
+        document.getElementById("url").value = "";
+
+    } catch (err) {
+        msg.textContent = "Upload failed: " + err.message;
+        msg.className = "error";
+    }
+}
+</script>
+
+</body>
+</html>
