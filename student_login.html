@@ -1,61 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Student Login — Tesla Vedha</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Minimal safe fallback styling in case styles.css is missing */
-    .login-box{max-width:520px;margin:48px auto;padding:28px;border-radius:16px;background:#fff;box-shadow:0 10px 30px rgba(2,6,23,0.06);}
-    h2{margin-top:0;color:#0b5a3c;font-size:24px}
-    label{display:block;margin-top:12px;color:#374151}
-    input{width:100%;padding:12px;border-radius:8px;border:1px solid #e6e9ef;background:#f3f7fb}
-    button{margin-top:18px;padding:12px 18px;border:none;border-radius:8px;background:#0b8d4f;color:#fff;font-weight:700}
-    .error{color:#b91c1c;margin-top:12px}
-    a.back{display:inline-block;margin-top:14px;color:#0b69ff}
-  </style>
-</head>
-<body>
+<meta charset="UTF-8">
+<title>Student Login | Tesla Vedha</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- load Firebase first -->
-<script src="firebase_init.js"></script>
+<link rel="stylesheet" href="styles.css">
 
-<div class="login-box" role="main" aria-labelledby="loginTitle">
-  <h2 id="loginTitle">Student Login</h2>
-
-  <label for="s_user">Email / Mobile (registered)</label>
-  <input id="s_user" type="text" placeholder="student@example.com or mobile number">
-
-  <label for="s_pass">Password</label>
-  <input id="s_pass" type="password" placeholder="Password">
-
-  <button id="s_login_btn" onclick="studentLogin()">Login</button>
-
-  <p id="s_msg" class="error" aria-live="polite"></p>
-
-  <a class="back" href="index.html">← Back to Tesla Vedha</a>
-</div>
-
-<script>
-function studentLogin(){
-  const u = document.getElementById('s_user').value.trim();
-  const p = document.getElementById('s_pass').value.trim();
-  const msg = document.getElementById('s_msg');
-  msg.textContent = '';
-
-  // DEMO credentials (replace with Firebase auth later)
-  const demoUsers = ['student1@teslavedha.com','9876543210'];
-  const demoPass  = 'Student@123';
-
-  if (demoUsers.includes(u) && p === demoPass){
-    localStorage.setItem('student_logged', 'yes');
-    // redirect to student courses
-    window.location.href = 'student_courses.html';
-  } else {
-    msg.textContent = 'Invalid student username or password';
-  }
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#0b5cff,#3b82f6);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-</script>
-</body>
-</html>
+
+.login-box {
+    width: 360px;
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1e3a8a;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+    color: #374151;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-size:
