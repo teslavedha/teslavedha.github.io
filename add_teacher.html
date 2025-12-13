@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Teacher | Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#020617,#1e3a8a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, sans-serif;
+}
+
+.box{
+    width:380px;
+    background:#ffffff;
+    padding:28px;
+    border-radius:14px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.45);
+}
+
+h2{
+    text-align:center;
+    color:#1e3a8a;
+    margin-bottom:20px;
+}
+
+label{
+    font-weight:600;
+    display:block;
+    margin-top:12px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    margin-top:20px;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.msg{
+    margin-top:12px;
+    text-align:center;
+    font-weight:600;
+}
+
+.success{ color:#16a34a; }
+.error{ color:#dc2626; }
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✅ FIREBASE INIT -->
+<script src="firebase_init.js"></script>
+
+<div class="box">
+    <h2>Add Teacher</h2>
+
+    <label>Teacher Name</label>
+    <input id="t_name" type="text" placeholder="Full name">
+
+    <label>Username (Email / ID)</label>
+    <input id="t_user" type="text" placeholder="Teacher username">
+
+    <label>Password</label>
+    <input id="t_pass" type="text" placeholder="Set password">
+
+    <button onclick="addTeacher()">Create Teacher</button>
+
+    <div id="msg" class="msg"></div>
+
+    <a class="back" href="admin-dashboard.html">← Back to Dashboard</a>
+</div>
+
+<script>
+async function addTeacher(){
+
+    const name = document.getElementById("t_name").value.trim();
+    const user = document.getElementById("t_user").value.trim();
+    const pass = document.getElementById("t_pass").value.trim();
+    const msg  = document.getElementById("msg");
+
+    msg.textContent = "";
+    msg.className = "msg";
+
+    if(!name || !user || !pass){
+        msg.textContent = "Please fill all fields";
+        msg.classList.add("error");
+        return;
+    }
+
+    try{
+        await db.collection("teachers").add({
+            name,
+            username: user,
+            password: pass,
+            createdAt: Date.now()
+        });
+
+        msg.textContent = "Teacher added successfully";
+        msg.classList.add("success");
+
+        document.getElementById("t_name").value = "";
+        document.getElementById("t_user").value = "";
+        document.getElementById("t_pass").value = "";
+
+    }catch(err){
+        msg.textContent = "Error: " + err.message;
+        msg.classList.add("error");
+    }
+}
+</script>
+
+</body>
+</html>
