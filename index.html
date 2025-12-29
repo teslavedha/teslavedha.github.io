@@ -1,93 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Teslavedha Learning</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #1f4f5f, #0b1b24);
+      color: #ffffff;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
     }
 
-    .card {
-      background: rgba(0, 0, 0, 0.65);
-      width: 360px;
-      padding: 30px;
-      border-radius: 20px;
+    .container {
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 18px;
+      padding: 30px 25px 35px;
+      width: 100%;
+      max-width: 420px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     }
 
     .logo {
-      width: 80px;
-      height: 80px;
-      margin: auto;
-      border-radius: 16px;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: #00ffb3;
-      font-size: 26px;
+      width: 120px;
+      height: auto;
       margin-bottom: 15px;
     }
 
     h1 {
-      margin: 10px 0;
-      color: #00ffb3;
+      margin: 10px 0 6px;
+      color: #2fffd2;
+      font-size: 28px;
     }
 
-    p {
+    .subtitle {
       font-size: 14px;
       opacity: 0.9;
       margin-bottom: 20px;
     }
 
-    .courses {
+    .courses-box {
       background: rgba(255,255,255,0.06);
+      border-radius: 14px;
       padding: 15px;
-      border-radius: 12px;
       text-align: left;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
-    .courses h3 {
-      margin-top: 0;
-      color: #7dd3fc;
+    .courses-box h3 {
+      margin: 0 0 10px;
+      color: #8ed1ff;
+      font-size: 18px;
     }
 
-    .courses ul {
-      padding-left: 18px;
+    .courses-box ul {
       margin: 0;
+      padding-left: 18px;
+    }
+
+    .courses-box li {
+      margin-bottom: 6px;
       font-size: 14px;
     }
 
     .btn {
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
       border: none;
       border-radius: 10px;
+      padding: 14px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 10px;
     }
 
-    .student { background: #22c55e; color: #000; }
-    .teacher { background: #3b82f6; color: #000; }
-    .admin   { background: #ef4444; color: #000; }
+    .btn-student {
+      background: #2ecc71;
+      color: #002b17;
+    }
 
-    footer {
-      margin-top: 15px;
+    .btn-teacher {
+      background: #4285f4;
+      color: #001a3a;
+    }
+
+    .btn-admin {
+      background: #ff4d4d;
+      color: #3a0000;
+    }
+
+    .footer {
+      margin-top: 18px;
       font-size: 12px;
       opacity: 0.7;
     }
@@ -95,30 +104,37 @@
 </head>
 
 <body>
+  <div class="container">
 
-  <div class="card">
-    <div class="logo">TV</div>
+    <!-- LOGO -->
+    <img src="images/logo.png" alt="Teslavedha Learning Logo" class="logo" />
 
+    <!-- TITLE -->
     <h1>Teslavedha Learning</h1>
-    <p>Coaching Centre for Competitive & Professional Exams</p>
+    <div class="subtitle">
+      Coaching Centre for Competitive & Professional Exams
+    </div>
 
-    <div class="courses">
+    <!-- COURSES -->
+    <div class="courses-box">
       <h3>Our Courses</h3>
       <ul>
         <li>KTET (Category I, II, III)</li>
         <li>Kerala PSC (10th & Degree Level)</li>
-        <li>AI Courses (Teachers & Students)</li>
+        <li>AI Courses for Teachers & Students</li>
+        <li>School Level Subjects</li>
       </ul>
     </div>
 
-    <button class="btn student" onclick="goStudent()">Student Login</button>
-    <button class="btn teacher" onclick="goTeacher()">Teacher Login</button>
-    <button class="btn admin" onclick="goAdmin()">Admin Login</button>
+    <!-- BUTTONS -->
+    <button class="btn btn-student" onclick="goStudent()">Student Login</button>
+    <button class="btn btn-teacher" onclick="goTeacher()">Teacher Login</button>
+    <button class="btn btn-admin" onclick="goAdmin()">Admin Login</button>
 
-    <footer>© 2025 Teslavedha Learning</footer>
+    <div class="footer">© 2025 Teslavedha Learning</div>
   </div>
 
-  <!-- SAFE JAVASCRIPT -->
+  <!-- NAVIGATION -->
   <script>
     function goStudent() {
       window.location.href = "courses.html";
@@ -132,6 +148,5 @@
       window.location.href = "courses.html";
     }
   </script>
-
 </body>
 </html>
