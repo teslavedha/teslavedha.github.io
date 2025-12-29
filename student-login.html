@@ -8,70 +8,70 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #0f3a47, #02161d);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       color: #fff;
     }
     .card {
       width: 360px;
+      background: rgba(10, 30, 38, 0.95);
       padding: 30px;
       border-radius: 16px;
-      background: rgba(0,0,0,0.35);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
       text-align: center;
     }
     .card img {
       width: 90px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
     h2 {
-      color: #2ee6a6;
+      color: #2ef2c6;
       margin-bottom: 5px;
     }
     p {
-      opacity: 0.8;
       font-size: 14px;
+      opacity: 0.8;
     }
     input {
       width: 100%;
       padding: 12px;
-      margin-top: 12px;
+      margin-top: 14px;
       border-radius: 8px;
       border: none;
-      outline: none;
+      background: #12343d;
+      color: #fff;
+      font-size: 14px;
     }
     button {
+      margin-top: 20px;
       width: 100%;
       padding: 14px;
-      margin-top: 20px;
-      border-radius: 10px;
+      background: linear-gradient(90deg, #2ef2c6, #1cc9a5);
       border: none;
-      background: linear-gradient(135deg, #2ee6a6, #1abc9c);
+      border-radius: 10px;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      font-size: 16px;
+      color: #000;
     }
-    #msg {
-      margin-top: 12px;
-      color: #ff6b6b;
-      font-size: 14px;
+    button:hover {
+      opacity: 0.9;
     }
     a {
-      display: inline-block;
-      margin-top: 15px;
-      color: #7ee7ff;
+      display: block;
+      margin-top: 14px;
+      color: #7be8ff;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13px;
     }
   </style>
 </head>
 
 <body>
-
   <div class="card">
     <img src="images/logo.png" alt="Teslavedha Logo" />
     <h2>Student Login</h2>
@@ -82,34 +82,38 @@
 
     <button onclick="login()">Login</button>
 
-    <div id="msg"></div>
-
     <a href="index.html">← Back to Home</a>
   </div>
 
-  <!-- 🔴 MODULE SCRIPT (VERY IMPORTANT) -->
-  <script type="module">
-    import { auth } from "./firebase.js";
-    import { signInWithEmailAndPassword } from
-      "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+  <!-- FIREBASE (INLINE – WORKS ON GITHUB PAGES) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
-    // attach function to window (CRITICAL)
-    window.login = function () {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const msg = document.getElementById("msg");
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnDwmnFIZWFdyWD50Yjab3HYf-xgMht-I",
+      authDomain: "teslavedha-learning.firebaseapp.com",
+      projectId: "teslavedha-learning",
+      storageBucket: "teslavedha-learning.appspot.com",
+      messagingSenderId: "217735003172",
+      appId: "1:217735003172:web:6700e0118e65400f07ecb1"
+    };
 
-      msg.innerText = "Logging in...";
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-      signInWithEmailAndPassword(auth, email, password)
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      auth.signInWithEmailAndPassword(email, password)
         .then(() => {
           window.location.href = "courses.html";
         })
-        .catch((error) => {
-          msg.innerText = error.message;
+        .catch(error => {
+          alert(error.message);
         });
-    };
+    }
   </script>
-
 </body>
 </html>
