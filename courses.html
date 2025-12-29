@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Courses | Teslavedha Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header img {
+      width: 90px;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      margin: 10px 0 5px;
+      color: #00ffd5;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .course-card {
+      background: rgba(0,0,0,0.55);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    }
+
+    .course-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .course-card h2 {
+      margin: 15px;
+      color: #00ffd5;
+    }
+
+    .course-card ul {
+      list-style: none;
+      padding: 0 20px 20px;
+      margin: 0;
+    }
+
+    .course-card ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .course-card ul li:last-child {
+      border-bottom: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <!-- YOUR LOGO -->
+    <img src="images/logo.png" alt="Teslavedha Logo">
+    <h1>Teslavedha Learning</h1>
+    <p>Course Categories</p>
+  </header>
+
+  <div class="container">
+    <div class="courses">
+
+      <!-- KTET -->
+      <div class="course-card">
+        <img src="images/ktet.jpg" alt="KTET Course">
+        <h2>KTET</h2>
+        <ul>
+          <li>Category I</li>
+          <li>Category II</li>
+          <li>Category III</li>
+        </ul>
+      </div>
+
+      <!-- KERALA PSC -->
+      <div class="course-card">
+        <img src="images/psc.jpg" alt="Kerala PSC Course">
+        <h2>Kerala PSC</h2>
+        <ul>
+          <li>10th Level Exams</li>
+          <li>Degree Level Exams</li>
+        </ul>
+      </div>
+
+      <!-- AI COURSES -->
+      <div class="course-card">
+        <img src="images/ai.jpg" alt="AI Courses">
+        <h2>AI Courses</h2>
+        <ul>
+          <li>AI for Teachers</li>
+          <li>AI for Students</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Teslavedha Learning
+  </footer>
+
+</body>
+</html>
