@@ -1,120 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Teslavedha Learning</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #333;
-    }
-
-    header {
-      background: #1e3a8a;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    section {
-      padding: 30px;
-      max-width: 900px;
-      margin: auto;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
     }
 
     .card {
-      background: white;
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.65);
+      width: 360px;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: auto;
+      border-radius: 16px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #00ffb3;
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin: 10px 0;
+      color: #00ffb3;
+    }
+
+    p {
+      font-size: 14px;
+      opacity: 0.9;
       margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    button {
-      padding: 12px 20px;
+    .courses {
+      background: rgba(255,255,255,0.06);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .courses h3 {
+      margin-top: 0;
+      color: #7dd3fc;
+    }
+
+    .courses ul {
+      padding-left: 18px;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
       border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #2563eb;
-      color: white;
+      border-radius: 10px;
       font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    button:hover {
-      background: #1d4ed8;
-    }
+    .student { background: #22c55e; color: #000; }
+    .teacher { background: #3b82f6; color: #000; }
+    .admin   { background: #ef4444; color: #000; }
 
     footer {
-      text-align: center;
-      padding: 15px;
-      background: #e5e7eb;
-      font-size: 14px;
+      margin-top: 15px;
+      font-size: 12px;
+      opacity: 0.7;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
+  <div class="card">
+    <div class="logo">TV</div>
+
     <h1>Teslavedha Learning</h1>
-    <p>Competitive Exam Coaching Platform</p>
-  </header>
+    <p>Coaching Centre for Competitive & Professional Exams</p>
 
-  <section>
-    <div class="card">
-      <h2>About Us</h2>
-      <p>
-        Teslavedha Learning provides high-quality coaching for competitive exams
-        with expert teachers, structured courses, and online assessments.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Courses Offered</h2>
+    <div class="courses">
+      <h3>Our Courses</h3>
       <ul>
-        <li>PSC / UPSC Preparation</li>
-        <li>Banking Exams</li>
-        <li>SSC & Railway Exams</li>
-        <li>Mock Tests & MCQ Practice</li>
+        <li>KTET (Category I, II, III)</li>
+        <li>Kerala PSC (10th & Degree Level)</li>
+        <li>AI Courses (Teachers & Students)</li>
       </ul>
     </div>
 
-    <div class="card">
-      <h2>Login</h2>
-      <p>Select your role to continue</p>
-      <button onclick="goAdmin()">Admin Login</button>
-      <button onclick="goTeacher()" style="margin-left:10px;">Teacher Login</button>
-      <button onclick="goStudent()" style="margin-left:10px;">Student Login</button>
-    </div>
-  </section>
+    <button class="btn student" onclick="goStudent()">Student Login</button>
+    <button class="btn teacher" onclick="goTeacher()">Teacher Login</button>
+    <button class="btn admin" onclick="goAdmin()">Admin Login</button>
 
-  <footer>
-    © 2025 Teslavedha Learning. All rights reserved.
-  </footer>
+    <footer>© 2025 Teslavedha Learning</footer>
+  </div>
 
-  <!-- Firebase + App Logic -->
-  <script type="module">
-    import { auth, db } from "./firebase.js";
+  <!-- SAFE JAVASCRIPT -->
+  <script>
+    function goStudent() {
+      window.location.href = "courses.html";
+    }
 
-    // Just to confirm Firebase is loaded (NO ERROR)
-    console.log("Firebase Auth:", auth);
-    console.log("Firestore DB:", db);
+    function goTeacher() {
+      window.location.href = "courses.html";
+    }
 
-    window.goAdmin = () => {
-      alert("Admin login page will be added next");
-    };
-
-    window.goTeacher = () => {
-      alert("Teacher login page will be added next");
-    };
-
-    window.goStudent = () => {
-      alert("Student login page will be added next");
-    };
+    function goAdmin() {
+      window.location.href = "courses.html";
+    }
   </script>
 
 </body>
