@@ -8,141 +8,114 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #333;
     }
 
-    .container {
-      width: 90%;
-      max-width: 420px;
-      background: #0b1520;
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 20px;
       text-align: center;
     }
 
-    .logo {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 12px;
-      border-radius: 12px;
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 24px;
-      color: #00f7a1;
+    section {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
     }
 
-    h1 {
-      margin: 10px 0 6px;
-      font-size: 26px;
-      color: #00f7a1;
-    }
-
-    p {
-      font-size: 14px;
-      opacity: 0.9;
-      margin-bottom: 18px;
-    }
-
-    .courses {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 14px;
-      border-radius: 10px;
+    .card {
+      background: white;
+      padding: 20px;
       margin-bottom: 20px;
-      text-align: left;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    .courses h3 {
-      margin-top: 0;
-      font-size: 16px;
-      color: #8ed1ff;
-    }
-
-    .courses ul {
-      padding-left: 18px;
-      margin: 8px 0 0;
-    }
-
-    .courses li {
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
+    button {
+      padding: 12px 20px;
       border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: bold;
+      border-radius: 6px;
       cursor: pointer;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
     }
 
-    .btn-student {
-      background: #22c55e;
-      color: #052e16;
-    }
-
-    .btn-teacher {
-      background: #3b82f6;
-      color: #0a1a33;
-    }
-
-    .btn-admin {
-      background: #ef4444;
-      color: #330808;
+    button:hover {
+      background: #1d4ed8;
     }
 
     footer {
-      margin-top: 16px;
-      font-size: 12px;
-      opacity: 0.7;
+      text-align: center;
+      padding: 15px;
+      background: #e5e7eb;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="logo">TV</div>
 
+  <header>
     <h1>Teslavedha Learning</h1>
-    <p>Coaching Centre for Competitive & Professional Exams</p>
+    <p>Competitive Exam Coaching Platform</p>
+  </header>
 
-    <div class="courses">
-      <h3>Our Courses</h3>
+  <section>
+    <div class="card">
+      <h2>About Us</h2>
+      <p>
+        Teslavedha Learning provides high-quality coaching for competitive exams
+        with expert teachers, structured courses, and online assessments.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Courses Offered</h2>
       <ul>
-        <li>KTET (Category I, II, III)</li>
-        <li>PSC (Degree & 10th)</li>
-        <li>School Level Subjects</li>
-        <li>Competitive Exams</li>
+        <li>PSC / UPSC Preparation</li>
+        <li>Banking Exams</li>
+        <li>SSC & Railway Exams</li>
+        <li>Mock Tests & MCQ Practice</li>
       </ul>
     </div>
 
-    <button class="btn btn-student" onclick="location.href='student_login.html'">
-      Student Login
-    </button>
+    <div class="card">
+      <h2>Login</h2>
+      <p>Select your role to continue</p>
+      <button onclick="goAdmin()">Admin Login</button>
+      <button onclick="goTeacher()" style="margin-left:10px;">Teacher Login</button>
+      <button onclick="goStudent()" style="margin-left:10px;">Student Login</button>
+    </div>
+  </section>
 
-    <button class="btn btn-teacher" onclick="location.href='teacher_login.html'">
-      Teacher Login
-    </button>
+  <footer>
+    © 2025 Teslavedha Learning. All rights reserved.
+  </footer>
 
-    <button class="btn btn-admin" onclick="location.href='admin-login.html'">
-      Admin Login
-    </button>
+  <!-- Firebase + App Logic -->
+  <script type="module">
+    import { auth, db } from "./firebase.js";
 
-    <footer>© 2025 Teslavedha Learning</footer>
-  </div>
+    // Just to confirm Firebase is loaded (NO ERROR)
+    console.log("Firebase Auth:", auth);
+    console.log("Firestore DB:", db);
+
+    window.goAdmin = () => {
+      alert("Admin login page will be added next");
+    };
+
+    window.goTeacher = () => {
+      alert("Teacher login page will be added next");
+    };
+
+    window.goStudent = () => {
+      alert("Student login page will be added next");
+    };
+  </script>
+
 </body>
 </html>
-
