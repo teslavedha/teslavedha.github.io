@@ -1,68 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Student Login | Teslavedha Learning</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
     body {
-      background: #0f2027;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin: 0;
       height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: #fff;
     }
-    .box {
-      background: #162d3d;
+    .card {
+      width: 360px;
       padding: 30px;
-      border-radius: 12px;
-      width: 320px;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.35);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
       text-align: center;
     }
-    input, button {
+    .card img {
+      width: 90px;
+      margin-bottom: 15px;
+    }
+    h2 {
+      color: #2ee6a6;
+      margin-bottom: 5px;
+    }
+    p {
+      opacity: 0.8;
+      font-size: 14px;
+    }
+    input {
       width: 100%;
       padding: 12px;
-      margin-top: 10px;
-      border-radius: 6px;
+      margin-top: 12px;
+      border-radius: 8px;
       border: none;
+      outline: none;
     }
     button {
-      background: #2ecc71;
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #2ee6a6, #1abc9c);
       font-weight: bold;
       cursor: pointer;
+      font-size: 16px;
+    }
+    #msg {
+      margin-top: 12px;
+      color: #ff6b6b;
+      font-size: 14px;
+    }
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      color: #7ee7ff;
+      text-decoration: none;
+      font-size: 14px;
     }
   </style>
 </head>
+
 <body>
 
-<div class="box">
-  <h2>Student Login</h2>
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p id="msg"></p>
-</div>
+  <div class="card">
+    <img src="images/logo.png" alt="Teslavedha Logo" />
+    <h2>Student Login</h2>
+    <p>Access your learning dashboard</p>
 
-<script type="module">
-  import { auth } from "./firebase.js";
-  import { signInWithEmailAndPassword } from
-    "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
 
-  window.login = function () {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    <button onclick="login()">Login</button>
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        window.location.href = "courses.html";
-      })
-      .catch(error => {
-        document.getElementById("msg").innerText = error.message;
-      });
-  };
-</script>
+    <div id="msg"></div>
+
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+  <!-- 🔴 MODULE SCRIPT (VERY IMPORTANT) -->
+  <script type="module">
+    import { auth } from "./firebase.js";
+    import { signInWithEmailAndPassword } from
+      "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+    // attach function to window (CRITICAL)
+    window.login = function () {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const msg = document.getElementById("msg");
+
+      msg.innerText = "Logging in...";
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          window.location.href = "courses.html";
+        })
+        .catch((error) => {
+          msg.innerText = error.message;
+        });
+    };
+  </script>
 
 </body>
 </html>
