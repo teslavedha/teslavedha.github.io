@@ -2,40 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Student Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Login | Teslavedha Learning</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #061a24, #0f3c4c);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.45);
+      padding: 30px;
+      width: 360px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    }
+
+    .logo {
+      width: 90px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #2ee6b6;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2ee6b6;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    a {
+      display: block;
+      margin-top: 12px;
+      color: #7cdcff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="card">
+    <img src="images/logo.png" class="logo" alt="Teslavedha Logo" />
 
-  <h2>Student Login</h2>
+    <h2>Student Login</h2>
+    <p>Access your learning dashboard</p>
 
-  <input type="email" id="email" placeholder="Email" />
-  <br><br>
-  <input type="password" id="password" placeholder="Password" />
-  <br><br>
-  <button id="loginBtn">Login</button>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
 
+    <button id="loginBtn">Login</button>
+
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+  <!-- Firebase Login Script -->
   <script type="module">
-    import { auth } from "./firebase.js";
-    import { signInWithEmailAndPassword } from
-      "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
-    const loginBtn = document.getElementById("loginBtn");
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnDwmnfIZWFdyWD50Yjab3HYf-xgMht-I",
+      authDomain: "teslavedha-learning.firebaseapp.com",
+      projectId: "teslavedha-learning",
+      storageBucket: "teslavedha-learning.appspot.com",
+      messagingSenderId: "217735003172",
+      appId: "1:217735003172:web:6700e0118e65400f07ecb1"
+    };
 
-    loginBtn.addEventListener("click", async () => {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        alert("Login successful: " + userCredential.user.email);
-        // window.location.href = "student-dashboard.html"; // later
-      } catch (error) {
-        alert(error.message);
+      if (!email || !password) {
+        alert("Please enter email and password");
+        return;
       }
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          // ✅ REDIRECT AFTER SUCCESS
+          window.location.href = "student-dashboard.html";
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     });
   </script>
-
 </body>
 </html>
