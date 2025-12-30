@@ -1,119 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Student Login | Teslavedha Learning</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="module">
+  import { auth } from "./firebase.js";
+  import { signInWithEmailAndPassword } from
+    "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #0f3a47, #02161d);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-    }
-    .card {
-      width: 360px;
-      background: rgba(10, 30, 38, 0.95);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-      text-align: center;
-    }
-    .card img {
-      width: 90px;
-      margin-bottom: 10px;
-    }
-    h2 {
-      color: #2ef2c6;
-      margin-bottom: 5px;
-    }
-    p {
-      font-size: 14px;
-      opacity: 0.8;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 14px;
-      border-radius: 8px;
-      border: none;
-      background: #12343d;
-      color: #fff;
-      font-size: 14px;
-    }
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(90deg, #2ef2c6, #1cc9a5);
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #000;
-    }
-    button:hover {
-      opacity: 0.9;
-    }
-    a {
-      display: block;
-      margin-top: 14px;
-      color: #7be8ff;
-      text-decoration: none;
-      font-size: 13px;
-    }
-  </style>
-</head>
+  const loginBtn = document.getElementById("loginBtn");
 
-<body>
-  <div class="card">
-    <img src="images/logo.png" alt="Teslavedha Logo" />
-    <h2>Student Login</h2>
-    <p>Access your learning dashboard</p>
+  loginBtn.addEventListener("click", async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Password" />
-
-    <button onclick="login()">Login</button>
-
-    <a href="index.html">← Back to Home</a>
-  </div>
-
-  <!-- FIREBASE (INLINE – WORKS ON GITHUB PAGES) -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAnDwmnFIZWFdyWD50Yjab3HYf-xgMht-I",
-      authDomain: "teslavedha-learning.firebaseapp.com",
-      projectId: "teslavedha-learning",
-      storageBucket: "teslavedha-learning.appspot.com",
-      messagingSenderId: "217735003172",
-      appId: "1:217735003172:web:6700e0118e65400f07ecb1"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-          window.location.href = "courses.html";
-        })
-        .catch(error => {
-          alert(error.message);
-        });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login successful");
+      window.location.href = "courses.html";
+    } catch (error) {
+      alert(error.message);
     }
-  </script>
-</body>
-</html>
+  });
+</script>
