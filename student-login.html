@@ -1,49 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Student Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
 
-<h2>Student Login</h2>
+  <h2>Student Login</h2>
 
-<input id="email" type="email" placeholder="Email">
-<br><br>
+  <input type="email" id="email" placeholder="Email" />
+  <br><br>
+  <input type="password" id="password" placeholder="Password" />
+  <br><br>
+  <button id="loginBtn">Login</button>
 
-<input id="password" type="password" placeholder="Password">
-<br><br>
-
-<button id="loginBtn">Login</button>
-
-<script type="module">
-  import { auth } from "./firebase.js";
-  import { signInWithEmailAndPassword }
-    from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-
-  document.addEventListener("DOMContentLoaded", () => {
+  <script type="module">
+    import { auth } from "./firebase.js";
+    import { signInWithEmailAndPassword } from
+      "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
     const loginBtn = document.getElementById("loginBtn");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
 
     loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
       try {
-        await signInWithEmailAndPassword(
-          auth,
-          email.value,
-          password.value
-        );
-        alert("Student login successful");
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful: " + userCredential.user.email);
+        // window.location.href = "student-dashboard.html"; // later
       } catch (error) {
         alert(error.message);
       }
     });
-
-  });
-</script>
+  </script>
 
 </body>
 </html>
