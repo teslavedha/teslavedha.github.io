@@ -1,20 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<h2>Student Login</h2>
+
+<input id="email" type="email" placeholder="Email">
+<br><br>
+
+<input id="password" type="password" placeholder="Password">
+<br><br>
+
+<button id="loginBtn">Login</button>
+
 <script type="module">
   import { auth } from "./firebase.js";
-  import { signInWithEmailAndPassword } from
-    "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+  import { signInWithEmailAndPassword }
+    from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
-  const loginBtn = document.getElementById("loginBtn");
+  document.addEventListener("DOMContentLoaded", () => {
 
-  loginBtn.addEventListener("click", async () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const loginBtn = document.getElementById("loginBtn");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful");
-      window.location.href = "courses.html";
-    } catch (error) {
-      alert(error.message);
-    }
+    loginBtn.addEventListener("click", async () => {
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          email.value,
+          password.value
+        );
+        alert("Student login successful");
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
   });
 </script>
+
+</body>
+</html>
