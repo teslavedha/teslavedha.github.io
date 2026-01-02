@@ -1,13 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Dashboard</title>
-</head>
-<body>
-  <h1>Welcome Student 🎓</h1>
-  <p>Login successful</p>
+  <meta charset="UTF-8" />
+  <title>Student Dashboard | Teslavedha</title>
 
-  <button id="logoutBtn">Logout</button>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0f2a33, #06151b);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dashboard {
+      background: rgba(15, 40, 50, 0.95);
+      width: 420px;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 40px rgba(0, 255, 200, 0.15);
+      text-align: center;
+    }
+
+    .dashboard h1 {
+      margin-bottom: 10px;
+      color: #2ef0c6;
+    }
+
+    .dashboard p {
+      opacity: 0.85;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .card h3 {
+      margin: 0 0 5px;
+      color: #7fffe1;
+      font-size: 16px;
+    }
+
+    .card span {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .logout-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #ff5f6d, #ff9966);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .logout-btn:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dashboard">
+    <h1>Welcome Student 🎓</h1>
+    <p>Login successful</p>
+
+    <div class="card">
+      <h3>📘 Enrolled Courses</h3>
+      <span>KTET • PSC • AI Basics</span>
+    </div>
+
+    <div class="card">
+      <h3>📅 Next Class</h3>
+      <span>Tomorrow – 6:30 PM</span>
+    </div>
+
+    <div class="card">
+      <h3>📊 Progress</h3>
+      <span>65% Completed</span>
+    </div>
+
+    <button id="logoutBtn" class="logout-btn">Logout</button>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
@@ -25,7 +112,7 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // 🔐 Protect page
+    // 🔐 Protect dashboard
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         window.location.href = "student-login.html";
