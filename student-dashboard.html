@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Dashboard</title>
+</head>
+<body>
+  <h1>Welcome Student 🎓</h1>
+  <p>Login successful</p>
+
+  <button id="logoutBtn">Logout</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnDwmnfIZWFdyWD50Yjab3HYf-xgMht-I",
+      authDomain: "teslavedha-learning.firebaseapp.com",
+      projectId: "teslavedha-learning",
+      storageBucket: "teslavedha-learning.appspot.com",
+      messagingSenderId: "217735003172",
+      appId: "1:217735003172:web:6700e0118e65400f07ecb1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 🔐 Protect page
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "student-login.html";
+      }
+    });
+
+    // 🚪 Logout
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        window.location.href = "student-login.html";
+      });
+    });
+  </script>
+</body>
+</html>
