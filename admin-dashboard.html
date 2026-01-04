@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | Teslavedha</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1a0505, #0b0202);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .dashboard {
+      width: 440px;
+      background: rgba(50, 15, 15, 0.95);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 45px rgba(255, 80, 80, 0.25);
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff6b6b;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #ffb3b3;
+    }
+
+    .card span {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #ff5f6d, #ff9966);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="dashboard">
+    <h1>Admin Panel ⚙️</h1>
+    <p>System control dashboard</p>
+
+    <div class="card">
+      <h3>👨‍🎓 Students</h3>
+      <span>Manage student accounts</span>
+    </div>
+
+    <div class="card">
+      <h3>👩‍🏫 Teachers</h3>
+      <span>Approve & manage teachers</span>
+    </div>
+
+    <div class="card">
+      <h3>📚 Courses</h3>
+      <span>Add / edit courses</span>
+    </div>
+
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnDwmnfIZWFdyWD50Yjab3HYf-xgMht-I",
+      authDomain: "teslavedha-learning.firebaseapp.com",
+      projectId: "teslavedha-learning",
+      storageBucket: "teslavedha-learning.appspot.com",
+      messagingSenderId: "217735003172",
+      appId: "1:217735003172:web:6700e0118e65400f07ecb1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 🔒 Protect admin page
+    onAuthStateChanged(auth, (user) => {
+      if (!user || user.email !== "admin@test.com") {
+        window.location.href = "admin-login.html";
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        window.location.href = "admin-login.html";
+      });
+    });
+  </script>
+
+</body>
+</html>
