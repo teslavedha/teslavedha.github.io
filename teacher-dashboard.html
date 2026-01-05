@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teacher Dashboard | Teslavedha Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #122f3a, #06161d);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+    }
+
+    .dashboard {
+      width: 420px;
+      background: rgba(12, 32, 40, 0.95);
+      border-radius: 18px;
+      padding: 32px 26px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    h1 {
+      color: #4a8dff;
+      margin-bottom: 6px;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: left;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      color: #9fc5ff;
+      margin-bottom: 4px;
+    }
+
+    .card span {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .logout-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      background: linear-gradient(135deg, #ff5f6d, #ff9966);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="dashboard">
+    <h1>Teacher Dashboard 👩‍🏫</h1>
+    <p class="subtitle">Welcome to Teslavedha Learning</p>
+
+    <div class="card">
+      <h3>📚 My Classes</h3>
+      <span>Manage assigned subjects & batches</span>
+    </div>
+
+    <div class="card">
+      <h3>📝 Upload Content</h3>
+      <span>Videos • Notes • MCQs</span>
+    </div>
+
+    <div class="card">
+      <h3>👨‍🎓 Students</h3>
+      <span>View enrolled students</span>
+    </div>
+
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+
+    <footer>© 2025 Teslavedha Learning</footer>
+  </div>
+
+  <!-- Firebase base -->
+  <script src="firebase.js" type="module"></script>
+
+  <!-- Teacher protection logic -->
+  <script type="module">
+    import { onAuthStateChanged, signOut } from
+      "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+    import { doc, getDoc } from
+      "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+    // 🔐 Protect dashboard
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "teacher-login.html";
+        return;
+      }
+
+      const snap = await getDoc(doc(db, "users", user.uid));
+
+      if (!snap.exists() || snap.data().role !== "teacher") {
+        alert("Unauthorized access");
+        window.location.href = "index.html";
+      }
+    });
+
+    // 🚪 Logout
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "index.html";
+    });
+  </script>
+
+</body>
+</html>
