@@ -3,123 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <title>Student Login | Teslavedha Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #061a24, #0f3c4c);
-      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #0f3d3d, #021b1b);
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: #ffffff;
     }
 
-    .card {
-      background: rgba(0, 0, 0, 0.45);
-      padding: 30px;
+    .login-card {
       width: 360px;
-      border-radius: 14px;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,.4);
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 40px rgba(0, 255, 200, 0.2);
     }
 
     .logo {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .logo img {
       width: 90px;
-      margin-bottom: 10px;
     }
 
     h2 {
-      color: #2ee6b6;
+      text-align: center;
+      color: #2ef2c2;
       margin-bottom: 5px;
     }
 
-    p {
+    p.subtitle {
+      text-align: center;
       font-size: 14px;
       opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 13px;
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 5px;
     }
 
     input {
       width: 100%;
-      padding: 12px;
-      margin: 12px 0;
+      padding: 10px;
       border-radius: 8px;
       border: none;
       outline: none;
+      font-size: 14px;
     }
 
     button {
       width: 100%;
+      margin-top: 20px;
       padding: 12px;
-      background: #2ee6b6;
       border: none;
       border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
+      background: linear-gradient(90deg, #2ef2c2, #1fcaa0);
+      color: #003333;
+      font-size: 15px;
       font-weight: bold;
+      cursor: pointer;
     }
 
-    a {
-      display: block;
-      margin-top: 12px;
-      color: #7cdcff;
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    .back a {
+      color: #9fffe7;
       text-decoration: none;
-      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <img src="images/logo.png" class="logo" alt="Teslavedha Logo" />
+
+  <div class="login-card">
+    <div class="logo">
+      <img src="images/logo.png" alt="Teslavedha Logo">
+    </div>
 
     <h2>Student Login</h2>
-    <p>Access your learning dashboard</p>
+    <p class="subtitle">Access your learning dashboard</p>
 
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Password" />
+    <label>Email</label>
+    <input type="email" id="email" placeholder="student@test.com">
+
+    <label>Password</label>
+    <input type="password" id="password" placeholder="••••••••">
 
     <button id="loginBtn">Login</button>
 
-    <a href="index.html">← Back to Home</a>
+    <div class="back">
+      ← <a href="index.html">Back to Home</a>
+    </div>
   </div>
 
-  <!-- Firebase Login Script -->
+  <!-- Firebase core (global auth + db) -->
+  <script src="firebase.js" type="module"></script>
+
+  <!-- Student login logic -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAnDwmnfIZWFdyWD50Yjab3HYf-xgMht-I",
-      authDomain: "teslavedha-learning.firebaseapp.com",
-      projectId: "teslavedha-learning",
-      storageBucket: "teslavedha-learning.appspot.com",
-      messagingSenderId: "217735003172",
-      appId: "1:217735003172:web:6700e0118e65400f07ecb1"
-    };
+    const loginBtn = document.getElementById("loginBtn");
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
 
       if (!email || !password) {
         alert("Please enter email and password");
         return;
       }
 
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          // ✅ REDIRECT AFTER SUCCESS
+      try {
+        // Firebase login
+        const userCred = await signInWithEmailAndPassword(auth, email, password);
+        const uid = userCred.user.uid;
+
+        // Role check
+        const userDoc = await getDoc(doc(db, "users", uid));
+
+        if (!userDoc.exists()) {
+          alert("User role not found. Contact admin.");
+          return;
+        }
+
+        const role = userDoc.data().role;
+
+        if (role === "student") {
           window.location.href = "student-dashboard.html";
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+        } else {
+          alert("Access denied. This is not a student account.");
+        }
+
+      } catch (error) {
+        alert(error.message);
+      }
     });
   </script>
+
 </body>
 </html>
